@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3 uid="uid://crtr7u4d5fagv"]
+
+[ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://scripts/dice_roller.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://scripts/spawnable_dice.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://score_counter.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bv2dwjmt8518f" path="res://scripts/gui.gd" id="4_1bvp3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+ambient_light_source = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(11, 1, 11)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+
+[node name="Node3D" type="Node3D"]
+physics_interpolation_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.266329, 0.963882, 0, -0.963882, 0.266329, 0, 9.98288, 3.36912)
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(0.870167, -0.426741, 0.246379, 0, 0.5, 0.866025, -0.492758, -0.753586, 0.435083, 3.3308, 1.38015, 0)
+
+[node name="world" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="world"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D"]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D"]
+transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4, 6)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D2"]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D2"]
+transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4, -6)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D3"]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D3"]
+transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="world"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -6, -4, -2.62268e-07)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D4"]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D4"]
+transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="world"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 6, -4, 2.62268e-07)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D5"]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D5"]
+transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="score_counter" type="Node" parent="." node_paths=PackedStringArray("dice_roller")]
+script = ExtResource("3_h2yge")
+dice_roller = NodePath("../dice_roller")
+
+[node name="dice_roller" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 2.02778, 3.8)
+script = ExtResource("1_h2yge")
+
+[node name="spawnable_dice" parent="dice_roller" instance=ExtResource("2_0xm2m")]
+process_mode = 4
+visible = false
+
+[node name="active_dice" type="Node3D" parent="dice_roller"]
+
+[node name="roll_warmup_timer" type="Timer" parent="dice_roller"]
+wait_time = 0.5
+one_shot = true
+
+[node name="multiple_roll_timer" type="Timer" parent="dice_roller"]
+wait_time = 0.5
+one_shot = true
+
+[node name="roll_max_timer" type="Timer" parent="dice_roller"]
+wait_time = 3.0
+one_shot = true
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+script = ExtResource("4_1bvp3")
+
+[node name="Panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 116.0
+grow_horizontal = 2
+
+[node name="score_label" type="Label" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "score:"
+
+[connection signal="score_counted" from="score_counter" to="GUI" method="_on_score_counted"]
+[connection signal="timeout" from="dice_roller/multiple_roll_timer" to="dice_roller" method="_on_multiple_roll_timeout"]
+[connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]

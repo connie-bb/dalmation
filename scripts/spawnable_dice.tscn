@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://jfc0d8f2uivv"]
+
+[ext_resource type="Script" uid="uid://v0qrqmnbdd7j" path="res://dice/die.gd" id="1_i4k4g"]
+[ext_resource type="PackedScene" uid="uid://fn3vmw5sslw7" path="res://dice/d6/die_placeholder_model.tscn" id="2_hpoly"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
+friction = 0.3
+bounce = 0.21
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4k4g"]
+
+[node name="spawnable_dice" type="Node3D"]
+
+[node name="d6" type="RigidBody3D" parent="." node_paths=PackedStringArray("mesh_instance")]
+physics_interpolation_mode = 1
+transform = Transform3D(0.709848, -0.690992, 0.136549, 0.586486, 0.472488, -0.657867, 0.390063, 0.54707, 0.740652, -6, 1, 0)
+collision_layer = 2
+collision_mask = 3
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+gravity_scale = 5.0
+continuous_cd = true
+linear_damp = 0.1
+angular_damp = 0.1
+script = ExtResource("1_i4k4g")
+mesh_instance = NodePath("die_placeholder/Cube")
+
+[node name="die_placeholder" parent="d6" instance=ExtResource("2_hpoly")]
+
+[node name="score_area" type="Area3D" parent="d6"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="score_collision" type="CollisionShape3D" parent="d6/score_area"]
+
+[node name="physics_collision" type="CollisionShape3D" parent="d6"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_i4k4g")
+
+[editable path="d6/die_placeholder"]
