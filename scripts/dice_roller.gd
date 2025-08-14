@@ -23,13 +23,6 @@ signal ready_to_count
 @onready var multiple_roll_timer: Timer = $multiple_roll_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
 
-func _input( event ):
-	if !( event is InputEventKey ):
-		return
-	if !( event.is_action_pressed( "roll" ) ):
-		return
-	roll_dice()
-
 func remove_active_dice():
 	for c in active_dice.get_children():
 		c.queue_free()
@@ -60,6 +53,7 @@ func roll_dice():
 	roll_warmup_timer.start()
 	rolling = true
 	
+	# Placeholder. Obviously. :P
 	for c: Die in spawnable_dice.get_children():
 		spawnlist.append( c )
 		spawnlist.append( c )
@@ -96,9 +90,6 @@ func check_if_dice_settled() -> bool:
 
 func get_ready_to_count():
 	rolling = false
-	var score_total: int = 0
-	for c: Die in active_dice.get_children():
-		score_total += c.get_score()
 	ready_to_count.emit()
 
 func _physics_process( _delta: float ):

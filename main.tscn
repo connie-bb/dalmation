@@ -1,9 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=16 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://scripts/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://scripts/spawnable_dice.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bv2dwjmt8518f" path="res://scripts/gui.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://bxnxjxvwerbch" path="res://scripts/roll_text_parser.gd" id="5_5vw27"]
+[ext_resource type="Script" uid="uid://fxo83shway67" path="res://scripts/roll_textedit.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/roll.png" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://du4l3n5t0hrdv" path="res://scripts/conductor.gd" id="7_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 
@@ -20,8 +24,23 @@ size = Vector3(11, 1, 11)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_7mycd"]
+action = &"roll"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_272bh"]
+events = [SubResource("InputEventAction_7mycd")]
+
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
+
+[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("dice_roller", "score_counter", "roll_text_parser", "roll_text_edit", "gui")]
+script = ExtResource("7_272bh")
+dice_roller = NodePath("../dice_roller")
+score_counter = NodePath("../score_counter")
+roll_text_parser = NodePath("../roll_text_parser")
+roll_text_edit = NodePath("../GUI/Panel/HBoxContainer/VBoxContainer/roll_text_edit")
+gui = NodePath("../GUI")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.266329, 0.963882, 0, -0.963882, 0.266329, 0, 9.98288, 3.36912)
@@ -90,9 +109,8 @@ shape = SubResource("BoxShape3D_0xm2m")
 transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
 mesh = SubResource("BoxMesh_0xm2m")
 
-[node name="score_counter" type="Node" parent="." node_paths=PackedStringArray("dice_roller")]
-script = ExtResource("3_h2yge")
-dice_roller = NodePath("../dice_roller")
+[node name="roll_text_parser" type="Node" parent="."]
+script = ExtResource("5_5vw27")
 
 [node name="dice_roller" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 2.02778, 3.8)
@@ -116,7 +134,10 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[node name="GUI" type="Control" parent="."]
+[node name="score_counter" type="Node" parent="."]
+script = ExtResource("3_h2yge")
+
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,6 +147,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("4_1bvp3")
+score_label = NodePath("Panel/HBoxContainer/VBoxContainer/score_label")
 
 [node name="Panel" type="Panel" parent="GUI"]
 layout_mode = 1
@@ -134,15 +156,37 @@ anchor_right = 1.0
 offset_bottom = 116.0
 grow_horizontal = 2
 
-[node name="score_label" type="Label" parent="GUI/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="score_label" type="Label" parent="GUI/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
 text = "score:"
 
-[connection signal="score_counted" from="score_counter" to="GUI" method="_on_score_counted"]
+[node name="roll_text_edit" type="Label" parent="GUI/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_lquwl")
+
+[node name="roll_button" type="Button" parent="GUI/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_272bh")
+icon = ExtResource("6_7mycd")
+
+[connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/multiple_roll_timer" to="dice_roller" method="_on_multiple_roll_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
+[connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
+[connection signal="pressed" from="GUI/Panel/HBoxContainer/roll_button" to="Conductor" method="_on_roll_button_pressed"]

@@ -1,5 +1,4 @@
 extends RigidBody3D
-
 class_name Die
 
 # References
@@ -8,7 +7,7 @@ class_name Die
 # because only concave meshes can have their backfaces detected
 # by raycasts. [sic]
 # However, collisions between two concave shapes are not supported,
-# so we use a separate box mesh for physics.
+# so we use a separate mesh for physics.
 @onready var score_collision: CollisionShape3D = $score_area/score_collision
 var mdt: MeshDataTool
 
@@ -43,6 +42,6 @@ func get_score() -> int:
 		return -1
 
 	var score_rgb: Color = mdt.get_vertex_color( mdt.get_face_vertex( hit.face_index, 0 ) )
-	var score: int = snapped( score_rgb.r, 0.01 ) * 100
+	var score: int = snapped( score_rgb.r, 0.05 ) * 20
 
 	return score

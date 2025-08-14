@@ -1,9 +1,11 @@
 extends Control
+class_name GUI
 
-@onready var score_label: Label = $Panel/score_label
+# References
+@export var score_label: Label
+
+func _ready():
+	assert( score_label != null, "GUI has no assigned score_label" )
 
 func display_score( score: int ):
 	score_label.text = "score: " + str( score ) 
-
-func _on_score_counted( score: int ):
-	display_score( score )
