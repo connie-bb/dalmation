@@ -19,7 +19,14 @@ func _ready():
 	)
 
 func _on_roll_button_pressed():
-	# TODO: Parse roll text
+	# Debugging for demonstration. You can wipe this.
+	var text = "d6+2d10-15+2d100+4+5+6+7"
+	print( "text to parse: " + text )
+	var errors: int = roll_text_parser.parse( text )
+	print( "errors: ", String.num_int64( errors, 2 ) )
+	roll_text_parser.debug_text_spawnlist()
+	#-------
+
 	dice_roller.roll_dice()
 
 func _on_ready_to_count():
