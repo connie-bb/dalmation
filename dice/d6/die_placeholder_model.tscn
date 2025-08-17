@@ -6,7 +6,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37dfv"]
 albedo_texture = ExtResource("2_ygcsw")
 
-[node name="die_placeholder" instance=ExtResource("1_4xsc2")]
+[node name="die_placeholder_model" instance=ExtResource("1_4xsc2")]
 
 [node name="Cube" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_37dfv")

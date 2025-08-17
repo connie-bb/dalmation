@@ -53,18 +53,9 @@ func roll_dice():
 	roll_warmup_timer.start()
 	rolling = true
 	
-	# Placeholder. Obviously. :P
-	for c: Die in spawnable_dice.get_children():
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
-		spawnlist.append( c )
+	# Placeholder for demonstration.
+	spawnlist.append( spawnable_dice.get_node("d_percentile_10s") )
+	spawnlist.append( spawnable_dice.get_node("d_percentile_1s") )
 		
 	roll_batch_of_dice()
 

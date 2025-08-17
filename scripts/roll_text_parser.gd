@@ -17,7 +17,7 @@ var constants_sum: int = 0
 const VALID_SIDES: Array[int] = [
 	4, 6, 8, 10, 12, 20, 100
 ]
-enum ERROR { NONE, SYNTAX, MAX_LENGTH, INVALID_DIE }
+enum ERROR { NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED }
 
 func parse( text: String ) -> ERROR:
 	text_spawnlist = []

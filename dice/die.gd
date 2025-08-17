@@ -1,8 +1,12 @@
 extends RigidBody3D
 class_name Die
 
+# Variable
+enum SIDES { D6, D8, D10, D12, D20, D_PERCENTILE_10S, D_PERCENTILE_1S }
+@export var sides: SIDES
+
 # References
-@export var mesh_instance: MeshInstance3D
+@export var score_mesh: MeshInstance3D
 # We use a concave mesh to get the score of faces,
 # because only concave meshes can have their backfaces detected
 # by raycasts. [sic]
@@ -12,10 +16,9 @@ class_name Die
 var mdt: MeshDataTool
 
 func _ready():
-	assert( mesh_instance != null, "No MeshInstance3D assigned to die.gd" )
-	assert( score_collision != null, "die.gd couldn't find child of type CollisionShape3D")
+	assert( score_mesh != null, "No score mesh assigned to die.gd" )
 	
-	var mesh: ArrayMesh = mesh_instance.mesh
+	var mesh: ArrayMesh = score_mesh.mesh
 	var collision_trimesh = mesh.create_trimesh_shape()
 	collision_trimesh.backface_collision = true
 	score_collision.shape = collision_trimesh
@@ -41,7 +44,15 @@ func get_score() -> int:
 		push_warning( "die.gd was unable to detect a raycast hit." )
 		return -1
 
+	# We store a face's score in its vertex color.
+	# 0.05 = 1, 0.10 = 2, 0.15 = 3 ... 0.95 = 19, 1.0 = 20
 	var score_rgb: Color = mdt.get_vertex_color( mdt.get_face_vertex( hit.face_index, 0 ) )
 	var score: int = snapped( score_rgb.r, 0.05 ) * 20
+	
+	if sides == Die.SIDES.D_PERCENTILE_10S:
+		if score == 10: score = 0	# It's a '00'
+		score *= 10
+	elif sides == Die.SIDES.D_PERCENTILE_1S:
+		if score == 10: score = 0	# it's a '0'
 
 	return score
