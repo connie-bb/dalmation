@@ -2,7 +2,7 @@ extends Node
 class_name RollTextParser
 
 # Extends object so that we can pass it by reference instead of value
-class TextSpawnlistEntry extends Object:
+class SpawnlistEntry extends Object:
 	var count: int = 0
 	var sides: int = 0
 	var top_n: int = 0		# Take the top n results
@@ -10,7 +10,7 @@ class TextSpawnlistEntry extends Object:
 	var subtract: bool = false
 
 # Variable
-var text_spawnlist: Array[TextSpawnlistEntry] = []
+var spawnlist: Array[SpawnlistEntry] = []
 var constants_sum: int = 0
 
 # Constant
@@ -19,8 +19,11 @@ const VALID_SIDES: Array[int] = [
 ]
 enum ERROR { NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED }
 
+func reset():
+	spawnlist = []
+	constants_sum = 0
+
 func parse( text: String ) -> ERROR:
-	text_spawnlist = []
 	var error = ERROR.NONE
 	var length: int = text.length()
 	var begin: int = 0
@@ -37,7 +40,7 @@ func parse( text: String ) -> ERROR:
 		
 func parse_expression( expression: String ) -> ERROR:
 	var error: int = ERROR.NONE
-	var entry: TextSpawnlistEntry = TextSpawnlistEntry.new()
+	var entry: SpawnlistEntry = SpawnlistEntry.new()
 	
 	if expression.count( "-" ) > 1 or expression.count( "+" ) > 1:
 		return ERROR.SYNTAX
@@ -59,10 +62,10 @@ func parse_expression( expression: String ) -> ERROR:
 		error = parse_multi_roll( expression, entry )
 	
 	if error != ERROR.NONE: return error as ERROR
-	text_spawnlist.append( entry )
+	spawnlist.append( entry )
 	return ERROR.NONE
 
-func parse_multi_roll( expression: String, entry: TextSpawnlistEntry ) -> ERROR:
+func parse_multi_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	print( "multiroll: " + expression )
 	var split_expression: PackedStringArray = expression.split( "d", false )
 	if split_expression.size() != 2:
@@ -73,12 +76,12 @@ func parse_multi_roll( expression: String, entry: TextSpawnlistEntry ) -> ERROR:
 	print( "split expr: " + str( split_expression ) )
 	return parse_sides( split_expression[1], entry )
 	
-func parse_roll( expression: String, entry: TextSpawnlistEntry ) -> ERROR:
+func parse_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	print( "roll: " + expression )
 	expression = expression.substr( 1 )
 	return parse_sides( expression, entry )
 
-func parse_constant( expression: String, entry: TextSpawnlistEntry ) -> ERROR:
+func parse_constant( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	print( "constant: " + expression )
 	if !expression.is_valid_int():
 		return ERROR.SYNTAX
@@ -87,7 +90,7 @@ func parse_constant( expression: String, entry: TextSpawnlistEntry ) -> ERROR:
 	constants_sum += constant
 	return ERROR.NONE
 	
-func parse_sides( sides: String, entry: TextSpawnlistEntry ) -> ERROR:
+func parse_sides( sides: String, entry: SpawnlistEntry ) -> ERROR:
 	print( "parse sides: " + sides )
 	if !sides.is_valid_int(): return ERROR.SYNTAX
 	var sides_int := sides.to_int()
@@ -106,7 +109,7 @@ func debug_text_spawnlist():
 	headers += "Subtract".rpad( COL_WIDTH, " " )
 	print( headers )
 	
-	for entry: TextSpawnlistEntry in text_spawnlist:
+	for entry: SpawnlistEntry in spawnlist:
 		var row: String = ""
 		row += str( entry.count ).rpad( COL_WIDTH, " " )
 		row += str( entry.sides ).rpad( COL_WIDTH, " " )

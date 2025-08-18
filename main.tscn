@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bv2dwjmt8518f" path="res://scripts/gui.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://bxnxjxvwerbch" path="res://scripts/roll_text_parser.gd" id="5_5vw27"]
-[ext_resource type="Script" uid="uid://fxo83shway67" path="res://scripts/roll_textedit.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://fxo83shway67" path="res://scripts/roll_text_edit.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/roll.png" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://du4l3n5t0hrdv" path="res://scripts/conductor.gd" id="7_272bh"]
 
@@ -182,6 +182,8 @@ script = ExtResource("5_lquwl")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 0
+action_mode = 0
 shortcut = SubResource("Shortcut_272bh")
 icon = ExtResource("6_7mycd")
 

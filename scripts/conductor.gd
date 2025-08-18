@@ -19,15 +19,20 @@ func _ready():
 	)
 
 func _on_roll_button_pressed():
-	# Debugging for demonstration. You can wipe this.
-	var text = "d6+2d10-15+2d100+4+5+6+7"
-	print( "text to parse: " + text )
-	var errors: int = roll_text_parser.parse( text )
-	print( "errors: ", String.num_int64( errors, 2 ) )
+	var text = roll_text_edit.get_roll_text()
+	if text == "": return
+	
+	roll_text_parser.reset()
+	var error: int = roll_text_parser.parse( text )
+	
 	roll_text_parser.debug_text_spawnlist()
-	#-------
-
-	dice_roller.roll_dice()
+	print ( "error: " + roll_text_parser.ERROR.find_key( error ) )
+	
+	if error != roll_text_parser.ERROR.NONE: return
+	if roll_text_parser.spawnlist.is_empty():
+		_on_score_counted( roll_text_parser.constants_sum )
+		return
+	dice_roller.roll_dice( roll_text_parser.spawnlist )
 
 func _on_ready_to_count():
 	score_counter.count_score( dice_roller.active_dice )

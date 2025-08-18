@@ -4,7 +4,8 @@ class_name DiceRoller
 # Variable
 var rolling: bool = false
 var multiple_rolls_left = false
-var spawnlist: Array[Die]
+var spawnlist: Array[ RollTextParser.SpawnlistEntry ]
+var entry_spawns: Array[ Die ]
 
 # Configurable
 var min_velocity: float = 18.0
@@ -22,6 +23,16 @@ signal ready_to_count
 @onready var roll_warmup_timer: Timer = $roll_warmup_timer
 @onready var multiple_roll_timer: Timer = $multiple_roll_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
+
+@onready var d6: Die = $spawnable_dice/d6
+@onready var d10: Die = $spawnable_dice/d10
+@onready var d_percentile_10s: Die = $spawnable_dice/d_percentile_10s
+@onready var d_percentile_1s: Die = $spawnable_dice/d_percentile_1s
+@onready var sides_to_die: Dictionary[ int, Die ] = {
+	6: d6,
+	10: d10,
+	100: null,	# We gotta spawn 2 types of dice here.
+}
 
 func remove_active_dice():
 	for c in active_dice.get_children():
@@ -45,29 +56,51 @@ func roll_die( to_spawn: Die ):
 	
 	active_dice.add_child( die )
 
-func roll_dice():
+func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
+	spawnlist = new_spawnlist
 	remove_active_dice()
-	spawnlist = []
 	multiple_roll_timer.stop()
-	
-	roll_warmup_timer.start()
 	rolling = true
+	roll_entry()
+
+func roll_entry():
+	var entry: RollTextParser.SpawnlistEntry = spawnlist[0]
+	entry_spawns = []
+	if entry.sides == 100:
+		for i in entry.count:
+			entry_spawns.append( d_percentile_10s )
+			entry_spawns.append( d_percentile_1s )
+	if entry.sides != 100:
+		for i in entry.count:
+			entry_spawns.append( sides_to_die[ entry.sides ] )
+			# BUG: This is appending null.
+	spawnlist.pop_front()
+	roll_batch_of_dice()
 	
-	# Placeholder for demonstration.
-	spawnlist.append( spawnable_dice.get_node("d_percentile_10s") )
-	spawnlist.append( spawnable_dice.get_node("d_percentile_1s") )
-		
-	roll_batch_of_dice()
-
-func _on_multiple_roll_timeout():
-	roll_batch_of_dice()
-
 func roll_batch_of_dice():
-	for i in range( 0, spawnlist.size() ):
+	for i in range( 0, entry_spawns.size() ):
 		if i >= max_simultaneous_rolls:
 			multiple_roll_timer.start()
 			return
-		roll_die( spawnlist.pop_back() )
+		roll_die( entry_spawns.pop_back() )
+	if spawnlist.is_empty():
+		finished_rolling()
+	else:
+		multiple_roll_timer.start()
+
+func _on_multiple_roll_timeout():
+	assert( !spawnlist.is_empty(), 
+	"""We should never reach this point with an empty spawnlist,
+	because it means we're waiting for multiple_roll_timer before
+	we realize we're finished_rolling(), which wastes user's time.
+	""" )
+	if entry_spawns.is_empty():
+		roll_entry()
+	elif !entry_spawns.is_empty():
+		roll_batch_of_dice()
+
+func finished_rolling():
+	roll_warmup_timer.start()
 	roll_max_timer.start()
 
 func _on_roll_max_timeout():

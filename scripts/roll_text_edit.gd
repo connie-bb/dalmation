@@ -3,6 +3,10 @@ class_name RollTextEdit
 # Okay, it's not REALLY a TextEdit...
 # But it behaves like one! Sort of.
 
+func get_roll_text():
+	#TODO: sanitize_text()
+	return text
+
 func parse_input( event: InputEvent ):
 	if event.is_action_pressed( "edit_d" ):
 		text += "d"
@@ -17,13 +21,13 @@ func parse_input_numbers( event: InputEvent ):
 	if !( event.is_pressed() ): return
 	
 	var number: int = 0
-	if ( event.keycode >= KEY_1 and event.keycode <= KEY_9 ):
+	if ( event.keycode >= KEY_0 and event.keycode <= KEY_9 ):
 		number = event.keycode - KEY_0
-	
-	if ( event.keycode >= KEY_KP_1 and event.keycode <= KEY_KP_9 ):
+	elif ( event.keycode >= KEY_KP_0 and event.keycode <= KEY_KP_9 ):
 		number = event.keycode - KEY_KP_0
-	
-	if number == 0: return
+	else:
+		return
+
 	text += str( number )
 
 func sanitize_text():
