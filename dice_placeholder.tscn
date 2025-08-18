@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=4 uid="uid://dx265o1ynlgn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pq145"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2sutc"]
+load_path = "res://.godot/imported/dice_placeholder_d10_placeholder.png-b23f8eeea793e13396649c813b6c9666.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_twxr2"]
+resource_name = "d10_placeholder"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_2sutc")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3wq0p"]
+_surfaces = [{
+"aabb": AABB(-0.718453, -0.713707, -0.752017, 1.43691, 1.42741, 1.50744),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAQADAAIABAAAAAIAAwAFAAIABQAEAAIAAwAGAAUABQAHAAQABwAFAAYABAAIAAAACAAEAAcAAAAJAAEACQAAAAgAAQAKAAMACgABAAkABgADAAoACAAHAAsABwAGAAsACQAIAAsABgAKAAsACgAJAAsA"),
+"material": SubResource("StandardMaterial3D_twxr2"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("bP95jT5YAAC/znqNB+cAAP9///+1fwAA5DAwjn7nAAD/f3uNAAAAAJMAeo0+WAAAAADOcVqnAADkMM5x7BcAAL/OhHJjGAAA///OcVqnAAD/f85x//8AAP9/AAC1fwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nje3f"]
+resource_name = "dice_placeholder_d10_001"
+_surfaces = [{
+"aabb": AABB(-0.718453, -0.713707, -0.752017, 1.43691, 1.42741, 1.50744),
+"attribute_data": PackedByteArray("WVlZ/1ldLBxZWVn/D6QEHFlZWf/cgKRiWVlZ/6qADAtycnL/NIOFlnJycv8GyruTcnJy/2Spk9tycnL/CqYMhCYmJv+7q4YcJiYm/2/ywR0mJib/2s2sYyYmJv9fz4MMDAwM/5YP+BsMDAz/dVY3HAwMDP/HMpliDAwM//syAQs/Pz//dDQdlz8/P/8ne+GVPz8//wlZCN0/Pz//gVdzhX9/f/87yppsf39//1yDnmx/f3//x6YaJn9/f/+zpkd9GRkZ/76jc+YZGRn/tVxZ5hkZGf9UgO+fGRkZ/zOAG/czMzP/6XtMbTMzM//jNA5sMzMz/6FZOCYzMzP/HFhifWZmZv8PVVrmZmZm/y8OHOZmZmb/3jG6n2ZmZv+qMeb2TExM/zj1LuVMTEz/Mq5r5kxMTP960FefTExM/wLS7PY="),
+"format": 34896613407,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUA"),
+"material": SubResource("StandardMaterial3D_pq145"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("bP95jT5YIO6/znqNB+cg7v9///+1fyDu///OcVqnIO7kMDCOfuft7JMAeo0+WO3s/3///7V/7ewAAM5xWqft7P9/e40AAFjibP95jT5YWOL/f///tX9Y4r/OhHJjGFjiv856jQfn9//kMDCOfuf3//9///+1f/f//3/Ocf//9/+TAHqNPlha4v9/e40AAFri/3///7V/WuLkMM5x7Bda4v//znFapy7nv86EcmMYLuf/fwAAtX8u52z/eY0+WC7n5DDOcewXFOcAAM5xWqcU5/9/AAC1fxTnkwB6jT5YFOf/f85x//8/9///znFapz/3/38AALV/P/e/znqNB+c/97/OhHJjGPjg5DDOcewX+OD/fwAAtX/44P9/e40AAPjgAADOcVqnQPf/f85x//9A9/9/AAC1f0D35DAwjn7nQPevqx+Yr6sfmK+rH5ivqx+Yl+iRLJfokSyX6JEsl+iRLL7Ywoq+2MKKvtjCir7YwopGgMquRoDKrkaAyq5GgMquPfW/WD31v1g99b9YPfW/WIoSdcCKEnXAihJ1wIoSdcCCQJZtgkCWbYJAlm2CQJZt5x0n6OcdJ+jnHSfo5x0n6AQAa4AEAGuABABrgAQAa4AnaBpiJ2gaYidoGmInaBpi")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3wq0p")
+
+[node name="dice_placeholder"]
+
+[node name="d_percentile_1s" parent="." index="7"]
+mesh = SubResource("ArrayMesh_nje3f")

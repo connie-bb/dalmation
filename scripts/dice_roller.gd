@@ -18,21 +18,11 @@ const max_simultaneous_rolls: int = 5
 signal ready_to_count
 
 # References
-@onready var spawnable_dice: Node3D = $spawnable_dice
+@onready var spawnable_dice: SpawnableDice = $spawnable_dice
 @onready var active_dice: Node3D = $active_dice
 @onready var roll_warmup_timer: Timer = $roll_warmup_timer
 @onready var multiple_roll_timer: Timer = $multiple_roll_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
-
-@onready var d6: Die = $spawnable_dice/d6
-@onready var d10: Die = $spawnable_dice/d10
-@onready var d_percentile_10s: Die = $spawnable_dice/d_percentile_10s
-@onready var d_percentile_1s: Die = $spawnable_dice/d_percentile_1s
-@onready var sides_to_die: Dictionary[ int, Die ] = {
-	6: d6,
-	10: d10,
-	100: null,	# We gotta spawn 2 types of dice here.
-}
 
 func remove_active_dice():
 	for c in active_dice.get_children():
@@ -66,14 +56,8 @@ func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
 func roll_entry():
 	var entry: RollTextParser.SpawnlistEntry = spawnlist[0]
 	entry_spawns = []
-	if entry.sides == 100:
-		for i in entry.count:
-			entry_spawns.append( d_percentile_10s )
-			entry_spawns.append( d_percentile_1s )
-	if entry.sides != 100:
-		for i in entry.count:
-			entry_spawns.append( sides_to_die[ entry.sides ] )
-			# BUG: This is appending null.
+	for i in entry.count:
+		entry_spawns.append( spawnable_dice.sides_to_die[ entry.sides ] )
 	spawnlist.pop_front()
 	roll_batch_of_dice()
 	

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3yol24a4qva"
-path.s3tc="res://.godot/imported/d100_placeholder.png-415de3674abe090020d8f7bb3a3f240a.s3tc.ctex"
+uid="uid://derlind6pow6j"
+path.s3tc="res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "486eb4eccc0fbae6e39187134f700534"
+}
 
 [deps]
 
-source_file="res://dice/d100/d100_placeholder.png"
-dest_files=["res://.godot/imported/d100_placeholder.png-415de3674abe090020d8f7bb3a3f240a.s3tc.ctex"]
+source_file="res://dice/placeholder/dice_d12_placeholder.png"
+dest_files=["res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.s3tc.ctex"]
 
 [params]
 

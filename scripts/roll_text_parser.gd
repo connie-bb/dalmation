@@ -4,7 +4,7 @@ class_name RollTextParser
 # Extends object so that we can pass it by reference instead of value
 class SpawnlistEntry extends Object:
 	var count: int = 0
-	var sides: int = 0
+	var sides: Die.SIDES
 	var top_n: int = 0		# Take the top n results
 	var bottom_n: int = 0 	# Take the bottom n results
 	var subtract: bool = false
@@ -14,9 +14,15 @@ var spawnlist: Array[SpawnlistEntry] = []
 var constants_sum: int = 0
 
 # Constant
-const VALID_SIDES: Array[int] = [
-	4, 6, 8, 10, 12, 20, 100
-]
+const INT_TO_SIDES: Dictionary[ int, Die.SIDES ] = {
+	4: Die.SIDES.D4,
+	6: Die.SIDES.D6,
+	8: Die.SIDES.D8,
+	10: Die.SIDES.D10,
+	12: Die.SIDES.D12,
+	20: Die.SIDES.D20,
+	100: Die.SIDES.D_PERCENTILE_10S
+}
 enum ERROR { NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED }
 
 func reset():
@@ -62,6 +68,14 @@ func parse_expression( expression: String ) -> ERROR:
 		error = parse_multi_roll( expression, entry )
 	
 	if error != ERROR.NONE: return error as ERROR
+	if entry.sides == Die.SIDES.D_PERCENTILE_10S:
+		var entry_1s: SpawnlistEntry = SpawnlistEntry.new()
+		entry_1s.count = entry.count
+		entry_1s.sides = Die.SIDES.D_PERCENTILE_1S
+		entry_1s.top_n = 0
+		entry_1s.bottom_n = 0
+		entry_1s.subtract = entry.subtract
+		spawnlist.append( entry_1s )
 	spawnlist.append( entry )
 	return ERROR.NONE
 
@@ -90,20 +104,22 @@ func parse_constant( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	constants_sum += constant
 	return ERROR.NONE
 	
-func parse_sides( sides: String, entry: SpawnlistEntry ) -> ERROR:
-	print( "parse sides: " + sides )
-	if !sides.is_valid_int(): return ERROR.SYNTAX
-	var sides_int := sides.to_int()
-	if !VALID_SIDES.has( sides_int ): return ERROR.INVALID_DIE
-	print( "sides as int: " + str( sides_int ) ) 
-	entry.sides = sides_int
+func parse_sides( sides_string: String, entry: SpawnlistEntry ) -> ERROR:
+	print( "parse sides: " + sides_string )
+	if !sides_string.is_valid_int(): return ERROR.SYNTAX
+	var sides_int := sides_string.to_int()
+	
+	if !INT_TO_SIDES.has( sides_int ):
+		return ERROR.INVALID_DIE
+	var sides: Die.SIDES = INT_TO_SIDES[ sides_int ]
+	entry.sides = sides
 	return ERROR.NONE
 
 func debug_text_spawnlist():
 	const COL_WIDTH: int = 10
 	var headers: String = ""
 	headers += "Count".rpad( COL_WIDTH, " " )
-	headers += "Sides".rpad( COL_WIDTH, " " )
+	headers += "Sides".rpad( COL_WIDTH * 2, " " )
 	headers += "Top n".rpad( COL_WIDTH, " " )
 	headers += "Bottom n".rpad( COL_WIDTH, " " )
 	headers += "Subtract".rpad( COL_WIDTH, " " )
@@ -112,7 +128,7 @@ func debug_text_spawnlist():
 	for entry: SpawnlistEntry in spawnlist:
 		var row: String = ""
 		row += str( entry.count ).rpad( COL_WIDTH, " " )
-		row += str( entry.sides ).rpad( COL_WIDTH, " " )
+		row += str( Die.SIDES.find_key( entry.sides ) ).rpad( COL_WIDTH * 2, " " )
 		row += str( entry.top_n ).rpad( COL_WIDTH, " " )
 		row += str( entry.bottom_n ).rpad( COL_WIDTH, " " )
 		row += str( entry.subtract ).rpad( COL_WIDTH, " " )

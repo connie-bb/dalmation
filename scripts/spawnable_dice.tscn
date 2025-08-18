@@ -1,56 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://jfc0d8f2uivv"]
+[gd_scene load_steps=2 format=3 uid="uid://jfc0d8f2uivv"]
 
-[ext_resource type="PackedScene" uid="uid://idjtsx48j57c" path="res://dice/die.tscn" id="1_i4k4g"]
-[ext_resource type="PackedScene" uid="uid://fn3vmw5sslw7" path="res://dice/d6/die_placeholder_model.tscn" id="2_hpoly"]
-[ext_resource type="PackedScene" uid="uid://hpq1i4fp0gkr" path="res://dice/d10/d10_placeholder_model.tscn" id="3_hpoly"]
-[ext_resource type="PackedScene" uid="uid://bqteuiynr883q" path="res://dice/d100/d100_placeholder_model.tscn" id="4_codld"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i4k4g"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hpoly"]
-points = PackedVector3Array(0.769421, -0.0848433, 0.249924, -0.000150502, 0.764339, -7.11083e-05, 0.473281, 0.0803543, 0.651466, -0.000150502, -0.0848433, 0.809017, -0.000150502, -0.764339, -7.11083e-05, 0.473281, -0.0806535, -0.651608, 0.765957, 0.0803543, -0.24896, -0.475541, 0.0846938, 0.654468, -0.000150502, 0.080504, -0.805367, -0.766107, 0.0803543, -0.24896, -0.769421, -0.0848433, 0.249924, -0.475541, -0.0848433, -0.654611)
+[ext_resource type="Script" uid="uid://dfsdmi1aykny3" path="res://scripts/spawnable_dice.gd" id="1_yugii"]
 
 [node name="spawnable_dice" type="Node3D"]
-
-[node name="d6" parent="." node_paths=PackedStringArray("score_mesh") instance=ExtResource("1_i4k4g")]
-score_mesh = NodePath("die_placeholder_model/Cube")
-
-[node name="physics_collision" type="CollisionShape3D" parent="d6"]
-shape = SubResource("BoxShape3D_i4k4g")
-
-[node name="die_placeholder_model" parent="d6" instance=ExtResource("2_hpoly")]
-
-[node name="d10" parent="." node_paths=PackedStringArray("score_mesh") instance=ExtResource("1_i4k4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-sides = 2
-score_mesh = NodePath("d10_placeholder_model/Circle")
-
-[node name="physics_collision" type="CollisionShape3D" parent="d10"]
-shape = SubResource("ConvexPolygonShape3D_hpoly")
-
-[node name="d10_placeholder_model" parent="d10" instance=ExtResource("3_hpoly")]
-
-[node name="d_percentile_10s" parent="." node_paths=PackedStringArray("score_mesh") instance=ExtResource("1_i4k4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-sides = 5
-score_mesh = NodePath("d100_placeholder_model/Circle")
-
-[node name="physics_collision" type="CollisionShape3D" parent="d_percentile_10s"]
-shape = SubResource("ConvexPolygonShape3D_hpoly")
-
-[node name="d100_placeholder_model" parent="d_percentile_10s" instance=ExtResource("4_codld")]
-
-[node name="d_percentile_1s" parent="." node_paths=PackedStringArray("score_mesh") instance=ExtResource("1_i4k4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-sides = 6
-score_mesh = NodePath("d10_placeholder_model/Circle")
-
-[node name="physics_collision" type="CollisionShape3D" parent="d_percentile_1s"]
-shape = SubResource("ConvexPolygonShape3D_hpoly")
-
-[node name="d10_placeholder_model" parent="d_percentile_1s" instance=ExtResource("3_hpoly")]
-
-[editable path="d6/die_placeholder_model"]
-[editable path="d10/d10_placeholder_model"]
-[editable path="d_percentile_10s/d100_placeholder_model"]
-[editable path="d_percentile_1s/d10_placeholder_model"]
+script = ExtResource("1_yugii")
