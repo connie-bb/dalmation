@@ -30,7 +30,6 @@ func remove_active_dice():
 
 func roll_die( to_spawn: Die ):
 	var die: Die = to_spawn.duplicate()
-	die.position = global_position
 	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
@@ -45,6 +44,7 @@ func roll_die( to_spawn: Die ):
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
 	active_dice.add_child( die )
+	die.position = Vector3.ZERO
 
 func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
 	spawnlist = new_spawnlist

@@ -8,4 +8,4 @@ func _ready():
 	assert( score_label != null, "GUI has no assigned score_label" )
 
 func display_score( score: int ):
-	score_label.text = "score: " + str( score ) 
+	score_label.text = str( score ) 

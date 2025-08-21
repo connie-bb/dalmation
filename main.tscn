@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=37 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://scripts/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://scripts/spawnable_dice.tscn" id="2_0xm2m"]
@@ -7,7 +7,16 @@
 [ext_resource type="Script" uid="uid://bxnxjxvwerbch" path="res://scripts/roll_text_parser.gd" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://fxo83shway67" path="res://scripts/roll_text_edit.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/roll.png" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="6_w48qg"]
 [ext_resource type="Script" uid="uid://du4l3n5t0hrdv" path="res://scripts/conductor.gd" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://clbsxfowrf5lw" path="res://gui/exit.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/settings.png" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://gqyj36rge4px" path="res://scripts/exit_button.gd" id="10_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://cd13kg2snxduq" path="res://gui/help.png" id="11_dg77c"]
+[ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/volume.png" id="12_dg77c"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
+points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 
@@ -19,10 +28,65 @@ background_mode = 2
 sky = SubResource("Sky_h2yge")
 ambient_light_source = 3
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
-size = Vector3(11, 1, 11)
+[sub_resource type="BoxMesh" id="BoxMesh_ycdy4"]
+size = Vector3(24.255, 1, 25.905)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(19, 2, 17)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vivmo"]
+size = Vector3(11, 2, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2cqfq"]
+size = Vector3(19, 2, 23)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
+size = Vector3(11, 7, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
+size = Vector3(19, 7, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
+size = Vector3(2, 7, 22)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
+size = Vector3(2, 7, 22)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48qg"]
+albedo_color = Color(1, 0.09, 0.09, 1)
+roughness = 0.28
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w48qg"]
+material = SubResource("StandardMaterial3D_w48qg")
+top_radius = 2.613
+bottom_radius = 2.0
+height = 5.575
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
+albedo_color = Color(0.0438, 0.73, 0.123857, 1)
+roughness = 0.44
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vivmo"]
+material = SubResource("StandardMaterial3D_vivmo")
+top_radius = 1.264
+bottom_radius = 1.278
+height = 3.617
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_color = Color(0.00999999, 0.307, 1, 1)
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_w48qg"]
+material = SubResource("StandardMaterial3D_2cqfq")
+size = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
+albedo_color = Color(1, 0.770667, 0.14, 1)
+roughness = 0.42
+
+[sub_resource type="BoxMesh" id="BoxMesh_074og"]
+material = SubResource("StandardMaterial3D_yaehf")
+size = Vector3(3, 3, 3)
 
 [sub_resource type="InputEventAction" id="InputEventAction_7mycd"]
 action = &"roll"
@@ -39,11 +103,16 @@ script = ExtResource("7_272bh")
 dice_roller = NodePath("../dice_roller")
 score_counter = NodePath("../score_counter")
 roll_text_parser = NodePath("../roll_text_parser")
-roll_text_edit = NodePath("../GUI/Panel/HBoxContainer/VBoxContainer/roll_text_edit")
+roll_text_edit = NodePath("../GUI/Panel/roll_text_edit")
 gui = NodePath("../GUI")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.266329, 0.963882, 0, -0.963882, 0.266329, 0, 9.98288, 3.36912)
+
+[node name="camera_bounds" type="CollisionShape3D" parent="Camera3D"]
+transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_w48qg")
+debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
 
 [node name="env" type="Node3D" parent="."]
 
@@ -55,65 +124,81 @@ transform = Transform3D(0.870167, -0.426741, 0.246379, 0, 0.5, 0.866025, -0.4927
 
 [node name="world" type="Node3D" parent="."]
 
+[node name="table" type="MeshInstance3D" parent="world"]
+mesh = SubResource("BoxMesh_ycdy4")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000673294, 0.0368586, -0.109508)
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="floor" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, -0.507976, -0.976288)
 shape = SubResource("BoxShape3D_0xm2m")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D"]
-transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="ramp" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.0251384, 0.811247, 9.99411)
+shape = SubResource("BoxShape3D_vivmo")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="world"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4, 6)
-collision_mask = 3
+[node name="ceil" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 6.49202, 2.02371)
+shape = SubResource("BoxShape3D_2cqfq")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D2"]
-shape = SubResource("BoxShape3D_0xm2m")
+[node name="near_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, 12.5237)
+shape = SubResource("BoxShape3D_074og")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D2"]
-transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="back_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, -4.47629)
+shape = SubResource("BoxShape3D_w48qg")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="world"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4, -6)
-collision_mask = 3
+[node name="left_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -6.59363, 2.992, 2.73266)
+shape = SubResource("BoxShape3D_yaehf")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D3"]
-shape = SubResource("BoxShape3D_0xm2m")
+[node name="right_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 6.59363, 2.992, 2.73266)
+shape = SubResource("BoxShape3D_ycdy4")
+debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D3"]
-transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.26118, -5.88599)
+mesh = SubResource("CylinderMesh_w48qg")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="world"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -6, -4, -2.62268e-07)
-collision_mask = 3
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="world"]
+transform = Transform3D(0.707107, -0.707107, 0, -3.09086e-08, -3.09086e-08, -1, 0.707107, 0.707107, -4.37114e-08, 1.90304, 1.83638, -6.2261)
+mesh = SubResource("CylinderMesh_vivmo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D4"]
-shape = SubResource("BoxShape3D_0xm2m")
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="world"]
+transform = Transform3D(0.865991, -0.50006, 0, -2.18583e-08, -3.78536e-08, -1, 0.50006, 0.865991, -4.37114e-08, 4.71215, 1.74882, -5.61063)
+mesh = SubResource("CylinderMesh_vivmo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D4"]
-transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="world"]
+transform = Transform3D(0.758839, -0.646985, 0.0746528, -2.6077e-08, -0.114625, -0.993409, 0.651278, 0.753838, -0.0869821, 3.58133, 3.97965, -6.13184)
+mesh = SubResource("CylinderMesh_vivmo")
 
-[node name="StaticBody3D5" type="StaticBody3D" parent="world"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 6, -4, 2.62268e-07)
-collision_mask = 3
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="world"]
+transform = Transform3D(-0.29989, 0, -0.953974, 0, 1, 0, 0.953974, 0, -0.29989, -6.62242, 2, -5.82331)
+mesh = SubResource("BoxMesh_w48qg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D5"]
-shape = SubResource("BoxShape3D_0xm2m")
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="world"]
+transform = Transform3D(0.185003, 0, -0.354646, 0, 0.4, 0, 0.354646, 0, 0.185003, -0.442011, 1.2, -4.3137)
+mesh = SubResource("BoxMesh_w48qg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D5"]
-transform = Transform3D(10.9325, 0, 0, 0, 1, 0, 0, 0, 11, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="world"]
+transform = Transform3D(0.522286, 0, -0.351438, 0, 0.629517, 0, 0.351438, 0, 0.522286, 6.77689, 1.43129, -4.56219)
+mesh = SubResource("BoxMesh_074og")
 
 [node name="roll_text_parser" type="Node" parent="."]
 script = ExtResource("5_5vw27")
 
 [node name="dice_roller" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 2.02778, 3.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 3.02778, 8.8)
 script = ExtResource("1_h2yge")
 
 [node name="spawnable_dice" parent="dice_roller" instance=ExtResource("2_0xm2m")]
@@ -134,6 +219,13 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="spawnpoint_indicator" type="Sprite3D" parent="dice_roller"]
+transform = Transform3D(4.1, 0, 0, 0, 4.1, 0, 0, 0, 4.1, 0, 0, 0)
+billboard = 1
+texture = ExtResource("6_7mycd")
+script = ExtResource("6_w48qg")
+show_in_game = true
+
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
@@ -147,39 +239,14 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("4_1bvp3")
-score_label = NodePath("Panel/HBoxContainer/VBoxContainer/score_label")
+score_label = NodePath("score_panel/VBoxContainer/score_label")
 
-[node name="Panel" type="Panel" parent="GUI"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 116.0
-grow_horizontal = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Panel/HBoxContainer"]
+[node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="score_label" type="Label" parent="GUI/Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "score:"
-
-[node name="roll_text_edit" type="Label" parent="GUI/Panel/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_lquwl")
-
-[node name="roll_button" type="Button" parent="GUI/Panel/HBoxContainer"]
-layout_mode = 2
+offset_left = 339.0
+offset_top = 553.0
+offset_right = 411.0
+offset_bottom = 625.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
@@ -187,8 +254,180 @@ action_mode = 0
 shortcut = SubResource("Shortcut_272bh")
 icon = ExtResource("6_7mycd")
 
+[node name="Panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 151.0
+offset_top = 552.0
+offset_right = -150.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="roll_text_edit" type="Label" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_lquwl")
+
+[node name="score_panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 263.0
+offset_top = 12.0
+offset_right = -114.0
+offset_bottom = -514.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/score_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GUI/score_panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="score_label" type="Label" parent="GUI/score_panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="history_panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = -231.0
+offset_bottom = -516.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/history_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GUI/history_panel/VBoxContainer"]
+layout_mode = 2
+text = "HISTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="history_table" type="VBoxContainer" parent="GUI/history_panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="history_table_row" type="PanelContainer" parent="GUI/history_panel/VBoxContainer/history_table"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="score_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.5
+text = "210"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
+layout_mode = 2
+
+[node name="roll_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2d6 + 3 + 2d10"
+
+[node name="history_table_row2" type="PanelContainer" parent="GUI/history_panel/VBoxContainer/history_table"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="score_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.5
+text = "210"
+
+[node name="VSeparator" type="VSeparator" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
+layout_mode = 2
+
+[node name="roll_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2d6 + 3 + 2d10"
+
+[node name="exit_button" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 11.0
+offset_right = 419.0
+offset_bottom = 51.0
+icon = ExtResource("9_kek77")
+script = ExtResource("10_ycdy4")
+
+[node name="settings_button" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 11.0
+offset_right = 469.0
+offset_bottom = 51.0
+disabled = true
+icon = ExtResource("10_efxa6")
+
+[node name="help_button" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 59.0
+offset_right = 419.0
+offset_bottom = 99.0
+disabled = true
+icon = ExtResource("11_dg77c")
+
+[node name="volume_button" type="Button" parent="GUI"]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 59.0
+offset_right = 469.0
+offset_bottom = 99.0
+disabled = true
+icon = ExtResource("12_dg77c")
+
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/multiple_roll_timer" to="dice_roller" method="_on_multiple_roll_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
-[connection signal="pressed" from="GUI/Panel/HBoxContainer/roll_button" to="Conductor" method="_on_roll_button_pressed"]
+[connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
+[connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
