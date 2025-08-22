@@ -1,6 +1,11 @@
 extends Node
 class_name RollTextParser
 
+# Constant
+const MAX_INT := pow( 2, 31 ) - 1	# We account for 32-bit systems.
+const MAX_DICE := 30
+const MAX_LENGTH = 128
+
 # Extends object so that we can pass it by reference instead of value
 class SpawnlistEntry extends Object:
 	var count: int = 0
@@ -23,7 +28,10 @@ const INT_TO_SIDES: Dictionary[ int, Die.SIDES ] = {
 	20: Die.SIDES.D20,
 	100: Die.SIDES.D_PERCENTILE_10S
 }
-enum ERROR { NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED }
+enum ERROR {
+	NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED, PARSE,
+	MAX_INT, MAX_DICE,
+}
 
 func reset():
 	spawnlist = []
@@ -33,27 +41,59 @@ func parse( text: String ) -> ERROR:
 	var error = ERROR.NONE
 	var length: int = text.length()
 	var begin: int = 0
+	
+	if length > MAX_LENGTH:
+		return ERROR.MAX_LENGTH
+	
+	if text[ -1 ] == "-" or text[ -1 ] == "+":
+		return ERROR.SYNTAX
+	
 	for end in range( 0, length ):
-		if text[end] != "+" and text[end] != "-" and end != length - 1:
+		if end == 0 and ( text[0] == "+" or text[0] == "-" ):
+			if length == 1: return ERROR.SYNTAX
 			continue
+		if text[end] != "+" and text[end] != "-" and end != length - 1:
+			# Expression delimiter or end-of-string not found.
+			continue
+		
+		var expression_length: int = end - begin
 		if end == length - 1:
-			end += 1
-		var expression = text.substr( begin, end - begin )
+			expression_length += 1
+		var expression = text.substr( begin, expression_length )
 		error = parse_expression( expression )
 		if error != ERROR.NONE: return error
 		begin = end
+
+	var max_possible_score: int = 0
+	var total_number_of_dice: int = 0
+	max_possible_score += constants_sum
+	
+	for entry: SpawnlistEntry in spawnlist:
+		max_possible_score += entry.count * INT_TO_SIDES.find_key( entry.sides )
+		total_number_of_dice += entry.count
+	if max_possible_score > MAX_INT: return ERROR.MAX_INT
+	if total_number_of_dice > MAX_DICE: return ERROR.MAX_DICE
+	
 	return error
 		
 func parse_expression( expression: String ) -> ERROR:
 	var error: int = ERROR.NONE
 	var entry: SpawnlistEntry = SpawnlistEntry.new()
-	
+	if expression.is_empty(): return ERROR.PARSE
+
 	if expression.count( "-" ) > 1 or expression.count( "+" ) > 1:
-		return ERROR.SYNTAX
+		return ERROR.PARSE
 	if expression[0] == "-":
 		entry.subtract = true
 	expression = expression.replace( "-", "" )
 	expression = expression.replace( "+", "" )
+	
+	var search_digits: RegEx = RegEx.new()
+	search_digits.compile( "[0-9]" )
+	var search_digits_results = search_digits.search_all( expression )
+	print("no. digits found in regex: " + str( search_digits_results.size()))
+	if search_digits_results.size() == 0:
+		return ERROR.SYNTAX
 	
 	var d_count: int = expression.count( "d" )
 	if d_count > 1:
@@ -86,12 +126,16 @@ func parse_multi_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
 		return ERROR.SYNTAX
 	if !split_expression[0].is_valid_int():
 		return ERROR.SYNTAX
+
 	entry.count = split_expression[0].to_int()
+	if entry.count > MAX_DICE: return ERROR.MAX_DICE
+	
 	print( "split expr: " + str( split_expression ) )
 	return parse_sides( split_expression[1], entry )
 	
 func parse_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	print( "roll: " + expression )
+	entry.count = 1
 	expression = expression.substr( 1 )
 	return parse_sides( expression, entry )
 
@@ -100,6 +144,7 @@ func parse_constant( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	if !expression.is_valid_int():
 		return ERROR.SYNTAX
 	var constant = expression.to_int()
+	if abs( constant ) > MAX_INT: return ERROR.MAX_INT
 	if entry.subtract: constant *= -1
 	constants_sum += constant
 	return ERROR.NONE
