@@ -30,7 +30,7 @@ func _on_roll_button_pressed():
 	
 	if error != roll_text_parser.ERROR.NONE: return
 	if roll_text_parser.spawnlist.is_empty():
-		_on_score_counted( roll_text_parser.constants_sum )
+		_on_score_counted( 0 )
 		return
 	dice_roller.roll_dice( roll_text_parser.spawnlist )
 
@@ -38,4 +38,5 @@ func _on_ready_to_count():
 	score_counter.count_score( dice_roller.active_dice )
 
 func _on_score_counted( score: int ):
+	score += roll_text_parser.constants_sum
 	gui.display_score( score )
