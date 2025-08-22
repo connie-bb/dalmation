@@ -49,7 +49,10 @@ func roll_die( to_spawn: Die ):
 func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
 	spawnlist = new_spawnlist
 	remove_active_dice()
+	roll_warmup_timer.stop()
+	roll_max_timer.stop()
 	multiple_roll_timer.stop()
+	
 	rolling = true
 	roll_entry()
 
@@ -98,6 +101,7 @@ func check_if_dice_settled() -> bool:
 
 func get_ready_to_count():
 	rolling = false
+	roll_max_timer.stop()
 	ready_to_count.emit()
 
 func _physics_process( _delta: float ):
