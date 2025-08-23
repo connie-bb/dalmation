@@ -19,6 +19,7 @@ func _ready():
 	)
 
 func _on_roll_button_pressed():
+	gui.stop_displaying_error()
 	var text = roll_text_edit.get_roll_text()
 	if text == "": return
 	
@@ -27,6 +28,8 @@ func _on_roll_button_pressed():
 	
 	roll_text_parser.debug_text_spawnlist()
 	print ( "error: " + roll_text_parser.ERROR.find_key( error ) )
+	if error != RollTextParser.ERROR.NONE:
+		gui.display_error( RollTextParser.ERROR_TO_STRING[ error ] )
 	
 	if error != roll_text_parser.ERROR.NONE: return
 	if roll_text_parser.spawnlist.is_empty():

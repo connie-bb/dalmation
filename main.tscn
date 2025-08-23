@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=38 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://scripts/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://scripts/spawnable_dice.tscn" id="2_0xm2m"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://gqyj36rge4px" path="res://scripts/exit_button.gd" id="10_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://cd13kg2snxduq" path="res://gui/help.png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/volume.png" id="12_dg77c"]
+[ext_resource type="Script" uid="uid://cuvl0yxsnu3ea" path="res://scripts/error_panel.gd" id="15_vivmo"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -229,7 +230,7 @@ show_in_game = true
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label")]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -240,6 +241,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 script = ExtResource("4_1bvp3")
 score_label = NodePath("score_panel/VBoxContainer/score_label")
+error_panel = NodePath("error_panel")
 
 [node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
@@ -432,6 +434,34 @@ offset_bottom = 99.0
 disabled = true
 icon = ExtResource("12_dg77c")
 
+[node name="error_panel" type="Panel" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 47.0
+offset_top = 438.0
+offset_right = -47.0
+offset_bottom = -112.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_vivmo")
+
+[node name="Label" type="Label" parent="GUI/error_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="display_timer" type="Timer" parent="GUI/error_panel"]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/multiple_roll_timer" to="dice_roller" method="_on_multiple_roll_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
@@ -439,3 +469,4 @@ icon = ExtResource("12_dg77c")
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
 [connection signal="text_changed" from="GUI/Panel/roll_text_edit" to="GUI/Panel/roll_text_edit" method="_on_text_changed"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
+[connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]

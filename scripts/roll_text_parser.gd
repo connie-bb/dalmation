@@ -2,9 +2,13 @@ extends Node
 class_name RollTextParser
 
 # Constant
-const MAX_INT := pow( 2, 31 ) - 1	# We account for 32-bit systems.
+# str( const int ) can't be used in a constant expression. What a load of @#!$.
+const MAX_INT := 9223372036854775807
+const MAX_INT_STR := "9,223,372,036,854,775,807"
 const MAX_DICE := 30
-const MAX_LENGTH = 128
+const MAX_DICE_STR := "30"
+const MAX_LENGTH := 128
+const MAX_LENGTH_STR := "128"
 
 # Extends object so that we can pass it by reference instead of value
 class SpawnlistEntry extends Object:
@@ -31,6 +35,16 @@ const INT_TO_SIDES: Dictionary[ int, Die.SIDES ] = {
 enum ERROR {
 	NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED, PARSE,
 	MAX_INT, MAX_DICE,
+}
+const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
+	ERROR.NONE: "",
+	ERROR.SYNTAX: "Syntax error. See Help [?] for more info.",
+	ERROR.MAX_LENGTH: "Maximum of " + MAX_LENGTH_STR + " characters.",
+	ERROR.INVALID_DIE: "Invalid die found. Supported dice are: d4, d6, d8, d10, d12, d20, d100.",
+	ERROR.D100_ADV_NOT_SUPPORTED: "Advantage and disadvantage is not supported for percentile dice.",
+	ERROR.PARSE: "The parser encountered an error (not your fault). Please report this bug.",
+	ERROR.MAX_INT: "Maximum integer of " + MAX_INT_STR + " exceeded. What exactly is going on here?",
+	ERROR.MAX_DICE: "A maximum of " + MAX_DICE_STR + " dice may be rolled at once.",
 }
 
 func reset():
@@ -71,7 +85,7 @@ func parse( text: String ) -> ERROR:
 	for entry: SpawnlistEntry in spawnlist:
 		max_possible_score += entry.count * INT_TO_SIDES.find_key( entry.sides )
 		total_number_of_dice += entry.count
-	if max_possible_score > MAX_INT: return ERROR.MAX_INT
+	if max_possible_score >= MAX_INT: return ERROR.MAX_INT
 	if total_number_of_dice > MAX_DICE: return ERROR.MAX_DICE
 	
 	return error
@@ -91,7 +105,6 @@ func parse_expression( expression: String ) -> ERROR:
 	var search_digits: RegEx = RegEx.new()
 	search_digits.compile( "[0-9]" )
 	var search_digits_results = search_digits.search_all( expression )
-	print("no. digits found in regex: " + str( search_digits_results.size()))
 	if search_digits_results.size() == 0:
 		return ERROR.SYNTAX
 	
@@ -144,7 +157,7 @@ func parse_constant( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	if !expression.is_valid_int():
 		return ERROR.SYNTAX
 	var constant = expression.to_int()
-	if abs( constant ) > MAX_INT: return ERROR.MAX_INT
+	if abs( constant ) >= MAX_INT: return ERROR.MAX_INT
 	if entry.subtract: constant *= -1
 	constants_sum += constant
 	return ERROR.NONE
