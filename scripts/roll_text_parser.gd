@@ -121,14 +121,6 @@ func parse_expression( expression: String ) -> ERROR:
 		error = parse_multi_roll( expression, entry )
 	
 	if error != ERROR.NONE: return error as ERROR
-	if entry.sides == Die.SIDES.D_PERCENTILE_10S:
-		var entry_1s: SpawnlistEntry = SpawnlistEntry.new()
-		entry_1s.count = entry.count
-		entry_1s.sides = Die.SIDES.D_PERCENTILE_1S
-		entry_1s.top_n = 0
-		entry_1s.bottom_n = 0
-		entry_1s.subtract = entry.subtract
-		spawnlist.append( entry_1s )
 	spawnlist.append( entry )
 	return ERROR.NONE
 

@@ -61,6 +61,10 @@ func roll_spawnlist_entry():
 	entry_spawns = []
 	for i in entry.count:
 		entry_spawns.append( spawnable_dice.sides_to_die[ entry.sides ] )
+		if entry.sides == Die.SIDES.D_PERCENTILE_10S:
+			entry_spawns.append(
+				spawnable_dice.sides_to_die[ Die.SIDES.D_PERCENTILE_1S ] 
+			)
 	spawnlist.pop_front()
 	roll_handful_of_dice()
 	
