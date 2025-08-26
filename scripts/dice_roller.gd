@@ -60,10 +60,10 @@ func roll_spawnlist_entry():
 	var entry: RollTextParser.SpawnlistEntry = spawnlist[0]
 	entry_spawns = []
 	for i in entry.count:
-		entry_spawns.append( spawnable_dice.sides_to_die[ entry.sides ] )
-		if entry.sides == Die.SIDES.D_PERCENTILE_10S:
+		entry_spawns.append( spawnable_dice.die_type_to_die[ entry.die_type ] )
+		if entry.die_type == Die.TYPES.D_PERCENTILE_10S:
 			entry_spawns.append(
-				spawnable_dice.sides_to_die[ Die.SIDES.D_PERCENTILE_1S ] 
+				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] 
 			)
 	spawnlist.pop_front()
 	roll_handful_of_dice()

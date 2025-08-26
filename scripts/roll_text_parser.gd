@@ -10,32 +10,32 @@ const MAX_DICE_STR := "30"
 const MAX_LENGTH := 128
 const MAX_LENGTH_STR := "128"
 
-# Extends object so that we can pass it by reference instead of value
-class SpawnlistEntry extends Object:
-	var count: int = 0
-	var sides: Die.SIDES
-	var top_n: int = 0		# Take the top n results
-	var bottom_n: int = 0 	# Take the bottom n results
-	var subtract: bool = false
-
-# Variable
-var spawnlist: Array[SpawnlistEntry] = []
-var constants_sum: int = 0
-
-# Constant
-const INT_TO_SIDES: Dictionary[ int, Die.SIDES ] = {
-	4: Die.SIDES.D4,
-	6: Die.SIDES.D6,
-	8: Die.SIDES.D8,
-	10: Die.SIDES.D10,
-	12: Die.SIDES.D12,
-	20: Die.SIDES.D20,
-	100: Die.SIDES.D_PERCENTILE_10S
+const INT_TO_DIE_TYPE: Dictionary[ int, Die.TYPES ] = {
+	4: Die.TYPES.D4,
+	6: Die.TYPES.D6,
+	8: Die.TYPES.D8,
+	10: Die.TYPES.D10,
+	12: Die.TYPES.D12,
+	20: Die.TYPES.D20,
+	100: Die.TYPES.D_PERCENTILE_10S
 }
+
+const DIE_TYPE_MAX_SCORE: Dictionary [ Die.TYPES, int ] = {
+	Die.TYPES.D4: 4,
+	Die.TYPES.D6: 6,
+	Die.TYPES.D8: 8,
+	Die.TYPES.D10: 10,
+	Die.TYPES.D12: 12,
+	Die.TYPES.D20: 20,
+	Die.TYPES.D_PERCENTILE_10S: 90,
+	Die.TYPES.D_PERCENTILE_1S: 9,
+}
+
 enum ERROR {
 	NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED, PARSE,
 	MAX_INT, MAX_DICE,
 }
+
 const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 	ERROR.NONE: "",
 	ERROR.SYNTAX: "Syntax error. See Help [?] for more info.",
@@ -46,6 +46,18 @@ const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 	ERROR.MAX_INT: "Maximum integer of " + MAX_INT_STR + " exceeded. What exactly is going on here?",
 	ERROR.MAX_DICE: "A maximum of " + MAX_DICE_STR + " dice may be rolled at once.",
 }
+
+# Extends object so that we can pass it by reference instead of value
+class SpawnlistEntry extends Object:
+	var count: int = 0
+	var die_type: Die.TYPES
+	var top_n: int = 0		# Take the top n results
+	var bottom_n: int = 0 	# Take the bottom n results
+	var subtract: bool = false
+
+# Variable
+var spawnlist: Array[SpawnlistEntry] = []
+var constants_sum: int = 0
 
 func reset():
 	spawnlist = []
@@ -83,7 +95,7 @@ func parse( text: String ) -> ERROR:
 	max_possible_score += constants_sum
 	
 	for entry: SpawnlistEntry in spawnlist:
-		max_possible_score += entry.count * INT_TO_SIDES.find_key( entry.sides )
+		max_possible_score += DIE_TYPE_MAX_SCORE[ entry.die_type ]
 		total_number_of_dice += entry.count
 	if max_possible_score >= MAX_INT: return ERROR.MAX_INT
 	if total_number_of_dice > MAX_DICE: return ERROR.MAX_DICE
@@ -159,17 +171,17 @@ func parse_sides( sides_string: String, entry: SpawnlistEntry ) -> ERROR:
 	if !sides_string.is_valid_int(): return ERROR.SYNTAX
 	var sides_int := sides_string.to_int()
 	
-	if !INT_TO_SIDES.has( sides_int ):
+	if !INT_TO_DIE_TYPE.has( sides_int ):
 		return ERROR.INVALID_DIE
-	var sides: Die.SIDES = INT_TO_SIDES[ sides_int ]
-	entry.sides = sides
+	var die_type: Die.TYPES = INT_TO_DIE_TYPE[ sides_int ]
+	entry.die_type = die_type
 	return ERROR.NONE
 
 func debug_text_spawnlist():
 	const COL_WIDTH: int = 10
 	var headers: String = ""
 	headers += "Count".rpad( COL_WIDTH, " " )
-	headers += "Sides".rpad( COL_WIDTH * 2, " " )
+	headers += "Die Type".rpad( COL_WIDTH * 2, " " )
 	headers += "Top n".rpad( COL_WIDTH, " " )
 	headers += "Bottom n".rpad( COL_WIDTH, " " )
 	headers += "Subtract".rpad( COL_WIDTH, " " )
@@ -178,7 +190,7 @@ func debug_text_spawnlist():
 	for entry: SpawnlistEntry in spawnlist:
 		var row: String = ""
 		row += str( entry.count ).rpad( COL_WIDTH, " " )
-		row += str( Die.SIDES.find_key( entry.sides ) ).rpad( COL_WIDTH * 2, " " )
+		row += str( Die.TYPES.find_key( entry.die_type ) ).rpad( COL_WIDTH * 2, " " )
 		row += str( entry.top_n ).rpad( COL_WIDTH, " " )
 		row += str( entry.bottom_n ).rpad( COL_WIDTH, " " )
 		row += str( entry.subtract ).rpad( COL_WIDTH, " " )

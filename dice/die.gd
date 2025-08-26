@@ -2,8 +2,8 @@ extends RigidBody3D
 class_name Die
 
 # Variable
-enum SIDES { D4, D6, D8, D10, D12, D20, D_PERCENTILE_10S, D_PERCENTILE_1S }
-@export var sides: SIDES
+enum TYPES { D4, D6, D8, D10, D12, D20, D_PERCENTILE_10S, D_PERCENTILE_1S }
+@export var die_type: TYPES
 
 # References
 @export var score_mesh: MeshInstance3D
@@ -53,10 +53,10 @@ func get_score() -> int:
 	var score_rgb: Color = mdt.get_vertex_color( mdt.get_face_vertex( hit.face_index, 0 ) )
 	var score: int = snapped( score_rgb.r, 0.05 ) * 20
 	
-	if sides == Die.SIDES.D_PERCENTILE_10S:
+	if die_type == TYPES.D_PERCENTILE_10S:
 		if score == 10: score = 0	# It's a '00'
 		score *= 10
-	elif sides == Die.SIDES.D_PERCENTILE_1S:
+	elif die_type == TYPES.D_PERCENTILE_1S:
 		if score == 10: score = 0	# it's a '0'
 
 	return score
