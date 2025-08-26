@@ -47,17 +47,10 @@ const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 	ERROR.MAX_DICE: "A maximum of " + MAX_DICE_STR + " dice may be rolled at once.",
 }
 
-# Extends object so that we can pass it by reference instead of value
-class SpawnlistEntry extends Object:
-	var count: int = 0
-	var die_type: Die.TYPES
-	var top_n: int = 0		# Take the top n results
-	var bottom_n: int = 0 	# Take the bottom n results
-	var subtract: bool = false
-
 # Variable
-var spawnlist: Array[SpawnlistEntry] = []
+var spawnlist: Array[ DiceGroup ] = []
 var constants_sum: int = 0
+var dice_group_resource: Resource = preload( "res://scripts/dice_group.tscn" )
 
 func reset():
 	spawnlist = []
@@ -94,9 +87,9 @@ func parse( text: String ) -> ERROR:
 	var total_number_of_dice: int = 0
 	max_possible_score += constants_sum
 	
-	for entry: SpawnlistEntry in spawnlist:
-		max_possible_score += DIE_TYPE_MAX_SCORE[ entry.die_type ]
-		total_number_of_dice += entry.count
+	for dice_group: DiceGroup in spawnlist:
+		max_possible_score += DIE_TYPE_MAX_SCORE[ dice_group.die_type ]
+		total_number_of_dice += dice_group.count
 	if max_possible_score >= MAX_INT: return ERROR.MAX_INT
 	if total_number_of_dice > MAX_DICE: return ERROR.MAX_DICE
 	
@@ -104,13 +97,13 @@ func parse( text: String ) -> ERROR:
 		
 func parse_expression( expression: String ) -> ERROR:
 	var error: int = ERROR.NONE
-	var entry: SpawnlistEntry = SpawnlistEntry.new()
+	var dice_group: DiceGroup = dice_group_resource.instantiate()
 	if expression.is_empty(): return ERROR.PARSE
 
 	if expression.count( "-" ) > 1 or expression.count( "+" ) > 1:
 		return ERROR.PARSE
 	if expression[0] == "-":
-		entry.subtract = true
+		dice_group.subtract = true
 	expression = expression.replace( "-", "" )
 	expression = expression.replace( "+", "" )
 	
@@ -126,17 +119,17 @@ func parse_expression( expression: String ) -> ERROR:
 	elif d_count == 0:
 		# If this is a constant, then even when no error, we don't append
 		# anything to the spawnlist.
-		return parse_constant( expression, entry )
+		return parse_constant( expression, dice_group )
 	elif d_count == 1 and expression[0] == "d":
-		error = parse_roll( expression, entry )
+		error = parse_roll( expression, dice_group )
 	elif d_count == 1 and expression[0] != "d":
-		error = parse_multi_roll( expression, entry )
+		error = parse_multi_roll( expression, dice_group )
 	
 	if error != ERROR.NONE: return error as ERROR
-	spawnlist.append( entry )
+	spawnlist.append( dice_group )
 	return ERROR.NONE
 
-func parse_multi_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
+func parse_multi_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
 	print( "multiroll: " + expression )
 	var split_expression: PackedStringArray = expression.split( "d", false )
 	if split_expression.size() != 2:
@@ -144,29 +137,29 @@ func parse_multi_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
 	if !split_expression[0].is_valid_int():
 		return ERROR.SYNTAX
 
-	entry.count = split_expression[0].to_int()
-	if entry.count > MAX_DICE: return ERROR.MAX_DICE
+	dice_group.count = split_expression[0].to_int()
+	if dice_group.count > MAX_DICE: return ERROR.MAX_DICE
 	
 	print( "split expr: " + str( split_expression ) )
-	return parse_sides( split_expression[1], entry )
+	return parse_sides( split_expression[1], dice_group )
 	
-func parse_roll( expression: String, entry: SpawnlistEntry ) -> ERROR:
+func parse_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
 	print( "roll: " + expression )
-	entry.count = 1
+	dice_group.count = 1
 	expression = expression.substr( 1 )
-	return parse_sides( expression, entry )
+	return parse_sides( expression, dice_group )
 
-func parse_constant( expression: String, entry: SpawnlistEntry ) -> ERROR:
+func parse_constant( expression: String, dice_group: DiceGroup ) -> ERROR:
 	print( "constant: " + expression )
 	if !expression.is_valid_int():
 		return ERROR.SYNTAX
 	var constant = expression.to_int()
 	if abs( constant ) >= MAX_INT: return ERROR.MAX_INT
-	if entry.subtract: constant *= -1
+	if dice_group.subtract: constant *= -1
 	constants_sum += constant
 	return ERROR.NONE
 	
-func parse_sides( sides_string: String, entry: SpawnlistEntry ) -> ERROR:
+func parse_sides( sides_string: String, dice_group: DiceGroup ) -> ERROR:
 	print( "parse sides: " + sides_string )
 	if !sides_string.is_valid_int(): return ERROR.SYNTAX
 	var sides_int := sides_string.to_int()
@@ -174,7 +167,7 @@ func parse_sides( sides_string: String, entry: SpawnlistEntry ) -> ERROR:
 	if !INT_TO_DIE_TYPE.has( sides_int ):
 		return ERROR.INVALID_DIE
 	var die_type: Die.TYPES = INT_TO_DIE_TYPE[ sides_int ]
-	entry.die_type = die_type
+	dice_group.die_type = die_type
 	return ERROR.NONE
 
 func debug_text_spawnlist():
@@ -187,12 +180,12 @@ func debug_text_spawnlist():
 	headers += "Subtract".rpad( COL_WIDTH, " " )
 	print( headers )
 	
-	for entry: SpawnlistEntry in spawnlist:
+	for dice_group: DiceGroup in spawnlist:
 		var row: String = ""
-		row += str( entry.count ).rpad( COL_WIDTH, " " )
-		row += str( Die.TYPES.find_key( entry.die_type ) ).rpad( COL_WIDTH * 2, " " )
-		row += str( entry.top_n ).rpad( COL_WIDTH, " " )
-		row += str( entry.bottom_n ).rpad( COL_WIDTH, " " )
-		row += str( entry.subtract ).rpad( COL_WIDTH, " " )
+		row += str( dice_group.count ).rpad( COL_WIDTH, " " )
+		row += str( Die.TYPES.find_key( dice_group.die_type ) ).rpad( COL_WIDTH * 2, " " )
+		row += str( dice_group.top_n ).rpad( COL_WIDTH, " " )
+		row += str( dice_group.bottom_n ).rpad( COL_WIDTH, " " )
+		row += str( dice_group.subtract ).rpad( COL_WIDTH, " " )
 		print( row )
 		

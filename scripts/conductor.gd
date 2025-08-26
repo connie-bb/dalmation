@@ -22,7 +22,7 @@ func _on_roll_button_pressed():
 	gui.stop_displaying_error()
 	var text = roll_text_edit.get_roll_text()
 	if text == "": return
-	
+
 	roll_text_parser.reset()
 	var error: int = roll_text_parser.parse( text )
 	

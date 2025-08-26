@@ -216,7 +216,7 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="roll_spawnlist_entry_timer" type="Timer" parent="dice_roller"]
+[node name="roll_dice_group_timer" type="Timer" parent="dice_roller"]
 wait_time = 0.5
 one_shot = true
 
@@ -468,7 +468,7 @@ one_shot = true
 
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
-[connection signal="timeout" from="dice_roller/roll_spawnlist_entry_timer" to="dice_roller" method="_on_roll_spawnlist_entry_timeout"]
+[connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]

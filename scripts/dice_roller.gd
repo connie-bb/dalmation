@@ -3,8 +3,9 @@ class_name DiceRoller
 
 # Variable
 var rolling: bool = false
-var spawnlist: Array[ RollTextParser.SpawnlistEntry ]
-var entry_spawns: Array[ Die ]
+var spawnlist: Array[ DiceGroup ]
+var dice_group: DiceGroup
+var group_spawnlist: Array[ Die ]
 
 # Configurable
 var min_velocity: float = 18.0
@@ -21,7 +22,7 @@ signal ready_to_count
 @onready var active_dice: Node3D = $active_dice
 @onready var roll_warmup_timer: Timer = $roll_warmup_timer
 @onready var roll_handful_timer: Timer = $roll_handful_timer
-@onready var roll_spawnlist_entry_timer: Timer = $roll_spawnlist_entry_timer
+@onready var roll_dice_group_timer: Timer = $roll_dice_group_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
 
 func remove_active_dice():
@@ -43,10 +44,10 @@ func roll_die( to_spawn: Die ):
 	die.angular_velocity = angular_velocity * TAU
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
-	active_dice.add_child( die )
+	dice_group.add_child( die )
 	die.position = Vector3.ZERO
 
-func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
+func roll_dice( new_spawnlist: Array[ DiceGroup ] ):
 	spawnlist = new_spawnlist
 	remove_active_dice()
 	roll_warmup_timer.stop()
@@ -54,44 +55,47 @@ func roll_dice( new_spawnlist: Array[ RollTextParser.SpawnlistEntry ] ):
 	roll_handful_timer.stop()
 	
 	rolling = true
-	roll_spawnlist_entry()
+	roll_dice_group()
 
-func roll_spawnlist_entry():
-	var entry: RollTextParser.SpawnlistEntry = spawnlist[0]
-	entry_spawns = []
-	for i in entry.count:
-		entry_spawns.append( spawnable_dice.die_type_to_die[ entry.die_type ] )
-		if entry.die_type == Die.TYPES.D_PERCENTILE_10S:
-			entry_spawns.append(
+func roll_dice_group():
+	dice_group = spawnlist.pop_front()
+	active_dice.add_child( dice_group )
+	group_spawnlist = []
+	for i in dice_group.count:
+		group_spawnlist.append( 
+			spawnable_dice.die_type_to_die[ dice_group.die_type ] 
+		)
+		if dice_group.die_type == Die.TYPES.D_PERCENTILE_10S:
+			group_spawnlist.append(
 				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] 
 			)
-	spawnlist.pop_front()
+			
 	roll_handful_of_dice()
 	
 func roll_handful_of_dice():
-	for i in range( 0, entry_spawns.size() ):
+	for i in range( 0, group_spawnlist.size() ):
 		if i >= MAX_SIMULTANEOUS_ROLLS:
 			roll_handful_timer.start()
 			return
 		else:
-			roll_die( entry_spawns.pop_back() )
+			roll_die( group_spawnlist.pop_back() )
 			
-	assert( entry_spawns.is_empty(), 
+	assert( group_spawnlist.is_empty(), 
 		"The following logic assumes we never reached this point 
-		with anything left in entry_spawns.
+		with anything left in group_spawnlist.
 		If this assertion fails, clearly I was wrong. >_>;"
 	)
 	
 	if spawnlist.is_empty():
 		finished_rolling()
 	else:
-		roll_spawnlist_entry_timer.start()
+		roll_dice_group_timer.start()
 
 func _on_roll_handful_timeout():
 	roll_handful_of_dice()
 	
-func _on_roll_spawnlist_entry_timeout():
-	roll_spawnlist_entry()
+func _on_roll_dice_group_timeout():
+	roll_dice_group()
 
 func finished_rolling():
 	roll_warmup_timer.start()
@@ -102,8 +106,9 @@ func _on_roll_max_timeout():
 	
 func check_if_dice_settled() -> bool:
 	var any_awake: bool = false
-	for c: Die in active_dice.get_children():
-		if !c.sleeping: any_awake = true
+	for group: DiceGroup in active_dice.get_children():
+		for die in group.get_children():
+			if !die.sleeping: any_awake = true
 	return !any_awake
 
 func get_ready_to_count():
