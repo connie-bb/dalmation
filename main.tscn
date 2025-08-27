@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=39 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://scripts/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://scripts/spawnable_dice.tscn" id="2_0xm2m"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cd13kg2snxduq" path="res://gui/help.png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/volume.png" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://cuvl0yxsnu3ea" path="res://scripts/error_panel.gd" id="15_vivmo"]
+[ext_resource type="PackedScene" uid="uid://n1f8wur3117u" path="res://gui/help_menu.tscn" id="16_2cqfq"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -426,7 +427,6 @@ offset_left = 379.0
 offset_top = 59.0
 offset_right = 419.0
 offset_bottom = 99.0
-disabled = true
 icon = ExtResource("11_dg77c")
 
 [node name="volume_button" type="Button" parent="GUI"]
@@ -466,6 +466,10 @@ metadata/_edit_use_anchors_ = true
 wait_time = 5.0
 one_shot = true
 
+[node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
+visible = false
+layout_mode = 1
+
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
@@ -474,4 +478,5 @@ one_shot = true
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
 [connection signal="text_changed" from="GUI/Panel/roll_text_edit" to="GUI/Panel/roll_text_edit" method="_on_text_changed"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
+[connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]

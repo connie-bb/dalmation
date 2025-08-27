@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://n1f8wur3117u"]
+
+[ext_resource type="Script" uid="uid://t83l1wmielpt" path="res://gui/help_menu.gd" id="1_wu670"]
+
+[sub_resource type="Shortcut" id="Shortcut_02itr"]
+
+[node name="help_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_wu670")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0375
+anchor_top = 0.0296875
+anchor_right = 0.9625
+anchor_bottom = 0.970312
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=24]Help[/font_size]
+Type your desired roll in the textbox.
+Press enter or click the 'roll' button (it looks like a d6) to roll the dice.
+
+[font_size=24]Supported Dice[/font_size]
+d4, d6, d8, d10, d12, d20, d100.
+
+[font_size=24]Roll Examples[/font_size]
+[ul] 2d6: Roll 2 six sided dice.
+ 2d6+5: Roll 2 six sided dice, and add 5.
+ d20-d4: Roll a d20, then roll a d4 and subtract its result.
+ 180-100: Subtract 100 from 180.[/ul]"
+
+[node name="exit_button" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_bottom = 48.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 29
+shortcut = SubResource("Shortcut_02itr")
+text = "X"
+
+[connection signal="pressed" from="Panel/exit_button" to="." method="_on_exit_button_pressed"]
