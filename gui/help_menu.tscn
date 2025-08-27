@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://n1f8wur3117u"]
+[gd_scene load_steps=4 format=3 uid="uid://n1f8wur3117u"]
 
 [ext_resource type="Script" uid="uid://t83l1wmielpt" path="res://gui/help_menu.gd" id="1_wu670"]
+[ext_resource type="Theme" uid="uid://ccplywml8u0bp" path="res://gui/theme.tres" id="2_02itr"]
 
 [sub_resource type="Shortcut" id="Shortcut_02itr"]
 
@@ -18,12 +19,13 @@ script = ExtResource("1_wu670")
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0375
-anchor_top = 0.0296875
-anchor_right = 0.9625
-anchor_bottom = 0.970312
+anchor_left = 0.11875
+anchor_top = 0.109375
+anchor_right = 0.88125
+anchor_bottom = 0.890625
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_02itr")
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]

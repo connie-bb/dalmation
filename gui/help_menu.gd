@@ -3,6 +3,7 @@ class_name HelpMenu
 
 
 func _input( event: InputEvent ):
+	if !visible: return
 	if event.is_action_pressed( "ui_exit" ):
 		close_help()
 		get_viewport().set_input_as_handled()
