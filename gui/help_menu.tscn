@@ -51,7 +51,17 @@ d4, d6, d8, d10, d12, d20, d100.
 [ul] 2d6: Roll 2 six sided dice.
  2d6+5: Roll 2 six sided dice, and add 5.
  d20-d4: Roll a d20, then roll a d4 and subtract its result.
- 180-100: Subtract 100 from 180.[/ul]"
+ 180-100: Subtract 100 from 180.[/ul]
+
+[font_size=24]Advantage and Disadvantage[/font_size]
+Use 'a' for Advantage to take the top n results.
+Use 'b' for \"Bisadvantage\" (or Bad or Bottom) to take the bottom n results.
+e.g. [ul]
+ 2d20a: Roll 2d20 and take the highest result.
+ 4d6a2: Roll 4d6 and take the top 2 results.
+ 2d20b: Roll 2d20 and take the lowest result.
+ 4d6b2: Roll 4d6 and take the bottom 2 results.
+[/ul]"
 
 [node name="exit_button" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(48, 48)

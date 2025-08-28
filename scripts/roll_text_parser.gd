@@ -33,7 +33,7 @@ const DIE_TYPE_MAX_SCORE: Dictionary [ Die.TYPES, int ] = {
 
 enum ERROR {
 	NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED, PARSE,
-	MAX_INT, MAX_DICE,
+	MAX_INT, MAX_DICE, BAD_ADV,
 }
 
 const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
@@ -45,6 +45,7 @@ const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 	ERROR.PARSE: "The parser encountered an error (not your fault). Please report this bug.",
 	ERROR.MAX_INT: "Maximum integer of " + MAX_INT_STR + " exceeded. What exactly is going on here?",
 	ERROR.MAX_DICE: "A maximum of " + MAX_DICE_STR + " dice may be rolled at once.",
+	ERROR.BAD_ADV: "Advantage or disadvantage must be between 1 and the number of dice, inclusively.",
 }
 
 # Variable
@@ -96,7 +97,7 @@ func parse( text: String ) -> ERROR:
 	return error
 		
 func parse_expression( expression: String ) -> ERROR:
-	var error: int = ERROR.NONE
+	var error: ERROR = ERROR.NONE
 	var dice_group: DiceGroup = dice_group_resource.instantiate()
 	if expression.is_empty(): return ERROR.PARSE
 
@@ -112,8 +113,20 @@ func parse_expression( expression: String ) -> ERROR:
 	var search_digits_results = search_digits.search_all( expression )
 	if search_digits_results.size() == 0:
 		return ERROR.SYNTAX
-	
+		
+	var a_count: int = expression.count( "a" )
+	var b_count: int = expression.count( "b" )
 	var d_count: int = expression.count( "d" )
+	
+	if ( a_count > 0 or b_count > 0 ) and d_count == 0: return ERROR.SYNTAX
+	if a_count > 0 or b_count > 0:
+		error = parse_advantage( expression, dice_group )
+		if error != ERROR.NONE: return error
+	if a_count > 0:
+		expression = expression.get_slice( "a", 0 )
+	elif b_count > 0:
+		expression = expression.get_slice( "b", 0 )
+	
 	if d_count > 1:
 		return ERROR.SYNTAX
 	elif d_count == 0:
@@ -124,6 +137,10 @@ func parse_expression( expression: String ) -> ERROR:
 		error = parse_roll( expression, dice_group )
 	elif d_count == 1 and expression[0] != "d":
 		error = parse_multi_roll( expression, dice_group )
+	
+	if dice_group.advantage > dice_group.count \
+	or dice_group.disadvantage > dice_group.count:
+		return ERROR.BAD_ADV
 	
 	if error != ERROR.NONE: return error as ERROR
 	spawnlist.append( dice_group )
@@ -169,14 +186,44 @@ func parse_sides( sides_string: String, dice_group: DiceGroup ) -> ERROR:
 	var die_type: Die.TYPES = INT_TO_DIE_TYPE[ sides_int ]
 	dice_group.die_type = die_type
 	return ERROR.NONE
+	
+func parse_advantage( expression: String, dice_group: DiceGroup ) -> ERROR:
+	# It parses disadvantage too. (-u-)b
+	var a_count: int = expression.count( "a" )
+	var b_count: int = expression.count( "b" )
+	if a_count > 0 and b_count > 0: return ERROR.SYNTAX
+	if a_count > 1 or b_count > 1: return ERROR.SYNTAX
+	
+	var is_advantage: bool = a_count > 0
+	if is_advantage:
+		expression = expression.get_slice( "a", 1 )
+	else:
+		expression = expression.get_slice( "b", 1 )
+	
+	var how_many_to_keep: int
+	if expression.is_empty():
+		how_many_to_keep = 1
+	elif expression.is_valid_int():
+		how_many_to_keep = expression.to_int()
+	else:
+		return ERROR.SYNTAX
+		
+	if how_many_to_keep == 0: return ERROR.BAD_ADV
+
+	if is_advantage:
+		dice_group.advantage = how_many_to_keep
+	else:
+		dice_group.disadvantage = how_many_to_keep
+	
+	return ERROR.NONE
 
 func debug_text_spawnlist():
 	const COL_WIDTH: int = 10
 	var headers: String = ""
 	headers += "Count".rpad( COL_WIDTH, " " )
 	headers += "Die Type".rpad( COL_WIDTH * 2, " " )
-	headers += "Top n".rpad( COL_WIDTH, " " )
-	headers += "Bottom n".rpad( COL_WIDTH, " " )
+	headers += "Advantage".rpad( COL_WIDTH, " " )
+	headers += "Disadvantage".rpad( COL_WIDTH, " " )
 	headers += "Subtract".rpad( COL_WIDTH, " " )
 	print( headers )
 	
@@ -184,8 +231,8 @@ func debug_text_spawnlist():
 		var row: String = ""
 		row += str( dice_group.count ).rpad( COL_WIDTH, " " )
 		row += str( Die.TYPES.find_key( dice_group.die_type ) ).rpad( COL_WIDTH * 2, " " )
-		row += str( dice_group.top_n ).rpad( COL_WIDTH, " " )
-		row += str( dice_group.bottom_n ).rpad( COL_WIDTH, " " )
+		row += str( dice_group.advantage ).rpad( COL_WIDTH, " " )
+		row += str( dice_group.disadvantage ).rpad( COL_WIDTH, " " )
 		row += str( dice_group.subtract ).rpad( COL_WIDTH, " " )
 		print( row )
 		

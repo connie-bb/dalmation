@@ -20,7 +20,7 @@ func sanitize_text():
 	for match in matches:
 		final_text[ match.get_start() ] = "+"
 		
-	reggie.compile( "[d0-9\\-\\+]" )
+	reggie.compile( "[abd0-9\\-\\+]" )
 	matches = reggie.search_all( final_text )
 	final_text = ""
 	for match in matches:
