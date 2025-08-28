@@ -47,7 +47,7 @@ func get_score() -> int:
 	if !hit:
 		push_warning( "die.gd was unable to detect a raycast hit." )
 		return -1
-	print(hit.collider.get_children()[0].shape)
+		
 	# We store a face's score in its vertex color.
 	# 0.05 = 1, 0.10 = 2, 0.15 = 3 ... 0.95 = 19, 1.0 = 20
 	var score_rgb: Color = mdt.get_vertex_color( mdt.get_face_vertex( hit.face_index, 0 ) )

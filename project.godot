@@ -12,8 +12,19 @@ config_version=5
 
 config/name="dalmation"
 run/main_scene="uid://crtr7u4d5fagv"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="dalmation"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Debug="*res://scripts/debug.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="user://logs/dalmation.log"
 
 [display]
 

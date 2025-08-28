@@ -23,13 +23,20 @@ func _on_roll_button_pressed():
 	var text = roll_text_edit.get_roll_text()
 	if text == "": return
 
+	Debug.log( "Roll: " + text, Debug.TAG.INFO )
+
 	roll_text_parser.reset()
 	var error: int = roll_text_parser.parse( text )
 	
 	roll_text_parser.debug_text_spawnlist()
-	print ( "error: " + roll_text_parser.ERROR.find_key( error ) )
+	Debug.log( "Sum of constants: " + str( roll_text_parser.constants_sum ) )
+	
 	if error != RollTextParser.ERROR.NONE:
 		gui.display_error( RollTextParser.ERROR_TO_STRING[ error ] )
+		Debug.log(
+			"Parse error: " + RollTextParser.ERROR_TO_STRING[ error ],
+			Debug.TAG.INFO
+		)
 	
 	if error != roll_text_parser.ERROR.NONE: return
 	if roll_text_parser.spawnlist.is_empty():
@@ -42,4 +49,5 @@ func _on_ready_to_count():
 
 func _on_score_counted( score: int ):
 	score += roll_text_parser.constants_sum
+	Debug.log( "Score: " + str( score ), Debug.TAG.INFO )
 	gui.display_score( score )

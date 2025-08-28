@@ -147,7 +147,6 @@ func parse_expression( expression: String ) -> ERROR:
 	return ERROR.NONE
 
 func parse_multi_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
-	print( "multiroll: " + expression )
 	var split_expression: PackedStringArray = expression.split( "d", false )
 	if split_expression.size() != 2:
 		return ERROR.SYNTAX
@@ -157,17 +156,14 @@ func parse_multi_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
 	dice_group.count = split_expression[0].to_int()
 	if dice_group.count > MAX_DICE: return ERROR.MAX_DICE
 	
-	print( "split expr: " + str( split_expression ) )
 	return parse_sides( split_expression[1], dice_group )
 	
 func parse_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
-	print( "roll: " + expression )
 	dice_group.count = 1
 	expression = expression.substr( 1 )
 	return parse_sides( expression, dice_group )
 
 func parse_constant( expression: String, dice_group: DiceGroup ) -> ERROR:
-	print( "constant: " + expression )
 	if !expression.is_valid_int():
 		return ERROR.SYNTAX
 	var constant = expression.to_int()
@@ -177,7 +173,6 @@ func parse_constant( expression: String, dice_group: DiceGroup ) -> ERROR:
 	return ERROR.NONE
 	
 func parse_sides( sides_string: String, dice_group: DiceGroup ) -> ERROR:
-	print( "parse sides: " + sides_string )
 	if !sides_string.is_valid_int(): return ERROR.SYNTAX
 	var sides_int := sides_string.to_int()
 	
@@ -219,20 +214,31 @@ func parse_advantage( expression: String, dice_group: DiceGroup ) -> ERROR:
 
 func debug_text_spawnlist():
 	const COL_WIDTH: int = 10
+	Debug.log( "== Spawnlist ==" )
+	
 	var headers: String = ""
 	headers += "Count".rpad( COL_WIDTH, " " )
-	headers += "Die Type".rpad( COL_WIDTH * 2, " " )
-	headers += "Advantage".rpad( COL_WIDTH, " " )
-	headers += "Disadvantage".rpad( COL_WIDTH, " " )
+	headers += "Die Type".rpad( COL_WIDTH, " " )
+	headers += "Adv".rpad( COL_WIDTH, " " )
+	headers += "Disadv".rpad( COL_WIDTH, " " )
 	headers += "Subtract".rpad( COL_WIDTH, " " )
-	print( headers )
+	Debug.log( headers )
 	
 	for dice_group: DiceGroup in spawnlist:
 		var row: String = ""
 		row += str( dice_group.count ).rpad( COL_WIDTH, " " )
-		row += str( Die.TYPES.find_key( dice_group.die_type ) ).rpad( COL_WIDTH * 2, " " )
+		row += str(
+			Die.TYPES.find_key( dice_group.die_type ).right( 3 )
+		).rpad( COL_WIDTH, " " )
 		row += str( dice_group.advantage ).rpad( COL_WIDTH, " " )
 		row += str( dice_group.disadvantage ).rpad( COL_WIDTH, " " )
 		row += str( dice_group.subtract ).rpad( COL_WIDTH, " " )
-		print( row )
+		Debug.log( row )
+
+	if spawnlist.is_empty():
+		var row: String = ""
+		row += "-".rpad( COL_WIDTH, " " ).repeat( 5 )
+		Debug.log( row )
+	
+	Debug.log( "" )
 		
