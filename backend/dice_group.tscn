@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d006qlull22sm"]
 
-[ext_resource type="Script" uid="uid://b24dbwrhj7e60" path="res://scripts/dice_group.gd" id="1_ea7qd"]
+[ext_resource type="Script" uid="uid://b24dbwrhj7e60" path="res://backend/dice_group.gd" id="1_ea7qd"]
 
 [node name="dice_group" type="Node3D"]
 script = ExtResource("1_ea7qd")

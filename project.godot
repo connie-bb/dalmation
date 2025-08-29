@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Debug="*res://scripts/debug.gd"
+Debug="*res://backend/debug.gd"
 
 [debug]
 

@@ -52,7 +52,7 @@ const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 # Variable
 var spawnlist: Array[ DiceGroup ] = []
 var constants_sum: int = 0
-var dice_group_resource: Resource = preload( "res://scripts/dice_group.tscn" )
+var dice_group_resource: Resource = preload( "res://backend/dice_group.tscn" )
 
 func reset():
 	spawnlist = []

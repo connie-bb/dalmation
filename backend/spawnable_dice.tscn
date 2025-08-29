@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jfc0d8f2uivv"]
 
-[ext_resource type="Script" uid="uid://dfsdmi1aykny3" path="res://scripts/spawnable_dice.gd" id="1_yugii"]
+[ext_resource type="Script" uid="uid://dfsdmi1aykny3" path="res://backend/spawnable_dice.gd" id="1_yugii"]
 
 [node name="spawnable_dice" type="Node3D"]
 script = ExtResource("1_yugii")
