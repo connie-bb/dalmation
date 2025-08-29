@@ -3,6 +3,10 @@ extends Node
 # Holds references to the most important logic objects and
 # orchestrates their behaviour.
 
+# Variables
+var most_recent_roll_text: String = ""
+
+# References
 @export var dice_roller: DiceRoller
 @export var score_counter: ScoreCounter
 @export var roll_text_parser: RollTextParser
@@ -42,6 +46,8 @@ func _on_roll_button_pressed():
 	if roll_text_parser.spawnlist.is_empty():
 		_on_score_counted( 0 )
 		return
+	
+	most_recent_roll_text = roll_text_edit.text
 	dice_roller.roll_dice( roll_text_parser.spawnlist )
 
 func _on_ready_to_count():
@@ -51,3 +57,8 @@ func _on_score_counted( score: int ):
 	score += roll_text_parser.constants_sum
 	Debug.log( "Score: " + str( score ), Debug.TAG.INFO )
 	gui.display_score( score )
+	gui.add_history( score, most_recent_roll_text )
+
+func _on_replay_requested( roll_text: String ):
+	roll_text_edit.text = roll_text
+	_on_roll_button_pressed()

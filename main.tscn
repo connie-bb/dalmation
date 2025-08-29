@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=40 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://du4l3n5t0hrdv" path="res://backend/conductor.gd" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://clbsxfowrf5lw" path="res://gui/icons/exit.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="10_efxa6"]
+[ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/history.tscn" id="10_yaehf"]
 [ext_resource type="Script" uid="uid://gqyj36rge4px" path="res://gui/exit_button.gd" id="10_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://cd13kg2snxduq" path="res://gui/icons/help.png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/icons/volume.png" id="12_dg77c"]
@@ -235,7 +236,7 @@ show_in_game = true
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel")]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "history")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -247,6 +248,7 @@ size_flags_vertical = 3
 script = ExtResource("4_1bvp3")
 score_label = NodePath("score_panel/VBoxContainer/score_label")
 error_panel = NodePath("error_panel")
+history = NodePath("history")
 
 [node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
@@ -325,100 +327,17 @@ size_flags_vertical = 3
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="history_panel" type="Panel" parent="GUI"]
+[node name="history" parent="GUI" instance=ExtResource("10_yaehf")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 13.0
-offset_right = -231.0
-offset_bottom = -516.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/history_panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="GUI/history_panel/VBoxContainer"]
-layout_mode = 2
-text = "HISTORY"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="history_table" type="VBoxContainer" parent="GUI/history_panel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="history_table_row" type="PanelContainer" parent="GUI/history_panel/VBoxContainer/history_table"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="score_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.5
-text = "210"
-
-[node name="VSeparator" type="VSeparator" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
-layout_mode = 2
-
-[node name="roll_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "2d6 + 3 + 2d10"
-
-[node name="history_table_row2" type="PanelContainer" parent="GUI/history_panel/VBoxContainer/history_table"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="score_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.5
-text = "210"
-
-[node name="VSeparator" type="VSeparator" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
-layout_mode = 2
-
-[node name="roll_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "2d6 + 3 + 2d10"
-
-[node name="history_table_row3" type="PanelContainer" parent="GUI/history_panel/VBoxContainer/history_table"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row3"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="score_label" type="Label" parent="GUI/history_panel/VBoxContainer/history_table/history_table_row3/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 0.5
-text = "  (Not implemented yet >_>)"
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 249.0
+offset_bottom = 124.2
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="exit_button" type="Button" parent="GUI"]
 layout_mode = 0
@@ -494,6 +413,7 @@ layout_mode = 1
 [connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
 [connection signal="text_changed" from="GUI/Panel/roll_text_edit" to="GUI/Panel/roll_text_edit" method="_on_text_changed"]
+[connection signal="replay_requested" from="GUI/history" to="Conductor" method="_on_replay_requested"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
