@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dls1shv84ke0d"
 path.s3tc="res://.godot/imported/dice_d6_placeholder.png-ddea599dc245ec1a02af0ff1e5d4c8ab.s3tc.ctex"
+path.etc2="res://.godot/imported/dice_d6_placeholder.png-ddea599dc245ec1a02af0ff1e5d4c8ab.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://dice/placeholder/dice_d6_placeholder.png"
-dest_files=["res://.godot/imported/dice_d6_placeholder.png-ddea599dc245ec1a02af0ff1e5d4c8ab.s3tc.ctex"]
+dest_files=["res://.godot/imported/dice_d6_placeholder.png-ddea599dc245ec1a02af0ff1e5d4c8ab.s3tc.ctex", "res://.godot/imported/dice_d6_placeholder.png-ddea599dc245ec1a02af0ff1e5d4c8ab.etc2.ctex"]
 
 [params]
 
