@@ -61,7 +61,13 @@ e.g. [ul]
  4d6a2: Roll 4d6 and take the top 2 results.
  2d20b: Roll 2d20 and take the lowest result.
  4d6b2: Roll 4d6 and take the bottom 2 results.
-[/ul]"
+[/ul]
+
+[font_size=24]Tips[/font_size][ul]
+ The roll editor is a normal textbox. You can copy/paste and do most things you'd normally be able to.
+ Comma, space, and equals will all insert a +.
+ You can interrupt rolls with other rolls.
+ Press enter again to repeat the previous roll."
 
 [node name="exit_button" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(48, 48)
