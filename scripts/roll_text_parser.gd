@@ -139,6 +139,10 @@ func parse_expression( expression: String ) -> ERROR:
 	elif d_count == 1 and expression[0] != "d":
 		error = parse_multi_roll( expression, dice_group )
 	
+	if dice_group.die_type == Die.TYPES.D_PERCENTILE_10S \
+	and ( dice_group.advantage > 0 or dice_group.disadvantage > 0 ):
+		return ERROR.D100_ADV_NOT_SUPPORTED
+	
 	if dice_group.advantage > dice_group.count \
 	or dice_group.disadvantage > dice_group.count:
 		return ERROR.BAD_ADV
