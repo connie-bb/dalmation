@@ -33,7 +33,7 @@ const DIE_TYPE_MAX_SCORE: Dictionary [ Die.TYPES, int ] = {
 
 enum ERROR {
 	NONE, SYNTAX, MAX_LENGTH, INVALID_DIE, D100_ADV_NOT_SUPPORTED, PARSE,
-	MAX_INT, MAX_DICE, BAD_ADV,
+	MAX_INT, MAX_DICE, BAD_ADV, ZERO_COUNT,
 }
 
 const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
@@ -46,6 +46,7 @@ const ERROR_TO_STRING: Dictionary[ ERROR, String ] = {
 	ERROR.MAX_INT: "Maximum integer of " + MAX_INT_STR + " exceeded. What exactly is going on here?",
 	ERROR.MAX_DICE: "A maximum of " + MAX_DICE_STR + " dice may be rolled at once.",
 	ERROR.BAD_ADV: "Advantage or disadvantage must be between 1 and the number of dice, inclusively.",
+	ERROR.ZERO_COUNT: "Cannot roll 0 dice of a given type."
 }
 
 # Variable
@@ -154,6 +155,7 @@ func parse_multi_roll( expression: String, dice_group: DiceGroup ) -> ERROR:
 		return ERROR.SYNTAX
 
 	dice_group.count = split_expression[0].to_int()
+	if dice_group.count == 0: return ERROR.ZERO_COUNT
 	if dice_group.count > MAX_DICE: return ERROR.MAX_DICE
 	
 	return parse_sides( split_expression[1], dice_group )
