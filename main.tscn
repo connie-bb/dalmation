@@ -1,11 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=41 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="2_yaehf"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bv2dwjmt8518f" path="res://gui/gui.gd" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://bxnxjxvwerbch" path="res://backend/roll_text_parser.gd" id="5_5vw27"]
-[ext_resource type="Script" uid="uid://fxo83shway67" path="res://gui/roll_text_edit.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="6_w48qg"]
 [ext_resource type="Script" uid="uid://du4l3n5t0hrdv" path="res://backend/conductor.gd" id="7_272bh"]
@@ -17,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/icons/volume.png" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://cuvl0yxsnu3ea" path="res://gui/error_panel.gd" id="15_vivmo"]
 [ext_resource type="PackedScene" uid="uid://n1f8wur3117u" path="res://gui/help_menu.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://5451dmdabyq1" path="res://gui/die_selector/die_selector_button.tscn" id="18_074og"]
+[ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/roll_editor_panel/roll_editor_panel.gd" id="18_82xsv"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -101,13 +102,16 @@ events = [SubResource("InputEventAction_7mycd")]
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
 
-[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("dice_roller", "score_counter", "roll_text_parser", "roll_text_edit", "gui")]
+[node name="Conductor" type="Node" parent="." node_paths=PackedStringArray("roll_editor", "dice_roller", "score_counter", "gui")]
 script = ExtResource("7_272bh")
+roll_editor = NodePath("../roll_editor")
 dice_roller = NodePath("../dice_roller")
 score_counter = NodePath("../score_counter")
-roll_text_parser = NodePath("../roll_text_parser")
-roll_text_edit = NodePath("../GUI/Panel/roll_text_edit")
 gui = NodePath("../GUI")
+
+[node name="roll_editor" type="Node" parent="." node_paths=PackedStringArray("die_selector")]
+script = ExtResource("2_yaehf")
+die_selector = NodePath("../GUI/die_selector")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.266329, 0.963882, 0, -0.963882, 0.266329, 0, 9.98288, 3.36912)
@@ -197,9 +201,6 @@ mesh = SubResource("BoxMesh_w48qg")
 transform = Transform3D(0.522286, 0, -0.351438, 0, 0.629517, 0, 0.351438, 0, 0.522286, 6.77689, 1.43129, -4.56219)
 mesh = SubResource("BoxMesh_074og")
 
-[node name="roll_text_parser" type="Node" parent="."]
-script = ExtResource("5_5vw27")
-
 [node name="dice_roller" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 3.02778, 8.8)
 script = ExtResource("1_h2yge")
@@ -236,7 +237,7 @@ show_in_game = true
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "history")]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "history", "roll_editor_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -249,50 +250,20 @@ script = ExtResource("4_1bvp3")
 score_label = NodePath("score_panel/VBoxContainer/score_label")
 error_panel = NodePath("error_panel")
 history = NodePath("history")
+roll_editor_panel = NodePath("roll_editor_panel")
 
 [node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
-offset_left = 339.0
-offset_top = 553.0
-offset_right = 411.0
-offset_bottom = 625.0
+offset_left = 358.0
+offset_top = 525.0
+offset_right = 430.0
+offset_bottom = 597.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
 action_mode = 0
 shortcut = SubResource("Shortcut_272bh")
 icon = ExtResource("6_7mycd")
-
-[node name="Panel" type="Panel" parent="GUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 151.0
-offset_top = 552.0
-offset_right = -150.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="roll_text_edit" type="TextEdit" parent="GUI/Panel"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-placeholder_text = "e.g. '2d6 + 5' ..."
-context_menu_enabled = false
-emoji_menu_enabled = false
-scroll_fit_content_height = true
-caret_blink = true
-caret_multiple = false
-script = ExtResource("5_lquwl")
 
 [node name="score_panel" type="Panel" parent="GUI"]
 layout_mode = 1
@@ -406,13 +377,88 @@ one_shot = true
 visible = false
 layout_mode = 1
 
+[node name="die_selector" type="PanelContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0181667
+anchor_top = 0.77
+anchor_right = 0.286167
+anchor_bottom = 0.975
+offset_left = 0.279999
+offset_top = -0.800049
+offset_right = 0.639999
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="GUI/die_selector"]
+layout_mode = 2
+columns = 3
+
+[node name="die_selector_button" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d4"
+
+[node name="die_selector_button2" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d6"
+type = 1
+
+[node name="die_selector_button3" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d8"
+type = 2
+
+[node name="die_selector_button4" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d10"
+type = 3
+
+[node name="die_selector_button5" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d12"
+type = 4
+
+[node name="die_selector_button6" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d20"
+type = 5
+
+[node name="die_selector_button7" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
+layout_mode = 2
+text = "d100"
+type = 6
+
+[node name="roll_editor_panel" type="PanelContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3875
+anchor_top = 0.773438
+anchor_right = 0.666667
+anchor_bottom = 0.95625
+offset_right = 10.0
+offset_bottom = 10.0
+script = ExtResource("18_82xsv")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/roll_editor_panel"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="table" type="VBoxContainer" parent="GUI/roll_editor_panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="changed" from="roll_editor" to="Conductor" method="_on_roll_editor_changed"]
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
-[connection signal="text_changed" from="GUI/Panel/roll_text_edit" to="GUI/Panel/roll_text_edit" method="_on_text_changed"]
 [connection signal="replay_requested" from="GUI/history" to="Conductor" method="_on_replay_requested"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
