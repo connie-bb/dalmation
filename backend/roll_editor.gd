@@ -39,6 +39,9 @@ func remove_die( type: Die.TYPES ):
 	if group.count <= 0:
 		spawnlist.erase( type )
 
+func remove_group( group: DiceGroup ):
+	spawnlist.erase( spawnlist.find_key( group ) )
+
 func duplicate_spawnlist() -> Dictionary[ Die.TYPES, DiceGroup ]:
 	var new_spawnlist: Dictionary[ Die.TYPES, DiceGroup ]
 	for type in spawnlist.keys():

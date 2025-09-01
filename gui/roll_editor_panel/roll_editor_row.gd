@@ -10,6 +10,11 @@ var dice_group: DiceGroup
 
 # Constant
 signal count_changed( count: int, dice_group: DiceGroup )
+signal deleted( dice_group: DiceGroup )
 
 func _on_count_spinbox_value_changed( value ):
 	count_changed.emit( value, dice_group )
+
+func _on_delete_button_pressed():
+	deleted.emit( dice_group )
+	queue_free()

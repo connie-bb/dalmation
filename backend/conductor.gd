@@ -55,3 +55,6 @@ func _on_score_counted( score: int ):
 
 func _on_roll_editor_panel_count_changed( count: int, dice_group: DiceGroup ):
 	dice_group.count = count
+	
+func _on_roll_editor_panel_deleted( dice_group ):
+	roll_editor.remove_group( dice_group )

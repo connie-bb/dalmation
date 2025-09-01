@@ -16,6 +16,7 @@ const DIE_TYPE_TO_STRING: Dictionary[ Die.TYPES, String ] = {
 	Die.TYPES.D_PERCENTILE_10S: "d100",
 }
 signal count_changed( count: int, dice_group: DiceGroup )
+signal deleted( dice_group: DiceGroup )
 
 func _ready():
 	for row in table.get_children():
@@ -28,9 +29,13 @@ func add_row( dice_group: DiceGroup ):
 	row.type_label.text = DIE_TYPE_TO_STRING[ dice_group.die_type ]
 	row.count_spinbox.value = dice_group.count
 	row.count_changed.connect( _on_row_count_changed )
+	row.deleted.connect( _on_row_deleted )
 	
 func _on_row_count_changed( count: int, dice_group: DiceGroup ):
 	count_changed.emit( count, dice_group )
+
+func _on_row_deleted( dice_group: DiceGroup ):
+	deleted.emit( dice_group )
 
 func update( spawnlist: Array[ DiceGroup ] ):
 	for row in table.get_children():
