@@ -9,6 +9,7 @@ var spawnlist: Dictionary[ Die.TYPES, DiceGroup]
 
 # Constant
 signal changed
+const MAX_DICE: int = 30
 
 func _ready():
 	connect_die_selector()
@@ -29,6 +30,7 @@ func _on_die_selected( type: Die.TYPES, remove: bool ):
 
 func add_die( type: Die.TYPES ):
 	var group = spawnlist.get_or_add( type, DiceGroup.new() )
+	if group.count >= MAX_DICE: return
 	group.die_type = type
 	group.count += 1
 
