@@ -52,3 +52,6 @@ func _on_score_counted( score: int ):
 #func _on_replay_requested( roll_text: String ):
 	#roll_text_edit.text = roll_text
 	#_on_roll_button_pressed()
+
+func _on_roll_editor_panel_count_changed( count: int, dice_group: DiceGroup ):
+	dice_group.count = count
