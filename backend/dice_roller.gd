@@ -16,7 +16,7 @@ var max_angular_velocity: float = 5.0
 # Constant
 enum STATES { IDLE, ROLLING, SETTLED }
 const MAX_SIMULTANEOUS_ROLLS: int = 5
-signal ready_to_count
+signal settled
 signal die_toggled
 
 # References
@@ -106,7 +106,7 @@ func finished_rolling():
 	roll_max_timer.start()
 
 func _on_roll_max_timeout():
-	get_ready_to_count()
+	settle()
 	
 func check_if_dice_settled() -> bool:
 	var any_awake: bool = false
@@ -115,17 +115,23 @@ func check_if_dice_settled() -> bool:
 			if !die.sleeping: any_awake = true
 	return !any_awake
 
-func get_ready_to_count():
+func settle():
+	state = STATES.SETTLED
 	roll_max_timer.stop()
-	ready_to_count.emit()
+	settled.emit()
 
 func _physics_process( _delta: float ):
 	if state != STATES.ROLLING: return
 	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
-		state = STATES.SETTLED
-		get_ready_to_count()
+		settle()
 
 func _on_die_clicked( die: Die ):
 	if state != STATES.SETTLED: return
 	die.toggle_disabled()
 	die_toggled.emit()
+	
+func get_active_groups() -> Array[ DiceGroup ]:
+	var result: Array[ DiceGroup ]
+	for group_node in active_dice.get_children():
+		result.append( group_node as DiceGroup )
+	return result

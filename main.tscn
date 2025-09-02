@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=44 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://5451dmdabyq1" path="res://gui/die_selector/die_selector_button.tscn" id="18_074og"]
 [ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/roll_editor_panel/roll_editor_panel.gd" id="18_82xsv"]
 [ext_resource type="PackedScene" uid="uid://75v4cht4q0pg" path="res://gui/roll_editor_panel/roll_editor_row.tscn" id="19_cegan"]
+[ext_resource type="PackedScene" uid="uid://b4csxnw7da742" path="res://gui/tooltip.tscn" id="20_82xsv"]
+[ext_resource type="Texture2D" uid="uid://cfb7vwc146xl1" path="res://gui/icons/pencil.png" id="20_getpj"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -239,7 +241,7 @@ show_in_game = true
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "history", "roll_editor_panel")]
+[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "history", "roll_editor_panel", "tooltip")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -254,6 +256,7 @@ score_label = NodePath("score_panel/VBoxContainer/score_label")
 error_panel = NodePath("error_panel")
 history = NodePath("history")
 roll_editor_panel = NodePath("roll_editor_panel")
+tooltip = NodePath("tooltip")
 
 [node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
@@ -476,6 +479,11 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="invisible_separator2" type="Control" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.74
+
 [node name="plus" type="Label" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "+"
@@ -488,19 +496,31 @@ min_value = -999.0
 max_value = 999.0
 rounded = true
 
+[node name="invisible_separator" type="Control" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="edit_score_addend_button" type="Button" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Write this addend to the current score"
+icon = ExtResource("20_getpj")
+
+[node name="tooltip" parent="GUI" instance=ExtResource("20_82xsv")]
+visible = false
+
 [connection signal="changed" from="roll_editor" to="Conductor" method="_on_roll_editor_changed"]
 [connection signal="die_toggled" from="dice_roller" to="Conductor" method="_on_dice_roller_die_toggled"]
-[connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
+[connection signal="settled" from="dice_roller" to="Conductor" method="_on_dice_roller_settled"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
-[connection signal="score_counted" from="score_counter" to="Conductor" method="_on_score_counted"]
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
 [connection signal="replay_requested" from="GUI/history" to="Conductor" method="_on_replay_requested"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
-[connection signal="addend_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_addend_changed"]
 [connection signal="count_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_count_changed"]
 [connection signal="deleted" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_deleted"]
+[connection signal="score_addend_edited" from="GUI/roll_editor_panel" to="Conductor" method="_on_score_addend_edited"]
 [connection signal="value_changed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/addend_spinbox" to="GUI/roll_editor_panel" method="_on_addend_spinbox_value_changed"]
+[connection signal="pressed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/edit_score_addend_button" to="GUI/roll_editor_panel" method="_on_edit_score_addend_button_pressed"]

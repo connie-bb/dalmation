@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Debug="*res://backend/debug.gd"
+TooltipManager="*res://gui/tooltip_manager.gd"
 
 [debug]
 

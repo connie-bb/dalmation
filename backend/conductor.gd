@@ -24,6 +24,10 @@ func _on_roll_editor_changed():
 	gui.update_roll_editor_panel( roll_editor.spawnlist.values() )
 
 func _on_roll_button_pressed():
+	if dice_roller.state == dice_roller.STATES.SETTLED:
+		# A previous roll exists, and has finished.
+		add_history()
+	
 	gui.stop_displaying_error()
 	if roll_editor.spawnlist.is_empty():
 		return
@@ -41,14 +45,33 @@ func _on_roll_button_pressed():
 		#)
 	#if error != roll_text_parser.ERROR.NONE: return
 
-func _on_ready_to_count():
-	score_counter.update_die_scores( dice_roller.active_dice )
-	score_counter.count_score( dice_roller.active_dice, gui.get_addend() )
+func add_history():
+	var addend = score_counter.stored_addend
+	var score: int = score_counter.count_score(
+		dice_roller.active_dice, addend
+	)
+	var roll_string = Utils.dice_groups_to_string(
+		dice_roller.get_active_groups()
+	)
+	if addend > 0:
+		roll_string += " + " + str( addend )
+	elif addend < 0:
+		roll_string += " - " + str( abs( addend ) )
+	gui.history.new_row( score, roll_string )
 
-func _on_score_counted( score: int ):
+func _on_dice_roller_settled():
+	score_counter.update_die_scores( dice_roller.active_dice )
+	score_counter.stored_addend = gui.get_addend()
+	update_score()
+
+func update_score():
+	var addend = score_counter.stored_addend
+	var score: int = score_counter.count_score(
+		dice_roller.active_dice, addend
+	)
+	
 	Debug.log( "Score: " + str( score ), Debug.TAG.INFO )
 	gui.display_score( score )
-	gui.add_history( score, "le place holder" )
 
 #func _on_replay_requested( roll_text: String ):
 	#roll_text_edit.text = roll_text
@@ -61,8 +84,9 @@ func _on_roll_editor_panel_deleted( dice_group ):
 	roll_editor.remove_group( dice_group )
 
 func _on_dice_roller_die_toggled():
-	score_counter.count_score( dice_roller.active_dice, gui.get_addend() )
+	update_score()
 
-func _on_addend_changed():
+func _on_score_addend_edited():
 	if dice_roller.state != DiceRoller.STATES.SETTLED: return
-	score_counter.count_score( dice_roller.active_dice, gui.get_addend() )
+	score_counter.stored_addend = gui.get_addend()
+	update_score()

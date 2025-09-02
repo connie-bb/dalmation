@@ -12,3 +12,9 @@ func _on_delete_button_pressed():
 
 func _on_replay_button_pressed():
 	row_wants_replay.emit( roll_label.text )
+
+func _on_roll_label_mouse_entered():
+	TooltipManager.show_tooltip( roll_label.text )
+
+func _on_roll_label_mouse_exited():
+	TooltipManager.hide_tooltip()

@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4csxnw7da742"]
+
+[ext_resource type="Script" uid="uid://ct5bubyqjit3q" path="res://gui/tooltip.gd" id="1_dbie3"]
+
+[node name="tooltip" type="Node2D"]
+script = ExtResource("1_dbie3")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 13.0
+offset_bottom = 23.0
+theme_type_variation = &"LabelTooltip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = -3
+theme_override_constants/margin_right = -5
+theme_override_constants/margin_bottom = -3
+
+[node name="Panel" type="Panel" parent="Label/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"PanelTooltip"
+metadata/_edit_use_anchors_ = true

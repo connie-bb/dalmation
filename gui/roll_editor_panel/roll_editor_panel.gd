@@ -9,18 +9,9 @@ var addend: int = 0
 var row_resource: Resource = preload( "res://gui/roll_editor_panel/roll_editor_row.tscn" )
 
 # Constant
-const DIE_TYPE_TO_STRING: Dictionary[ Die.TYPES, String ] = {
-	Die.TYPES.D4: "d4",
-	Die.TYPES.D6: "d6",
-	Die.TYPES.D8: "d8",
-	Die.TYPES.D10: "d10",
-	Die.TYPES.D12: "d12",
-	Die.TYPES.D20: "d20",
-	Die.TYPES.D_PERCENTILE_10S: "d100",
-}
 signal count_changed( count: int, dice_group: DiceGroup )
 signal deleted( dice_group: DiceGroup )
-signal addend_changed
+signal score_addend_edited
 
 func _ready():
 	for row in table.get_children():
@@ -30,7 +21,7 @@ func add_row( dice_group: DiceGroup ):
 	var row: RollEditorRow = row_resource.instantiate()
 	table.add_child( row )
 	row.dice_group = dice_group
-	row.type_label.text = DIE_TYPE_TO_STRING[ dice_group.die_type ]
+	row.type_label.text = Utils.DIE_TYPE_TO_STRING[ dice_group.die_type ]
 	row.count_spinbox.value = dice_group.count
 	row.count_changed.connect( _on_row_count_changed )
 	row.deleted.connect( _on_row_deleted )
@@ -49,4 +40,6 @@ func update( spawnlist: Array[ DiceGroup ] ):
 
 func _on_addend_spinbox_value_changed( value ):
 	addend = value
-	addend_changed.emit()
+
+func _on_edit_score_addend_button_pressed():
+	score_addend_edited.emit()

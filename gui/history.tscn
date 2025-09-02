@@ -36,11 +36,11 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="history_table" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="table" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="history_row" parent="VBoxContainer/ScrollContainer/history_table" instance=ExtResource("1_tsd3m")]
+[node name="history_row" parent="VBoxContainer/ScrollContainer/table" instance=ExtResource("1_tsd3m")]
 layout_mode = 2
