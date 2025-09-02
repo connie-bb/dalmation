@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://idjtsx48j57c"]
+[gd_scene load_steps=4 format=3 uid="uid://idjtsx48j57c"]
 
 [ext_resource type="Script" uid="uid://v0qrqmnbdd7j" path="res://dice/die.gd" id="1_hyrid"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_y4in4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.3
@@ -10,6 +11,7 @@ bounce = 0.21
 physics_interpolation_mode = 1
 collision_layer = 2
 collision_mask = 3
+input_ray_pickable = false
 mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 gravity_scale = 5.0
@@ -25,3 +27,12 @@ collision_mask = 0
 [node name="score_collision" type="CollisionShape3D" parent="score_area"]
 
 [node name="physics_collision" type="CollisionShape3D" parent="."]
+
+[node name="disabled_sprite" type="Sprite3D" parent="."]
+visible = false
+pixel_size = 0.04
+billboard = 1
+no_depth_test = true
+texture = ExtResource("2_y4in4")
+
+[connection signal="input_event" from="score_area" to="." method="_on_score_area_input_event"]

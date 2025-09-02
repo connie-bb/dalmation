@@ -2,7 +2,7 @@ extends Node3D
 class_name DiceRoller
 
 # Variable
-var rolling: bool = false
+var state: STATES = STATES.IDLE
 var spawnlist: Array[ DiceGroup ]
 var dice_group: DiceGroup
 var group_spawnlist: Array[ Die ]
@@ -14,8 +14,10 @@ var min_angular_velocity: float = 1.0 # rotations/s
 var max_angular_velocity: float = 5.0
 
 # Constant
+enum STATES { IDLE, ROLLING, SETTLED }
 const MAX_SIMULTANEOUS_ROLLS: int = 5
 signal ready_to_count
+signal die_toggled
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -44,6 +46,8 @@ func roll_die( to_spawn: Die ):
 	die.angular_velocity = angular_velocity * TAU
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
+	die.clicked.connect( _on_die_clicked )
+	
 	dice_group.add_child( die )
 	die.position = Vector3.ZERO
 
@@ -54,7 +58,7 @@ func roll_dice( new_spawnlist: Array[ DiceGroup ] ):
 	roll_max_timer.stop()
 	roll_handful_timer.stop()
 	
-	rolling = true
+	state = STATES.ROLLING
 	roll_dice_group()
 
 func roll_dice_group():
@@ -112,15 +116,16 @@ func check_if_dice_settled() -> bool:
 	return !any_awake
 
 func get_ready_to_count():
-	rolling = false
 	roll_max_timer.stop()
 	ready_to_count.emit()
 
 func _physics_process( _delta: float ):
-	if !rolling: return
-	
-	var dice_settled: bool = false
-	if roll_warmup_timer.is_stopped():
-		dice_settled = check_if_dice_settled()
-	if dice_settled:
+	if state != STATES.ROLLING: return
+	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
+		state = STATES.SETTLED
 		get_ready_to_count()
+
+func _on_die_clicked( die: Die ):
+	if state != STATES.SETTLED: return
+	die.toggle_disabled()
+	die_toggled.emit()

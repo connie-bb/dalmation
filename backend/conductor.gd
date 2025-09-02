@@ -42,6 +42,7 @@ func _on_roll_button_pressed():
 	#if error != roll_text_parser.ERROR.NONE: return
 
 func _on_ready_to_count():
+	score_counter.update_die_scores( dice_roller.active_dice )
 	score_counter.count_score( dice_roller.active_dice )
 
 func _on_score_counted( score: int ):
@@ -58,3 +59,6 @@ func _on_roll_editor_panel_count_changed( count: int, dice_group: DiceGroup ):
 	
 func _on_roll_editor_panel_deleted( dice_group ):
 	roll_editor.remove_group( dice_group )
+
+func _on_dice_roller_die_toggled():
+	score_counter.count_score( dice_roller.active_dice )

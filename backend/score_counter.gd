@@ -4,6 +4,11 @@ class_name ScoreCounter
 # Constant
 signal score_counted( score: int )
 
+func update_die_scores( active_dice: Node ):
+	for group: DiceGroup in active_dice.get_children():
+		for die: Die in group.get_children():
+			die.update_score()
+
 func count_score( active_dice: Node ):
 	var total_score: int = 0
 	for group: DiceGroup in active_dice.get_children():

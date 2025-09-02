@@ -138,6 +138,7 @@ mesh = SubResource("BoxMesh_ycdy4")
 [node name="StaticBody3D" type="StaticBody3D" parent="world"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000673294, 0.0368586, -0.109508)
 collision_mask = 3
+input_ray_pickable = false
 
 [node name="floor" type="CollisionShape3D" parent="world/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, -0.507976, -0.976288)
@@ -247,6 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("4_1bvp3")
 score_label = NodePath("score_panel/VBoxContainer/score_label")
 error_panel = NodePath("error_panel")
@@ -268,15 +270,14 @@ icon = ExtResource("6_7mycd")
 
 [node name="score_panel" type="Panel" parent="GUI"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 263.0
-offset_top = 12.0
-offset_right = -114.0
-offset_bottom = -514.0
+anchors_preset = -1
+anchor_left = 0.545833
+anchor_top = 0.01875
+anchor_right = 0.75625
+anchor_bottom = 0.196875
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/score_panel"]
 layout_mode = 1
@@ -301,15 +302,18 @@ vertical_alignment = 1
 
 [node name="history" parent="GUI" instance=ExtResource("10_yaehf")]
 layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 249.0
-offset_bottom = 124.2
+anchors_preset = -1
+anchor_left = 0.0291667
+anchor_top = 0.015625
+anchor_right = 0.519167
+anchor_bottom = 0.19825
+offset_left = 0.0
+offset_top = 0.0
+offset_right = -0.200012
+offset_bottom = 0.119995
 grow_horizontal = 1
 grow_vertical = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="exit_button" type="Button" parent="GUI"]
 layout_mode = 0
@@ -348,17 +352,17 @@ icon = ExtResource("12_dg77c")
 
 [node name="error_panel" type="Panel" parent="GUI"]
 visible = false
+custom_minimum_size = Vector2(0.34, 0.86)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = 438.0
-offset_right = -47.0
-offset_bottom = -112.0
+anchors_preset = -1
+anchor_left = 0.139583
+anchor_top = 0.59375
+anchor_right = 0.8125
+anchor_bottom = 0.735937
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("15_vivmo")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="GUI/error_panel"]
 layout_mode = 1
@@ -377,6 +381,7 @@ one_shot = true
 [node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
 visible = false
 layout_mode = 1
+mouse_filter = 2
 
 [node name="die_selector" type="PanelContainer" parent="GUI"]
 layout_mode = 1
@@ -460,6 +465,7 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="changed" from="roll_editor" to="Conductor" method="_on_roll_editor_changed"]
+[connection signal="die_toggled" from="dice_roller" to="Conductor" method="_on_dice_roller_die_toggled"]
 [connection signal="ready_to_count" from="dice_roller" to="Conductor" method="_on_ready_to_count"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
