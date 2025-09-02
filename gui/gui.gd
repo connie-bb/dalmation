@@ -14,6 +14,9 @@ func _ready():
 	assert( history != null, "GUI has no assigned History" )
 	assert( roll_editor_panel != null, "GUI has no assigned RollEditorPanel" )
 
+func get_addend() -> int:
+	return roll_editor_panel.addend
+
 func update_roll_editor_panel( spawnlist: Array[ DiceGroup ] ):
 	roll_editor_panel.update( spawnlist )
 

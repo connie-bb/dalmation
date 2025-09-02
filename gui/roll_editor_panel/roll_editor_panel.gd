@@ -1,8 +1,11 @@
 extends PanelContainer
 class_name RollEditorPanel
 
+# Variable
+var addend: int = 0
+
 # References
-@onready var table: Control = $ScrollContainer/table
+@onready var table: Control = $VBoxContainer/ScrollContainer/table
 var row_resource: Resource = preload( "res://gui/roll_editor_panel/roll_editor_row.tscn" )
 
 # Constant
@@ -17,6 +20,7 @@ const DIE_TYPE_TO_STRING: Dictionary[ Die.TYPES, String ] = {
 }
 signal count_changed( count: int, dice_group: DiceGroup )
 signal deleted( dice_group: DiceGroup )
+signal addend_changed
 
 func _ready():
 	for row in table.get_children():
@@ -42,4 +46,7 @@ func update( spawnlist: Array[ DiceGroup ] ):
 		row.queue_free()
 	for dice_group in spawnlist:
 		add_row( dice_group )
-		
+
+func _on_addend_spinbox_value_changed( value ):
+	addend = value
+	addend_changed.emit()

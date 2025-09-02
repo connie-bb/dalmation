@@ -9,8 +9,8 @@ func update_die_scores( active_dice: Node ):
 		for die: Die in group.get_children():
 			die.update_score()
 
-func count_score( active_dice: Node ):
-	var total_score: int = 0
+func count_score( active_dice: Node, addend: int ):
+	var total_score: int = addend
 	for group: DiceGroup in active_dice.get_children():
 		total_score += count_group_score( group )
 	score_counted.emit( total_score )

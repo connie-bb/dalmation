@@ -440,29 +440,53 @@ type = 6
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.320833
-anchor_top = 0.773438
-anchor_right = 0.7125
+anchor_top = 0.682375
+anchor_right = 0.80625
 anchor_bottom = 0.95625
-offset_right = 10.0
+offset_top = 0.280273
+offset_right = -8.00003
 offset_bottom = 10.0
 script = ExtResource("18_82xsv")
 metadata/_edit_use_anchors_ = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GUI/roll_editor_panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/roll_editor_panel"]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/roll_editor_panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="table" type="VBoxContainer" parent="GUI/roll_editor_panel/ScrollContainer"]
+[node name="table" type="VBoxContainer" parent="GUI/roll_editor_panel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="roll_editor_row" parent="GUI/roll_editor_panel/ScrollContainer/table" instance=ExtResource("19_cegan")]
+[node name="roll_editor_row" parent="GUI/roll_editor_panel/VBoxContainer/ScrollContainer/table" instance=ExtResource("19_cegan")]
 layout_mode = 2
 
-[node name="roll_editor_row2" parent="GUI/roll_editor_panel/ScrollContainer/table" instance=ExtResource("19_cegan")]
+[node name="roll_editor_row2" parent="GUI/roll_editor_panel/VBoxContainer/ScrollContainer/table" instance=ExtResource("19_cegan")]
 layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="GUI/roll_editor_panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/roll_editor_panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="plus" type="Label" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "+"
+
+[node name="addend_spinbox" type="SpinBox" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+min_value = -999.0
+max_value = 999.0
+rounded = true
 
 [connection signal="changed" from="roll_editor" to="Conductor" method="_on_roll_editor_changed"]
 [connection signal="die_toggled" from="dice_roller" to="Conductor" method="_on_dice_roller_die_toggled"]
@@ -476,5 +500,7 @@ layout_mode = 2
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
+[connection signal="addend_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_addend_changed"]
 [connection signal="count_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_count_changed"]
 [connection signal="deleted" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_deleted"]
+[connection signal="value_changed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/addend_spinbox" to="GUI/roll_editor_panel" method="_on_addend_spinbox_value_changed"]
