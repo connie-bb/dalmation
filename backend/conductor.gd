@@ -21,7 +21,7 @@ func _ready():
 	)
 
 func _on_roll_editor_changed():
-	gui.update_roll_editor_panel( roll_editor.spawnlist.values() )
+	gui.update_roll_editor_panel( roll_editor.spawnlist )
 
 func _on_roll_button_pressed():
 	if dice_roller.state == dice_roller.STATES.SETTLED:
@@ -31,7 +31,7 @@ func _on_roll_button_pressed():
 	gui.stop_displaying_error()
 	if roll_editor.spawnlist.is_empty():
 		return
-	var spawnlist = roll_editor.duplicate_spawnlist().values()
+	var spawnlist = DiceGroup.dupe_array( roll_editor.spawnlist )
 	dice_roller.roll_dice( spawnlist )
 
 	#Debug.log( "Roll: " + text, Debug.TAG.INFO )

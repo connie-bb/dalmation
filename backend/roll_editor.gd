@@ -2,7 +2,7 @@ extends Node
 class_name RollEditor
 
 # Variable
-var spawnlist: Dictionary[ Die.TYPES, DiceGroup]
+var spawnlist: Array[ DiceGroup ]
 
 # References
 @export var die_selector: Control
@@ -29,25 +29,33 @@ func _on_die_selected( type: Die.TYPES, remove: bool ):
 	changed.emit()
 
 func add_die( type: Die.TYPES ):
-	var group = spawnlist.get_or_add( type, DiceGroup.new() )
+	var group: DiceGroup = null
+	
+	for existing_group in spawnlist:
+		if existing_group.die_type == type:
+			group = existing_group
+			break
+	if group == null:
+		group = DiceGroup.new()
+		group.die_type = type
+		spawnlist.append( group )
+	
 	if group.count >= MAX_DICE: return
-	group.die_type = type
 	group.count += 1
 
 func remove_die( type: Die.TYPES ):
-	if !spawnlist.has( type ): return
-	var group = spawnlist[ type ]
+	var group: DiceGroup = null
+	for existing_group in spawnlist:
+		if existing_group.die_type == type:
+			group = existing_group
+			break
+	if group == null:
+		return
+		
 	group.count -= 1
 	if group.count <= 0:
-		spawnlist.erase( type )
+		remove_group( group )
 
 func remove_group( group: DiceGroup ):
-	spawnlist.erase( spawnlist.find_key( group ) )
-
-func duplicate_spawnlist() -> Dictionary[ Die.TYPES, DiceGroup ]:
-	var new_spawnlist: Dictionary[ Die.TYPES, DiceGroup ]
-	for type in spawnlist.keys():
-		new_spawnlist[ type ] = DiceGroup.new()
-		new_spawnlist[ type ].count = spawnlist[ type ].count
-		new_spawnlist[ type ].die_type = spawnlist[ type ].die_type
-	return new_spawnlist
+	group.queue_free()
+	spawnlist.erase( group )
