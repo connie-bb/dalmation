@@ -515,7 +515,7 @@ visible = false
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="pressed" from="GUI/roll_button" to="Conductor" method="_on_roll_button_pressed"]
-[connection signal="replay_requested" from="GUI/history" to="Conductor" method="_on_replay_requested"]
+[connection signal="replay_pressed" from="GUI/history" to="Conductor" method="_on_history_replay_pressed"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]

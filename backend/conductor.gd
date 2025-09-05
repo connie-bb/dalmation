@@ -30,6 +30,7 @@ func _on_roll_button_pressed():
 	
 	gui.stop_displaying_error()
 	if roll_editor.spawnlist.is_empty():
+		push_warning( "Roll editor spawnlist is empty." )
 		return
 	var spawnlist = DiceGroup.dupe_array( roll_editor.spawnlist )
 	dice_roller.roll_dice( spawnlist )
@@ -50,14 +51,15 @@ func add_history():
 	var score: int = score_counter.count_score(
 		dice_roller.active_dice, addend
 	)
-	var roll_string = Utils.dice_groups_to_string(
-		dice_roller.get_active_groups()
-	)
+	var active_groups = dice_roller.get_active_groups()
+	var roll_string = Utils.dice_groups_to_string( active_groups )
 	if addend > 0:
 		roll_string += " + " + str( addend )
 	elif addend < 0:
 		roll_string += " - " + str( abs( addend ) )
-	gui.history.new_row( score, roll_string )
+	gui.history.new_row(
+		score, roll_string, DiceGroup.dupe_array( active_groups )
+	)
 
 func _on_dice_roller_settled():
 	score_counter.update_die_scores( dice_roller.active_dice )
@@ -73,9 +75,12 @@ func update_score():
 	Debug.log( "Score: " + str( score ), Debug.TAG.INFO )
 	gui.display_score( score )
 
-#func _on_replay_requested( roll_text: String ):
-	#roll_text_edit.text = roll_text
-	#_on_roll_button_pressed()
+func _on_history_replay_pressed( spawnlist: Array[ DiceGroup ] ):
+	roll_editor.spawnlist = spawnlist
+	gui.update_roll_editor_panel(
+		DiceGroup.dupe_array( roll_editor.spawnlist )
+	)
+	_on_roll_button_pressed()
 
 func _on_roll_editor_panel_count_changed( count: int, dice_group: DiceGroup ):
 	dice_group.count = count
