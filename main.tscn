@@ -353,39 +353,6 @@ offset_bottom = 99.0
 disabled = true
 icon = ExtResource("12_dg77c")
 
-[node name="error_panel" type="Panel" parent="GUI"]
-visible = false
-custom_minimum_size = Vector2(0.34, 0.86)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.139583
-anchor_top = 0.59375
-anchor_right = 0.8125
-anchor_bottom = 0.735937
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_vivmo")
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="GUI/error_panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="display_timer" type="Timer" parent="GUI/error_panel"]
-wait_time = 5.0
-one_shot = true
-
-[node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
-visible = false
-layout_mode = 1
-mouse_filter = 2
-
 [node name="die_selector" type="PanelContainer" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
@@ -505,6 +472,39 @@ layout_mode = 2
 tooltip_text = "Write this addend to the current score"
 icon = ExtResource("20_getpj")
 
+[node name="error_panel" type="Panel" parent="GUI"]
+visible = false
+custom_minimum_size = Vector2(0.34, 0.86)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.139583
+anchor_top = 0.59375
+anchor_right = 0.8125
+anchor_bottom = 0.735937
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_vivmo")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GUI/error_panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="display_timer" type="Timer" parent="GUI/error_panel"]
+wait_time = 5.0
+one_shot = true
+
+[node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
+
 [node name="tooltip" parent="GUI" instance=ExtResource("20_82xsv")]
 visible = false
 
@@ -518,9 +518,9 @@ visible = false
 [connection signal="replay_pressed" from="GUI/history" to="Conductor" method="_on_history_replay_pressed"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
-[connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
 [connection signal="count_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_count_changed"]
 [connection signal="deleted" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_deleted"]
 [connection signal="score_addend_edited" from="GUI/roll_editor_panel" to="Conductor" method="_on_score_addend_edited"]
 [connection signal="value_changed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/addend_spinbox" to="GUI/roll_editor_panel" method="_on_addend_spinbox_value_changed"]
 [connection signal="pressed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/edit_score_addend_button" to="GUI/roll_editor_panel" method="_on_edit_score_addend_button_pressed"]
+[connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]

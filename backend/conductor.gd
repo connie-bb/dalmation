@@ -24,6 +24,13 @@ func _on_roll_editor_changed():
 	gui.update_roll_editor_panel( roll_editor.spawnlist )
 
 func _on_roll_button_pressed():
+	var total_dice: int = 0
+	for group: DiceGroup in roll_editor.spawnlist:
+		total_dice += group.count
+	if total_dice > 30:	#TODO don't hardcode this value and error string
+		gui.display_error( "Max of 30 dice at once." )
+		return
+	
 	if dice_roller.state == dice_roller.STATES.SETTLED:
 		# A previous roll exists, and has finished.
 		add_history()
