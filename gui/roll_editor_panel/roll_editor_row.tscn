@@ -39,7 +39,6 @@ max_value = 30.0
 value = 1.0
 rounded = true
 alignment = 1
-select_all_on_focus = true
 
 [node name="invisible separator" type="Control" parent="HBoxContainer"]
 custom_minimum_size = Vector2(15.365, 0)

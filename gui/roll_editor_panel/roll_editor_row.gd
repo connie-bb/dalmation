@@ -18,20 +18,3 @@ func _on_count_spinbox_value_changed( value ):
 func _on_delete_button_pressed():
 	deleted.emit( dice_group )
 	queue_free()
-
-func _input( event: InputEvent ):
-	if !( event is InputEventMouseButton ): return
-	if !event.is_pressed(): return
-	var rect: Rect2 = Rect2( Vector2.ZERO, count_spinbox.size )
-	if !rect.has_point( count_spinbox.get_local_mouse_position() ):
-		return
-	var event_mouse: InputEventMouseButton = event as InputEventMouseButton
-	if !( event_mouse.button_index == MOUSE_BUTTON_WHEEL_UP \
-		or event_mouse.button_index == MOUSE_BUTTON_WHEEL_DOWN ):
-		return
-	accept_event()
-	
-	if event_mouse.button_index == MOUSE_BUTTON_WHEEL_UP:
-		count_spinbox.value += 1
-	elif event_mouse.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		count_spinbox.value -= 1
