@@ -31,9 +31,15 @@ func _on_roll_button_pressed():
 		gui.display_error( "Max of 30 dice at once." )
 		return
 	
+	score_counter.stored_addend = gui.get_addend()
+	
 	if dice_roller.state == dice_roller.STATES.SETTLED:
 		# A previous roll exists, and has finished.
 		add_history()
+	
+	var roll_string = Utils.dice_groups_to_string( roll_editor.spawnlist )
+	roll_string += Utils.addend_to_string( score_counter.stored_addend )
+	Debug.log( "Roll: " + roll_string, Debug.TAG.INFO )
 	
 	gui.stop_displaying_error()
 	if roll_editor.spawnlist.is_empty():
@@ -60,17 +66,13 @@ func add_history():
 	)
 	var active_groups = dice_roller.get_active_groups()
 	var roll_string = Utils.dice_groups_to_string( active_groups )
-	if addend > 0:
-		roll_string += " + " + str( addend )
-	elif addend < 0:
-		roll_string += " - " + str( abs( addend ) )
+	roll_string += Utils.addend_to_string( score_counter.stored_addend )
 	gui.history.new_row(
 		score, roll_string, DiceGroup.dupe_array( active_groups )
 	)
 
 func _on_dice_roller_settled():
 	score_counter.update_die_scores( dice_roller.active_dice )
-	score_counter.stored_addend = gui.get_addend()
 	update_score()
 
 func update_score():

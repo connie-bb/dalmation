@@ -21,5 +21,13 @@ static func dice_groups_to_string( dice_groups: Array[ DiceGroup ] ) -> String:
 		result += group_string
 		result += " + "
 		
-	result = result.substr( 0, result.length() - 2 )
+	result = result.substr( 0, result.length() - 3 )
+	return result
+	
+static func addend_to_string( addend: int ) -> String:
+	var result: String = ""
+	if addend > 0:
+		result += " + " + str( addend )
+	elif addend < 0:
+		result += " - " + str( abs( addend ) )
 	return result
