@@ -17,21 +17,7 @@ func count_score( active_dice: Node, addend: int ) -> int:
 	
 func count_group_score( group: DiceGroup ) -> int:
 	var group_score: int = 0
-	var die_scores: Array[int] = []
-	
 	for die: Die in group.get_children():
-		die_scores.append( die.get_score() )
-	die_scores.sort()
-	
-	if group.advantage > 0:
-		for i in range( group.count - group.advantage ):
-			die_scores.pop_front()
-	if group.disadvantage > 0:
-		for i in range( group.count - group.disadvantage ):
-			die_scores.pop_back()
-	
-	group_score = die_scores.reduce( func( a, b ): return a + b, 0 )
-	
-	if group.subtract: group_score *= -1
+		group_score += die.get_score()
 	
 	return group_score
