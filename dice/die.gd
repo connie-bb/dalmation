@@ -17,7 +17,7 @@ var score: int
 @onready var score_collision: CollisionShape3D = $score_area/score_collision
 @onready var physics_collision: CollisionShape3D = $physics_collision
 @onready var disabled_sprite: Sprite3D = $disabled_sprite
-var mdt: MeshDataTool
+var mesh_data_tool: MeshDataTool
 
 # Constant
 signal clicked( die: Die )
@@ -33,8 +33,8 @@ func _ready():
 	var collision_convex = mesh.create_convex_shape()
 	physics_collision.shape = collision_convex
 	
-	mdt = MeshDataTool.new()
-	mdt.create_from_surface( mesh, 0 )
+	mesh_data_tool = MeshDataTool.new()
+	mesh_data_tool.create_from_surface( mesh, 0 )
 	
 func update_score():
 	var ray_distance = 5.0
@@ -55,8 +55,9 @@ func update_score():
 		return -1
 		
 	# We store a face's score in its vertex color.
-	# 0.05 = 1, 0.10 = 2, 0.15 = 3 ... 0.95 = 19, 1.0 = 20
-	var score_rgb: Color = mdt.get_vertex_color( mdt.get_face_vertex( hit.face_index, 0 ) )
+	# 0.05 = 1, 	0.10 = 2, 	0.15 = 3 ... 0.95 = 19, 	1.0 = 20
+	var score_rgb: Color = mesh_data_tool.get_vertex_color(
+		mesh_data_tool.get_face_vertex( hit.face_index, 0 ) )
 	score = snapped( score_rgb.r, 0.05 ) * 20
 	
 	if die_type == TYPES.D_PERCENTILE_10S:
@@ -69,9 +70,7 @@ func get_score() -> int:
 	if disabled: return 0
 	else: return score
 	
-func _on_score_area_input_event(
-	_camera, event: InputEvent, _event_position, _normal, _shape_idx
-):
+func _on_score_area_input_event( _a, event: InputEvent, _b, _c, _d ):
 	if !( event is InputEventMouseButton ): return
 	var mouse_event: InputEventMouseButton = event
 	

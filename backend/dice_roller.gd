@@ -36,9 +36,8 @@ func roll_die( to_spawn: Die ):
 	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
-	angular_velocity *= randf_range(
-		min_angular_velocity, max_angular_velocity
-	)
+	angular_velocity *= randf_range( min_angular_velocity, \
+		max_angular_velocity )
 	var rotation_axis = Vector3( randf(), randf(), randf() ).normalized()
 	var rotation_angle = randf_range( 0, TAU )
 	
@@ -67,12 +66,10 @@ func roll_dice_group():
 	group_spawnlist = []
 	for i in dice_group.count:
 		group_spawnlist.append( 
-			spawnable_dice.die_type_to_die[ dice_group.die_type ] 
-		)
+			spawnable_dice.die_type_to_die[ dice_group.die_type ] )
 		if dice_group.die_type == Die.TYPES.D_PERCENTILE_10S:
 			group_spawnlist.append(
-				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] 
-			)
+				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] )
 			
 	roll_handful_of_dice()
 	
@@ -87,8 +84,7 @@ func roll_handful_of_dice():
 	assert( group_spawnlist.is_empty(), 
 		"The following logic assumes we never reached this point 
 		with anything left in group_spawnlist.
-		If this assertion fails, clearly I was wrong. >_>;"
-	)
+		If this assertion fails, clearly I was wrong. >_>;" )
 	
 	if spawnlist.is_empty():
 		finished_rolling()
@@ -109,11 +105,10 @@ func _on_roll_max_timeout():
 	settle()
 	
 func check_if_dice_settled() -> bool:
-	var any_awake: bool = false
 	for group: DiceGroup in active_dice.get_children():
 		for die in group.get_children():
-			if !die.sleeping: any_awake = true
-	return !any_awake
+			if !die.sleeping: return false
+	return true
 
 func settle():
 	state = STATES.SETTLED

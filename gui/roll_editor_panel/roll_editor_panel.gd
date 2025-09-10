@@ -7,6 +7,7 @@ var addend: int = 0
 # References
 @onready var table: Control = $VBoxContainer/ScrollContainer/table
 var row_resource: Resource = preload( "res://gui/roll_editor_panel/roll_editor_row.tscn" )
+@onready var addend_spinbox: SpinBox = $VBoxContainer/HBoxContainer/addend_spinbox
 
 # Constant
 signal count_changed( count: int, dice_group: DiceGroup )

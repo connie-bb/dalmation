@@ -12,6 +12,7 @@ const DIE_TYPE_TO_STRING: Dictionary[ Die.TYPES, String ] = {
 }
 
 static func dice_groups_to_string( dice_groups: Array[ DiceGroup ] ) -> String:
+	if dice_groups == []: return ""
 	var result: String = ""
 	
 	for group in dice_groups:
