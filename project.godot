@@ -19,7 +19,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Debug="*res://backend/debug.gd"
+Debug="*res://singletons/debug.gd"
+TooltipManager="*res://singletons/tooltip_manager.gd"
+Settings="*res://singletons/settings.gd"
 
 [debug]
 

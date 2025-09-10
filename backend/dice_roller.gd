@@ -2,7 +2,7 @@ extends Node3D
 class_name DiceRoller
 
 # Variable
-var rolling: bool = false
+var state: STATES = STATES.IDLE
 var spawnlist: Array[ DiceGroup ]
 var dice_group: DiceGroup
 var group_spawnlist: Array[ Die ]
@@ -14,8 +14,10 @@ var min_angular_velocity: float = 1.0 # rotations/s
 var max_angular_velocity: float = 5.0
 
 # Constant
+enum STATES { IDLE, ROLLING, SETTLED }
 const MAX_SIMULTANEOUS_ROLLS: int = 5
-signal ready_to_count
+signal settled
+signal die_toggled
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -34,15 +36,16 @@ func roll_die( to_spawn: Die ):
 	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
-	angular_velocity *= randf_range(
-		min_angular_velocity, max_angular_velocity
-	)
+	angular_velocity *= randf_range( min_angular_velocity, \
+		max_angular_velocity )
 	var rotation_axis = Vector3( randf(), randf(), randf() ).normalized()
 	var rotation_angle = randf_range( 0, TAU )
 	
 	die.rotate( rotation_axis, rotation_angle )
 	die.angular_velocity = angular_velocity * TAU
 	die.apply_impulse( Vector3.FORWARD * velocity )
+	
+	die.clicked.connect( _on_die_clicked )
 	
 	dice_group.add_child( die )
 	die.position = Vector3.ZERO
@@ -54,7 +57,7 @@ func roll_dice( new_spawnlist: Array[ DiceGroup ] ):
 	roll_max_timer.stop()
 	roll_handful_timer.stop()
 	
-	rolling = true
+	state = STATES.ROLLING
 	roll_dice_group()
 
 func roll_dice_group():
@@ -63,12 +66,10 @@ func roll_dice_group():
 	group_spawnlist = []
 	for i in dice_group.count:
 		group_spawnlist.append( 
-			spawnable_dice.die_type_to_die[ dice_group.die_type ] 
-		)
+			spawnable_dice.die_type_to_die[ dice_group.die_type ] )
 		if dice_group.die_type == Die.TYPES.D_PERCENTILE_10S:
 			group_spawnlist.append(
-				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] 
-			)
+				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] )
 			
 	roll_handful_of_dice()
 	
@@ -83,8 +84,7 @@ func roll_handful_of_dice():
 	assert( group_spawnlist.is_empty(), 
 		"The following logic assumes we never reached this point 
 		with anything left in group_spawnlist.
-		If this assertion fails, clearly I was wrong. >_>;"
-	)
+		If this assertion fails, clearly I was wrong. >_>;" )
 	
 	if spawnlist.is_empty():
 		finished_rolling()
@@ -102,25 +102,31 @@ func finished_rolling():
 	roll_max_timer.start()
 
 func _on_roll_max_timeout():
-	get_ready_to_count()
+	settle()
 	
 func check_if_dice_settled() -> bool:
-	var any_awake: bool = false
 	for group: DiceGroup in active_dice.get_children():
 		for die in group.get_children():
-			if !die.sleeping: any_awake = true
-	return !any_awake
+			if !die.sleeping: return false
+	return true
 
-func get_ready_to_count():
-	rolling = false
+func settle():
+	state = STATES.SETTLED
 	roll_max_timer.stop()
-	ready_to_count.emit()
+	settled.emit()
 
 func _physics_process( _delta: float ):
-	if !rolling: return
+	if state != STATES.ROLLING: return
+	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
+		settle()
+
+func _on_die_clicked( die: Die ):
+	if state != STATES.SETTLED: return
+	die.toggle_disabled()
+	die_toggled.emit()
 	
-	var dice_settled: bool = false
-	if roll_warmup_timer.is_stopped():
-		dice_settled = check_if_dice_settled()
-	if dice_settled:
-		get_ready_to_count()
+func get_active_groups() -> Array[ DiceGroup ]:
+	var result: Array[ DiceGroup ]
+	for group_node in active_dice.get_children():
+		result.append( group_node as DiceGroup )
+	return result

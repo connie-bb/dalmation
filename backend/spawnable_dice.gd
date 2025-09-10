@@ -10,12 +10,14 @@ func _ready():
 func load_dice_set():
 	var dice_set_resource = preload( "res://dice/placeholder/dice.tscn" )
 	var dice_set = dice_set_resource.instantiate()
-	dice_set.position = Vector3.ZERO
-	add_child( dice_set )
 	dice_set.visible = false
+	add_child( dice_set )
+	dice_set.position = Vector3.ZERO
 	
-	for die_type_string: String in Die.TYPES.keys():
-		var die_type = Die.TYPES[ die_type_string ]
+	for i in range( Die.TYPES.size() ):
+		var die_type = Die.TYPES.values()[i]
+		var die_type_string = Die.TYPES.keys()[i]
+		
 		var die: Die = die_scene.instantiate()
 		die.die_type = die_type
 		
@@ -23,6 +25,7 @@ func load_dice_set():
 		var model: MeshInstance3D = dice_set.get_node( model_name )
 		assert( model != null, "Couldn't find model with name " + model_name )
 		die.score_mesh = model
+		
 		model.reparent( die )
 		model.position = Vector3.ZERO
 		add_child( die )

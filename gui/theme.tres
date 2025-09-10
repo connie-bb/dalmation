@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ccplywml8u0bp"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ccplywml8u0bp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_526xo"]
 bg_color = Color(0.76, 0.72694, 0.5396, 1)
@@ -12,8 +12,36 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgmjj"]
+bg_color = Color(0.76, 0.72694, 0.5396, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.64, 0.567467, 0.4224, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlndv"]
+bg_color = Color(0.0862745, 0.0862745, 0.0862745, 0.905882)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
+LabelTooltip/base_type = &"Label"
+LabelTooltip/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/constants/minimum_character_width = 2
+MarginContainer/constants/margin_bottom = 3
+MarginContainer/constants/margin_left = 5
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 3
 Panel/styles/panel = SubResource("StyleBoxFlat_526xo")
-PanelContainer/styles/panel = null
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_qgmjj")
+PanelTooltip/base_type = &"Panel"
+PanelTooltip/styles/panel = SubResource("StyleBoxFlat_jlndv")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)

@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://75v4cht4q0pg"]
+
+[ext_resource type="Script" uid="uid://dn2adc2ykl2rd" path="res://gui/roll_editor_panel/roll_editor_row.gd" id="1_3fvru"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_41ktn"]
+
+[node name="roll_editor_row" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 0.472917
+anchor_bottom = 0.0640625
+size_flags_horizontal = 3
+script = ExtResource("1_3fvru")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="type_label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "dn"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="times" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(38.85, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="count_spinbox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+min_value = 1.0
+max_value = 30.0
+value = 1.0
+rounded = true
+alignment = 1
+
+[node name="invisible separator" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(15.365, 0)
+layout_mode = 2
+
+[node name="delete_button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+icon = ExtResource("2_41ktn")
+
+[connection signal="value_changed" from="HBoxContainer/count_spinbox" to="." method="_on_count_spinbox_value_changed"]
+[connection signal="pressed" from="HBoxContainer/delete_button" to="." method="_on_delete_button_pressed"]

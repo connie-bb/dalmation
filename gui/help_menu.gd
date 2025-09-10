@@ -18,6 +18,8 @@ func _on_exit_button_pressed():
 
 func open_help():
 	visible = true
+	mouse_filter = MOUSE_FILTER_STOP
 
 func close_help():
 	visible = false
+	mouse_filter = MOUSE_FILTER_IGNORE

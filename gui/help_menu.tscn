@@ -40,34 +40,18 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[font_size=24]Help[/font_size]
-Type your desired roll in the textbox.
-Press enter or click the 'roll' button (it looks like a d6) to roll the dice.
-
-[font_size=24]Supported Dice[/font_size]
-d4, d6, d8, d10, d12, d20, d100.
-
-[font_size=24]Roll Examples[/font_size]
-[ul] 2d6: Roll 2 six sided dice.
- 2d6+5: Roll 2 six sided dice, and add 5.
- d20-d4: Roll a d20, then roll a d4 and subtract its result.
- 180-100: Subtract 100 from 180.[/ul]
-
-[font_size=24]Advantage and Disadvantage[/font_size]
-Use 'a' for Advantage to take the top n results.
-Use 'b' for \"Bisadvantage\" (or Bad or Bottom) to take the bottom n results.
-e.g. [ul]
- 2d20a: Roll 2d20 and take the highest result.
- 4d6a2: Roll 4d6 and take the top 2 results.
- 2d20b: Roll 2d20 and take the lowest result.
- 4d6b2: Roll 4d6 and take the bottom 2 results.
+text = "[font_size=24]Help[/font_size][ul]
+ Select dice by clicking on their buttons in the bottom left.
+ Edit your selection using the bottom middle panel.
+ You can choose an 'addend' ( like +5 ) at the bottom of the panel.
+ Press the 'Roll' button to roll.
+ When the dice have settled, clicking on a die toggles whether it gets counted.
 [/ul]
 
 [font_size=24]Tips[/font_size][ul]
- The roll editor is a normal textbox. You can copy/paste and do most things you'd normally be able to.
- Comma, space, and equals will all insert a +.
  You can interrupt rolls with other rolls.
- Press enter again to repeat the previous roll."
+ You can click + drag OR scroll on number fields when you've clicked on them.
+[/ul]"
 
 [node name="exit_button" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(48, 48)

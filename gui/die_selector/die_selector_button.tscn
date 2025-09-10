@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5451dmdabyq1"]
+
+[ext_resource type="Script" uid="uid://k2el3golys8s" path="res://gui/die_selector/die_selector_button.gd" id="1_3m6ed"]
+
+[node name="Button" type="Button"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3m6ed")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
