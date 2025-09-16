@@ -88,3 +88,8 @@ func _on_score_addend_edited():
 	if dice_roller.state != DiceRoller.STATES.SETTLED: return
 	score_counter.stored_addend = gui.get_addend()
 	update_score()
+
+func _on_roll_editor_panel_cleared():
+	roll_editor.spawnlist = []
+	gui.roll_editor_panel.addend_spinbox.value = 0
+	gui.update_roll_editor_panel( [] )

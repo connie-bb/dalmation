@@ -13,6 +13,7 @@ var row_resource: Resource = preload( "res://gui/roll_editor_panel/roll_editor_r
 signal count_changed( count: int, dice_group: DiceGroup )
 signal deleted( dice_group: DiceGroup )
 signal score_addend_edited
+signal cleared
 
 func _ready():
 	for row in table.get_children():
@@ -44,3 +45,6 @@ func _on_addend_spinbox_value_changed( value ):
 
 func _on_edit_score_addend_button_pressed():
 	score_addend_edited.emit()
+
+func _on_clear_button_pressed():
+	cleared.emit()

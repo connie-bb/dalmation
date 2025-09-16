@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=45 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://5451dmdabyq1" path="res://gui/die_selector/die_selector_button.tscn" id="18_074og"]
 [ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/roll_editor_panel/roll_editor_panel.gd" id="18_82xsv"]
 [ext_resource type="PackedScene" uid="uid://75v4cht4q0pg" path="res://gui/roll_editor_panel/roll_editor_row.tscn" id="19_cegan"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="19_ryguw"]
 [ext_resource type="PackedScene" uid="uid://b4csxnw7da742" path="res://gui/tooltip.tscn" id="20_82xsv"]
 [ext_resource type="Texture2D" uid="uid://cfb7vwc146xl1" path="res://gui/icons/pencil.png" id="20_getpj"]
 
@@ -472,6 +473,11 @@ layout_mode = 2
 tooltip_text = "Write this addend to the current score"
 icon = ExtResource("20_getpj")
 
+[node name="clear_button" type="Button" parent="GUI/roll_editor_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Clear roll editor"
+icon = ExtResource("19_ryguw")
+
 [node name="error_panel" type="Panel" parent="GUI"]
 visible = false
 custom_minimum_size = Vector2(0.34, 0.86)
@@ -518,9 +524,11 @@ visible = false
 [connection signal="replay_pressed" from="GUI/history" to="Conductor" method="_on_history_replay_pressed"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
+[connection signal="cleared" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_cleared"]
 [connection signal="count_changed" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_count_changed"]
 [connection signal="deleted" from="GUI/roll_editor_panel" to="Conductor" method="_on_roll_editor_panel_deleted"]
 [connection signal="score_addend_edited" from="GUI/roll_editor_panel" to="Conductor" method="_on_score_addend_edited"]
 [connection signal="value_changed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/addend_spinbox" to="GUI/roll_editor_panel" method="_on_addend_spinbox_value_changed"]
 [connection signal="pressed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/edit_score_addend_button" to="GUI/roll_editor_panel" method="_on_edit_score_addend_button_pressed"]
+[connection signal="pressed" from="GUI/roll_editor_panel/VBoxContainer/HBoxContainer/clear_button" to="GUI/roll_editor_panel" method="_on_clear_button_pressed"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
