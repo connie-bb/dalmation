@@ -1,19 +1,24 @@
 extends Node
 class_name ScoreCounter
 
-# Variable
-var stored_addend: int = 0
+# Constant
+signal score_counted( score: int )
 
-func update_die_scores( active_dice: Node ):
-	for group: DiceGroup in active_dice.get_children():
+func count_score( roll: Roll ):
+	var total_score: int = 0
+	total_score += roll.addend
+	
+	for group: DiceGroup in roll.spawnlist:
+		if !group.is_inside_tree():
+			push_error(
+				"Tried to call count_score() on an uninstantiated roll." )
 		for die: Die in group.get_children():
 			die.update_score()
-
-func count_score( active_dice: Node, addend: int ) -> int:
-	var total_score: int = addend
-	for group: DiceGroup in active_dice.get_children():
 		total_score += count_group_score( group )
-	return total_score
+	
+	roll.score = total_score
+	Debug.log( "Score: " + str( total_score ), Debug.TAG.INFO )
+	score_counted.emit( total_score )
 	
 func count_group_score( group: DiceGroup ) -> int:
 	var group_score: int = 0
