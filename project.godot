@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 Debug="*res://singletons/debug.gd"
 TooltipManager="*res://singletons/tooltip_manager.gd"
 Settings="*res://singletons/settings.gd"
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 
 [debug]
 
@@ -33,6 +34,10 @@ file_logging/log_path="user://logs/dalmation.log"
 window/size/viewport_width=480
 window/size/viewport_height=640
 window/size/resizable=false
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
 
 [gui]
 

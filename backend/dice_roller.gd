@@ -15,6 +15,7 @@ var max_angular_velocity: float = 5.0
 # Constant
 enum STATES { IDLE, ROLLING, SETTLED }
 const MAX_SIMULTANEOUS_ROLLS: int = 5
+signal rolled()
 signal scoring_requested( roll: Roll )
 signal old_roll_done( roll: Roll )
 signal error_with_roll( error: String )
@@ -64,8 +65,10 @@ func roll_dice( request: RollRequest ):
 			total_dice += 1 # We'll spawn a D_PERCENTILE_1s in addition.
 	if total_dice == 0: return
 	if total_dice > Settings.max_dice:
-		error_with_roll.emit( "Max of " + str( Settings.max_dice ) \
-			+ " dice at once." )
+		var err_string = "Max of " + str( Settings.max_dice ) \
+			+ " dice at once."
+		Debug.log( err_string, Debug.TAG.INFO )
+		error_with_roll.emit( err_string )
 		return
 	
 	# --------------- No early returns allowed past this point.
@@ -96,6 +99,7 @@ func roll_dice( request: RollRequest ):
 	# I miss C style brackets...
 	current_roll.modifier = request.modifier
 	roll_handful_of_dice()
+	rolled.emit()
 	
 func roll_handful_of_dice():
 	for i in range( 0, spawnlist.size() ):

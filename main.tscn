@@ -1,11 +1,10 @@
-[gd_scene load_steps=44 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=43 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="2_yaehf"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="3_ryguw"]
-[ext_resource type="Script" uid="uid://bv2dwjmt8518f" path="res://gui/gui.gd" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="6_w48qg"]
 [ext_resource type="Script" uid="uid://dxnh6enflejgm" path="res://gui/score_panel.gd" id="9_getpj"]
@@ -236,7 +235,7 @@ show_in_game = true
 [node name="score_counter" type="Node" parent="."]
 script = ExtResource("3_h2yge")
 
-[node name="GUI" type="Control" parent="." node_paths=PackedStringArray("score_label", "error_panel", "roll_editor_panel", "tooltip")]
+[node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,11 +245,6 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("4_1bvp3")
-score_label = NodePath("score_panel/VBoxContainer/score_label")
-error_panel = NodePath("error_panel")
-roll_editor_panel = NodePath("roll_editor_panel")
-tooltip = NodePath("tooltip")
 
 [node name="roll_button" type="Button" parent="GUI"]
 layout_mode = 2
@@ -454,18 +448,19 @@ visible = false
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
 [connection signal="entry_added" from="roll_history" to="GUI/roll_history_panel" method="add_row"]
 [connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
+[connection signal="error_with_roll" from="dice_roller" to="GUI/error_panel" method="display_error"]
 [connection signal="old_roll_done" from="dice_roller" to="roll_history" method="add_entry"]
+[connection signal="rolled" from="dice_roller" to="GUI/error_panel" method="stop_displaying_error"]
 [connection signal="scoring_requested" from="dice_roller" to="score_counter" method="count_score"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="GUI/score_panel" method="display"]
 [connection signal="pressed" from="GUI/roll_button" to="roll_editor" method="finalize"]
-[connection signal="pressed" from="GUI/roll_button" to="GUI/error_panel" method="stop_displaying_error"]
 [connection signal="delete_pressed" from="GUI/roll_history_panel" to="roll_history" method="remove_entry"]
 [connection signal="replay_pressed" from="GUI/roll_history_panel" to="roll_history" method="replay"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
-[connection signal="pressed" from="GUI/help_button" to="GUI" method="_on_help_button_pressed"]
+[connection signal="pressed" from="GUI/help_button" to="GUI/help_menu" method="open_help"]
 [connection signal="cleared" from="GUI/roll_editor_panel" to="roll_editor" method="clear"]
 [connection signal="modifier_changed" from="GUI/roll_editor_panel" to="roll_editor" method="set_modifier"]
 [connection signal="modifier_post_roll" from="GUI/roll_editor_panel" to="dice_roller" method="update_modifier"]
