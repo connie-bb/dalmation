@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://k74d0w4efxnw"]
 
 [ext_resource type="Texture2D" uid="uid://dqitu07tqlcf0" path="res://gui/icons/play.png" id="1_6ebrb"]
-[ext_resource type="Script" uid="uid://5cdugyl4doq4" path="res://gui/history_panel_row.gd" id="1_hbhih"]
+[ext_resource type="Script" uid="uid://5cdugyl4doq4" path="res://gui/roll_history_panel_row.gd" id="1_hbhih"]
 [ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_hbhih"]
 
 [node name="history_row" type="PanelContainer"]

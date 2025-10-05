@@ -2,66 +2,41 @@ extends Node
 class_name RollEditor
 
 # Variable
-var roll: Roll = Roll.new()
+var request: RollRequest = RollRequest.new()
 
 # Constant
-signal changed( roll: Roll )
-signal finalized( roll: Roll )
+signal changed( roll_request: RollRequest )
+signal finalized( roll_request: RollRequest )
 
 func clear():
-	roll.delete()
-	roll = Roll.new()
-	changed.emit( roll )
+	request.delete()
+	request = RollRequest.new()
+	changed.emit( request )
 
 func add_die( type: Die.TYPES ):
-	var group: DiceGroup = null
-	
-	for existing_group in roll.spawnlist:
-		if existing_group.die_type == type:
-			group = existing_group
-			break
-	if group == null:
-		group = DiceGroup.new()
-		group.die_type = type
-		roll.spawnlist.append( group )
-	
-	if group.count >= Settings.max_dice: return
-	group.count += 1
-	changed.emit( roll )
+	request.add_die( type )
+	changed.emit( request )
+
+func subtract_die( type: Die.TYPES ):
+	request.subtract_die( type )
+	changed.emit( request )
+
+func set_count( type: Die.TYPES, count: int ):
+	request.set_count( type, count )
+	changed.emit( request )
 
 func remove_die( type: Die.TYPES ):
-	var group: DiceGroup = null
-	for existing_group in roll.spawnlist:
-		if existing_group.die_type == type:
-			group = existing_group
-			break
-	if group == null:
-		return
-		
-	group.count -= 1
-	if group.count <= 0:
-		remove_group( group )
-	
-	changed.emit( roll )
+	request.remove_die( type )
+	changed.emit( request )
 
-func set_group_count( count: int, group: DiceGroup ):
-	group.count = count
-	changed.emit( roll )
+func set_modifier( modifier: int ):
+	request.set_modifier( modifier )
+	changed.emit( request )
 
-func remove_group( group: DiceGroup ):
-	group.queue_free()
-	roll.spawnlist.erase( group )
-	changed.emit( roll )
-
-func set_addend( addend: int ):
-	roll.addend = addend
-	changed.emit( roll )
-
-func replay_roll( new_roll: Roll ):
-	roll.delete()
-	roll = new_roll.dupe()
-	changed.emit( roll )
-	finalize()
+func replay_roll( receipt: RollReceipt ):
+	request.delete()
+	request = RollRequest.from_roll_receipt( receipt )
+	changed.emit( request )
 
 func finalize():
-	finalized.emit( roll )
+	finalized.emit( request )

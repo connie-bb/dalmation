@@ -4,9 +4,7 @@ class_name DiceRoller
 # Variable
 var state: STATES = STATES.IDLE
 var current_roll: Roll
-var spawnlist_index: int = 0
-var dice_group: DiceGroup
-var group_spawnlist: Array[ Die ]
+var spawnlist: Array[ Die.TYPES ]
 
 # Configurable
 var min_velocity: float = 18.0
@@ -17,9 +15,8 @@ var max_angular_velocity: float = 5.0
 # Constant
 enum STATES { IDLE, ROLLING, SETTLED }
 const MAX_SIMULTANEOUS_ROLLS: int = 5
-signal settled( roll: Roll )
+signal scoring_requested( roll: Roll )
 signal old_roll_done( roll: Roll )
-signal die_toggled( roll: Roll )
 signal error_with_roll( error: String )
 
 # References
@@ -27,19 +24,20 @@ signal error_with_roll( error: String )
 @onready var active_dice: Node3D = $active_dice
 @onready var roll_warmup_timer: Timer = $roll_warmup_timer
 @onready var roll_handful_timer: Timer = $roll_handful_timer
-@onready var roll_dice_group_timer: Timer = $roll_dice_group_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
 
-func remove_active_dice():
-	for group: DiceGroup in active_dice.get_children():
-		for die in group.get_children():
-			die.queue_free()
-		# Preserve DiceGroups so the Roll can be passed to History.
-		if active_dice.is_ancestor_of( group ):
-			active_dice.remove_child( group )
+func _physics_process( _delta: float ):
+	if state != STATES.ROLLING: return
+	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
+		settle()
 
-func roll_die( to_spawn: Die ):
-	var die: Die = to_spawn.duplicate()
+func remove_active_dice():
+	for die: PhysicalDie in active_dice.get_children():
+		die.delete()
+
+func roll_die( die_type: Die.TYPES ):
+	var die: PhysicalDie = \
+		spawnable_dice.die_type_to_die[ die_type ].duplicate()
 	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
@@ -54,21 +52,23 @@ func roll_die( to_spawn: Die ):
 	
 	die.clicked.connect( _on_die_clicked )
 	
-	dice_group.add_child( die )
+	active_dice.add_child( die )
 	die.position = Vector3.ZERO
+	current_roll.die_list.append( die )
 
-func roll_dice( roll: Roll ):
+func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
-	for group: DiceGroup in roll.spawnlist:
-		total_dice += group.count
-		#TODO: Special case for d100
+	for die_type in request.die_counts.keys():
+		total_dice += request.die_counts[ die_type ]
+		if die_type == Die.TYPES.D_PERCENTILE_10S:
+			total_dice += 1 # We'll spawn a D_PERCENTILE_1s in addition.
 	if total_dice == 0: return
 	if total_dice > Settings.max_dice:
 		error_with_roll.emit( "Max of " + str( Settings.max_dice ) \
 			+ " dice at once." )
 		return
 	
-	# --------------- No more early returns.
+	# --------------- No early returns allowed past this point.
 	
 	if state == STATES.SETTLED:
 		# A previous roll exists, and has finished.
@@ -77,9 +77,9 @@ func roll_dice( roll: Roll ):
 	if current_roll != null:
 		remove_active_dice()
 		
-	current_roll = roll.dupe()
+	current_roll = Roll.new()
 	
-	var roll_string = roll.string()
+	var roll_string = request.as_string()
 	Debug.log( "Roll: " + roll_string, Debug.TAG.INFO )
 		
 	roll_warmup_timer.stop()
@@ -88,43 +88,31 @@ func roll_dice( roll: Roll ):
 	
 	state = STATES.ROLLING
 	
-	spawnlist_index = 0
-	roll_dice_group()
-
-func roll_dice_group():
-	dice_group = current_roll.spawnlist[ spawnlist_index ]
-	active_dice.add_child( dice_group )
-	group_spawnlist = []
-	for i in dice_group.count:
-		group_spawnlist.append( 
-			spawnable_dice.die_type_to_die[ dice_group.die_type ] )
-		if dice_group.die_type == Die.TYPES.D_PERCENTILE_10S:
-			group_spawnlist.append(
-				spawnable_dice.die_type_to_die[ Die.TYPES.D_PERCENTILE_1S ] )
-			
+	for die_type in request.die_counts.keys():
+		for i in request.die_counts[ die_type ]:
+			spawnlist.append( die_type )
+			if die_type == Die.TYPES.D_PERCENTILE_10S:
+				spawnlist.append( Die.TYPES.D_PERCENTILE_1S )
+	# I miss C style brackets...
+	current_roll.modifier = request.modifier
 	roll_handful_of_dice()
-	spawnlist_index += 1
 	
 func roll_handful_of_dice():
-	for i in range( 0, group_spawnlist.size() ):
-		if i >= MAX_SIMULTANEOUS_ROLLS:
+	for i in range( 0, spawnlist.size() ):
+		if i < MAX_SIMULTANEOUS_ROLLS:
+			roll_die( spawnlist.pop_back() )
+		else: # if i >= MAX_SIMULTANEOUS_ROLLS:
 			roll_handful_timer.start()
 			return
-		else:
-			roll_die( group_spawnlist.pop_back() )
-	
-	if spawnlist_index >= current_roll.spawnlist.size() - 1:
-		finished_rolling()
-	else:
-		roll_dice_group_timer.start()
+
+	assert( spawnlist.is_empty(), "Following code assumes spawnlist is empty.
+		If this triggers clearly I was wrong. >_>;" )
+	all_dice_spawned()
 
 func _on_roll_handful_timeout():
 	roll_handful_of_dice()
-	
-func _on_roll_dice_group_timeout():
-	roll_dice_group()
 
-func finished_rolling():
+func all_dice_spawned():
 	roll_warmup_timer.start()
 	roll_max_timer.start()
 
@@ -132,34 +120,32 @@ func _on_roll_max_timeout():
 	settle()
 	
 func check_if_dice_settled() -> bool:
-	for group: DiceGroup in active_dice.get_children():
-		for die in group.get_children():
-			if !die.sleeping: return false
+	for die: PhysicalDie in active_dice.get_children():
+		if !die.sleeping: return false
 	return true
 
 func settle():
 	state = STATES.SETTLED
 	roll_max_timer.stop()
-	settled.emit( current_roll )
+	request_scoring()
 	
-func update_addend( addend: int ):
-	current_roll.addend = addend
+func request_scoring():
+	scoring_requested.emit( current_roll )
+	
+func update_modifier( modifier: int ):
+	if current_roll == null: return
+	current_roll.modifier = modifier
 	if state == STATES.SETTLED:
-		settle() # Re-count the score
+		request_scoring()
 		# If state != settled, score gets counted later anyway.
 
-func _physics_process( _delta: float ):
-	if state != STATES.ROLLING: return
-	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
-		settle()
-
-func _on_die_clicked( die: Die ):
-	if state != STATES.SETTLED: return
-	die.toggle_disabled()
-	die_toggled.emit( current_roll )
+func _on_die_clicked( _die: Die ):
+	if state == STATES.SETTLED:
+		request_scoring()
+		# If state != settled, score gets counted later anyway.
 	
-func get_active_groups() -> Array[ DiceGroup ]:
-	var result: Array[ DiceGroup ]
-	for group_node in active_dice.get_children():
-		result.append( group_node as DiceGroup )
+func get_active_dice() -> Array[ PhysicalDie ]:
+	var result: Array[ PhysicalDie ]
+	for die in active_dice.get_children():
+		result.append( die as PhysicalDie )
 	return result

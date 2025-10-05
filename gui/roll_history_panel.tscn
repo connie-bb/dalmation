@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://brhhb2juwnmcd"]
 
-[ext_resource type="Script" uid="uid://cewrxsgewmuou" path="res://gui/history_panel.gd" id="1_83wuu"]
-[ext_resource type="PackedScene" uid="uid://k74d0w4efxnw" path="res://gui/history_panel_row.tscn" id="1_tsd3m"]
+[ext_resource type="Script" uid="uid://cewrxsgewmuou" path="res://gui/roll_history_panel.gd" id="1_83wuu"]
+[ext_resource type="PackedScene" uid="uid://k74d0w4efxnw" path="res://gui/roll_history_panel_row.tscn" id="1_tsd3m"]
 
 [node name="history" type="Panel"]
 custom_minimum_size = Vector2(235, 112.2)

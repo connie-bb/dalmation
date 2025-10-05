@@ -1,7 +1,7 @@
 extends Node3D
 class_name SpawnableDice
 
-var die_scene: Resource = preload( "res://dice/die.tscn" )
+var die_scene: Resource = preload( "res://dice/physical_die.tscn" )
 var die_type_to_die: Dictionary[ Die.TYPES, Die ]
 
 func _ready():
