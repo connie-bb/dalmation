@@ -32,13 +32,19 @@ func _physics_process( _delta: float ):
 	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
 		settle()
 
-func remove_active_dice():
+func remove_active_dice( remove_locked_dice: bool = false ):
 	for die: PhysicalDie in active_dice.get_children():
-		die.delete()
+		if die.locked and remove_locked_dice:
+			active_dice.remove_child( die )
+			die.delete()
+		if !die.locked:
+			active_dice.remove_child( die )
+			die.delete()
 
 func roll_die( die_type: Die.TYPES ):
 	var die: PhysicalDie = \
 		spawnable_dice.die_type_to_die[ die_type ].duplicate()
+	die.die_type = die_type
 	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
@@ -51,7 +57,7 @@ func roll_die( die_type: Die.TYPES ):
 	die.angular_velocity = angular_velocity * TAU
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
-	die.clicked.connect( _on_die_clicked )
+	die.disable_toggled.connect( _on_die_disable_toggled )
 	
 	active_dice.add_child( die )
 	die.position = Vector3.ZERO
@@ -81,6 +87,9 @@ func roll_dice( request: RollRequest ):
 		remove_active_dice()
 		
 	current_roll = Roll.new()
+	# Add locked dice from previous roll
+	for die: PhysicalDie in active_dice.get_children():
+		current_roll.die_list.append( die )
 	
 	var roll_string = request.as_string()
 	Debug.log( "Roll: " + roll_string, Debug.TAG.INFO )
@@ -143,7 +152,7 @@ func update_modifier( modifier: int ):
 		request_scoring()
 		# If state != settled, score gets counted later anyway.
 
-func _on_die_clicked( _die: Die ):
+func _on_die_disable_toggled( _die: PhysicalDie ):
 	if state == STATES.SETTLED:
 		request_scoring()
 		# If state != settled, score gets counted later anyway.

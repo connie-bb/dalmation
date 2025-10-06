@@ -7,7 +7,7 @@ var score: int = 0
 
 static func from_roll( roll: Roll ) -> RollReceipt:
 	var result: RollReceipt = RollReceipt.new()
-	for die in roll.die_list:
+	for die: PhysicalDie in roll.die_list:
 		result.die_list.append( Die.from_physical_die( die ) )
 	result.modifier = roll.modifier
 	result.score = roll.score

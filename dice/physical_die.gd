@@ -1,4 +1,4 @@
-extends Die
+extends RigidBody3D
 class_name PhysicalDie
 
 # References
@@ -11,10 +11,18 @@ class_name PhysicalDie
 @onready var score_collision: CollisionShape3D = $score_area/score_collision
 @onready var physics_collision: CollisionShape3D = $physics_collision
 @onready var disabled_sprite: Sprite3D = $disabled_sprite
+@onready var locked_sprite: Sprite3D = $locked_sprite
 var mesh_data_tool: MeshDataTool
 
+# Variable
+var die_type: Die.TYPES
+var disabled: bool = false
+var locked: bool = false
+var score: int
+
 # Constant
-signal clicked( die: Die )
+signal disable_toggled( die: PhysicalDie )
+signal lock_toggled( die: PhysicalDie )
 
 func _ready():
 	assert( score_mesh != null, "No score mesh assigned to die.gd" )
@@ -29,14 +37,33 @@ func _ready():
 	
 	mesh_data_tool = MeshDataTool.new()
 	mesh_data_tool.create_from_surface( mesh, 0 )
+
+
+func toggle_disabled():
+	if disabled: enable()
+	else: disable()
 	
 func disable():
-	super()
+	disabled = true
 	disabled_sprite.visible = true
 	
 func enable():
-	super()
+	disabled = false
 	disabled_sprite.visible = false
+
+func toggle_locked():
+	if locked: unlock()
+	else: lock()
+
+func lock():
+	locked = true
+	locked_sprite.visible = true
+	freeze = true
+	sleeping = true
+
+func unlock():
+	locked = false
+	locked_sprite.visible = false
 
 func update_score():
 	var ray_distance = 5.0
@@ -62,11 +89,14 @@ func update_score():
 		mesh_data_tool.get_face_vertex( hit.face_index, 0 ) )
 	score = snapped( score_rgb.r, 0.05 ) * 20
 	
-	if die_type == TYPES.D_PERCENTILE_10S:
+	if die_type == Die.TYPES.D_PERCENTILE_10S:
 		if score == 10: score = 0	# It's a '00'
 		score *= 10
-	elif die_type == TYPES.D_PERCENTILE_1S:
+	elif die_type == Die.TYPES.D_PERCENTILE_1S:
 		if score == 10: score = 0	# it's a '0'
+	
+func delete():
+	queue_free()
 	
 func _on_score_area_input_event( _a, event: InputEvent, _b, _c, _d ):
 	if !( event is InputEventMouseButton ): return
@@ -75,4 +105,8 @@ func _on_score_area_input_event( _a, event: InputEvent, _b, _c, _d ):
 	if mouse_event.button_index == MOUSE_BUTTON_LEFT \
 	and mouse_event.pressed:
 		toggle_disabled()
-		clicked.emit( self )
+		disable_toggled.emit( self )
+	elif mouse_event.button_index == MOUSE_BUTTON_RIGHT \
+	and mouse_event.pressed:
+		toggle_locked()
+		lock_toggled.emit( self )
