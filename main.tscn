@@ -448,6 +448,8 @@ visible = false
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
 [connection signal="entry_added" from="roll_history" to="GUI/roll_history_panel" method="add_row"]
 [connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
+[connection signal="die_locked" from="dice_roller" to="roll_editor" method="subtract_die"]
+[connection signal="die_unlocked" from="dice_roller" to="roll_editor" method="add_die"]
 [connection signal="error_with_roll" from="dice_roller" to="GUI/error_panel" method="display_error"]
 [connection signal="old_roll_done" from="dice_roller" to="roll_history" method="add_entry"]
 [connection signal="rolled" from="dice_roller" to="GUI/error_panel" method="stop_displaying_error"]

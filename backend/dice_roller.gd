@@ -19,6 +19,8 @@ signal rolled()
 signal scoring_requested( roll: Roll )
 signal old_roll_done( roll: Roll )
 signal error_with_roll( error: String )
+signal die_locked( die_type: Die.TYPES )
+signal die_unlocked( die_type: Die.TYPES )
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -58,6 +60,7 @@ func roll_die( die_type: Die.TYPES ):
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
 	die.disable_toggled.connect( _on_die_disable_toggled )
+	die.lock_toggled.connect( _on_die_lock_toggled )
 	
 	active_dice.add_child( die )
 	die.position = Vector3.ZERO
@@ -156,6 +159,10 @@ func _on_die_disable_toggled( _die: PhysicalDie ):
 	if state == STATES.SETTLED:
 		request_scoring()
 		# If state != settled, score gets counted later anyway.
+
+func _on_die_lock_toggled( die: PhysicalDie ):
+	if die.locked: die_locked.emit( die.die_type )
+	else: die_unlocked.emit( die.die_type )
 	
 func get_active_dice() -> Array[ PhysicalDie ]:
 	var result: Array[ PhysicalDie ]
