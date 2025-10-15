@@ -108,7 +108,7 @@ physics_interpolation_mode = 1
 script = ExtResource("2_yaehf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.684419, 0.729089, 0, -0.729089, 0.684419, 0, 6.29279, 5.83099)
+transform = Transform3D(0.877982, 0, 0, 0, 0.600908, 0.640127, 0, -0.640127, 0.600908, 0, 9.4547, 8.76079)
 
 [node name="camera_bounds" type="CollisionShape3D" parent="Camera3D"]
 transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
@@ -127,6 +127,7 @@ environment = SubResource("Environment_0xm2m")
 transform = Transform3D(0.870167, -0.426741, 0.246379, 0, 0.5, 0.866025, -0.492758, -0.753586, 0.435083, 3.3308, 1.38015, 0)
 
 [node name="world" type="Node3D" parent="."]
+transform = Transform3D(1.40477, 0, 0, 0, 1.40477, 0, 0, 0, 1.40477, 0, 0.614297, 0.569212)
 
 [node name="table" type="MeshInstance3D" parent="world"]
 mesh = SubResource("BoxMesh_ycdy4")
@@ -157,7 +158,7 @@ shape = SubResource("BoxShape3D_074og")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
 [node name="back_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, -4.47629)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.5)
 shape = SubResource("BoxShape3D_w48qg")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
@@ -200,7 +201,7 @@ transform = Transform3D(0.522286, 0, -0.351438, 0, 0.629517, 0, 0.351438, 0, 0.5
 mesh = SubResource("BoxMesh_074og")
 
 [node name="dice_roller" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18377, 3.69227, 5.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294, 5.907, 9.28)
 script = ExtResource("1_h2yge")
 
 [node name="spawnable_dice" parent="dice_roller" instance=ExtResource("2_0xm2m")]
