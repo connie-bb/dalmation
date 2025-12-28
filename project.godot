@@ -23,6 +23,7 @@ Debug="*res://singletons/debug.gd"
 TooltipManager="*res://singletons/tooltip_manager.gd"
 Settings="*res://singletons/settings.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
+VFXManager="*res://singletons/vfx_manager.gd"
 
 [debug]
 

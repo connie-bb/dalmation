@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=44 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="2_yaehf"]
+[ext_resource type="PackedScene" uid="uid://d3gmy8l2rgcb3" path="res://backgrounds/toybox.tscn" id="3_getpj"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="3_ryguw"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="6_7mycd"]
@@ -33,9 +34,9 @@ sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 ambient_light_source = 3
-
-[sub_resource type="BoxMesh" id="BoxMesh_ycdy4"]
-size = Vector3(24.255, 1, 25.905)
+tonemap_mode = 4
+adjustment_enabled = true
+adjustment_saturation = 1.13
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(19, 2, 17)
@@ -57,6 +58,9 @@ size = Vector3(2, 7, 22)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
 size = Vector3(2, 7, 22)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ycdy4"]
+size = Vector3(24.255, 1, 25.905)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48qg"]
 albedo_color = Color(1, 0.09, 0.09, 1)
@@ -108,7 +112,7 @@ physics_interpolation_mode = 1
 script = ExtResource("2_yaehf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.877982, 0, 0, 0, 0.600908, 0.640127, 0, -0.640127, 0.600908, 0, 9.4547, 8.76079)
+transform = Transform3D(1, 0, 0, 0, 0.684419, 0.729089, 0, -0.729089, 0.684419, 0, 10.069, 9.33)
 
 [node name="camera_bounds" type="CollisionShape3D" parent="Camera3D"]
 transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
@@ -126,51 +130,54 @@ environment = SubResource("Environment_0xm2m")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(0.870167, -0.426741, 0.246379, 0, 0.5, 0.866025, -0.492758, -0.753586, 0.435083, 3.3308, 1.38015, 0)
 
-[node name="world" type="Node3D" parent="."]
-transform = Transform3D(1.40477, 0, 0, 0, 1.40477, 0, 0, 0, 1.40477, 0, 0.614297, 0.569212)
-
-[node name="table" type="MeshInstance3D" parent="world"]
-mesh = SubResource("BoxMesh_ycdy4")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="world"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000673294, 0.0368586, -0.109508)
+[node name="collisions" type="StaticBody3D" parent="env"]
+transform = Transform3D(1.40477, 0, 0, 0, 1.40477, 0, 0, 0, 1.40477, 0, -0.699434, 0)
 collision_mask = 3
 input_ray_pickable = false
 
-[node name="floor" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="floor" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, -0.507976, -0.976288)
 shape = SubResource("BoxShape3D_0xm2m")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="ramp" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="ramp" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.0251384, 0.811247, 5.99411)
 shape = SubResource("BoxShape3D_vivmo")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="ceil" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="ceil" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 6.49202, 2.02371)
 shape = SubResource("BoxShape3D_2cqfq")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="near_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="near_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, 8.5237)
 shape = SubResource("BoxShape3D_074og")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="back_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="back_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.5)
 shape = SubResource("BoxShape3D_w48qg")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="left_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="left_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -4.71424, 2.992, 2.04862)
 shape = SubResource("BoxShape3D_yaehf")
 debug_color = Color(0.839216, 0, 0.423529, 1)
 
-[node name="right_wall" type="CollisionShape3D" parent="world/StaticBody3D"]
+[node name="right_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 4.71424, 2.992, 2.04862)
 shape = SubResource("BoxShape3D_ycdy4")
 debug_color = Color(0.839216, 0, 0.423529, 1)
+
+[node name="toybox" parent="env" instance=ExtResource("3_getpj")]
+
+[node name="world" type="Node3D" parent="."]
+transform = Transform3D(1.40477, 0, 0, 0, 1.40477, 0, 0, 0, 1.40477, 0, 0.614297, 0.569212)
+visible = false
+
+[node name="table" type="MeshInstance3D" parent="world"]
+mesh = SubResource("BoxMesh_ycdy4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="world"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.26118, -5.88599)

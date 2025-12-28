@@ -29,6 +29,10 @@ signal die_unlocked( die_type: Die.TYPES )
 @onready var roll_handful_timer: Timer = $roll_handful_timer
 @onready var roll_max_timer: Timer = $roll_max_timer
 
+func _ready():
+	current_roll = Roll.new()
+	VFXManager.dice_roller = self
+
 func _physics_process( _delta: float ):
 	if state != STATES.ROLLING: return
 	if roll_warmup_timer.is_stopped() and check_if_dice_settled():
@@ -86,8 +90,7 @@ func roll_dice( request: RollRequest ):
 		# A previous roll exists, and has finished.
 		old_roll_done.emit( current_roll )
 		
-	if current_roll != null:
-		remove_active_dice()
+	remove_active_dice()
 		
 	current_roll = Roll.new()
 	# Add locked dice from previous roll
