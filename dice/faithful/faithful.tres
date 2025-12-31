@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://3rknm51vqnga"]
+
+[ext_resource type="Shader" uid="uid://dyhb32b3xscv4" path="res://shaders/dice/die_pbr.gdshader" id="1_rxhfo"]
+[ext_resource type="Texture2D" uid="uid://00o4xkf2csgl" path="res://dice/faithful/AlbedoAlpha.exr" id="2_rxhfo"]
+[ext_resource type="Texture2D" uid="uid://bnh6fms0k826l" path="res://dice/faithful/Normal.png" id="3_3kkpx"]
+[ext_resource type="Texture2D" uid="uid://bue2bi01f11j3" path="res://dice/faithful/ORM.png" id="4_ri6gf"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rxhfo")
+shader_parameter/albedo_texture = ExtResource("2_rxhfo")
+shader_parameter/orm_texture = ExtResource("4_ri6gf")
+shader_parameter/normal_map_texture = ExtResource("3_3kkpx")
+shader_parameter/ao_intensity = 0.25
+shader_parameter/floor_y = 0.0

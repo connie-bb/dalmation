@@ -1,8 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=45 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="2_yaehf"]
+[ext_resource type="Texture2D" uid="uid://be1cnfjg505tx" path="res://backgrounds/toybox_hdri.exr" id="3_d13ii"]
 [ext_resource type="PackedScene" uid="uid://d3gmy8l2rgcb3" path="res://backgrounds/toybox.tscn" id="3_getpj"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="3_ryguw"]
@@ -25,10 +26,11 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
+panorama = ExtResource("3_d13ii")
 
 [sub_resource type="Sky" id="Sky_h2yge"]
-sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+sky_material = SubResource("PanoramaSkyMaterial_1u8w0")
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2

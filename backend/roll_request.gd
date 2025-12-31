@@ -38,6 +38,7 @@ func as_string() -> String:
 	var result: String = ""
 	
 	for die_type: Die.TYPES in die_counts.keys():
+		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
 		result += str( die_counts[ die_type ] )
 		result += Utils.DIE_TYPE_TO_STRING[ die_type ]
 		result += " + "

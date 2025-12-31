@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://1p71o38bbjnv"]
+
+[ext_resource type="PackedScene" uid="uid://dfckp0k8ekwpl" path="res://dice/faithful/faithful.glb" id="1_4of6f"]
+[ext_resource type="Material" uid="uid://3rknm51vqnga" path="res://dice/faithful/faithful.tres" id="2_kmxy2"]
+
+[node name="faithful" instance=ExtResource("1_4of6f")]
+
+[node name="d6" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d10" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d4" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d8" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d12" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d20" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d_percentile_10s" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_kmxy2")
+
+[node name="d_percentile_1s" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_kmxy2")
