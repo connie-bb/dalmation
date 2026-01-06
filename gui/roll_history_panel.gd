@@ -8,6 +8,7 @@ var row_resource: Resource = preload("res://gui/roll_history_panel_row.tscn")
 # Constant
 signal replay_pressed( receipt: RollReceipt )
 signal delete_pressed( receipt: RollReceipt )
+signal expand_pressed( receipt: RollReceipt )
 
 func _ready():
 	# Remove placeholder rows
@@ -20,6 +21,7 @@ func add_row( receipt: RollReceipt ):
 	table.move_child( row, 0 )
 	row.replay_pressed.connect( _on_row_replay_pressed )
 	row.delete_pressed.connect( _on_row_delete_pressed )
+	row.expand_pressed.connect( _on_row_expand_pressed )
 	row.score_label.text = str( receipt.score )
 	row.roll_label.text = receipt.as_string()
 	row.receipt = receipt
@@ -31,3 +33,6 @@ func _on_row_replay_pressed( receipt: RollReceipt ):
 
 func _on_row_delete_pressed( receipt: RollReceipt ):
 	delete_pressed.emit( receipt )
+
+func _on_row_expand_pressed( receipt ):
+	expand_pressed.emit( receipt )

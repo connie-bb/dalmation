@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=46 format=3 uid="uid://crtr7u4d5fagv"]
 
 [ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c6ba6x5w0xqnj" path="res://gui/roll_editor_panel/roll_editor_panel.tscn" id="17_82xsv"]
 [ext_resource type="PackedScene" uid="uid://5451dmdabyq1" path="res://gui/die_selector/die_selector_button.tscn" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://b4csxnw7da742" path="res://gui/tooltip.tscn" id="20_82xsv"]
+[ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/roll_receipt_viewer.tscn" id="21_d13ii"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -446,6 +447,9 @@ metadata/_edit_use_anchors_ = true
 wait_time = 5.0
 one_shot = true
 
+[node name="roll_receipt_viewer" parent="GUI" instance=ExtResource("21_d13ii")]
+layout_mode = 1
+
 [node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
 visible = false
 layout_mode = 1
@@ -470,6 +474,7 @@ visible = false
 [connection signal="score_counted" from="score_counter" to="GUI/score_panel" method="display"]
 [connection signal="pressed" from="GUI/roll_button" to="roll_editor" method="finalize"]
 [connection signal="delete_pressed" from="GUI/roll_history_panel" to="roll_history" method="remove_entry"]
+[connection signal="expand_pressed" from="GUI/roll_history_panel" to="GUI/roll_receipt_viewer" method="open_receipt"]
 [connection signal="replay_pressed" from="GUI/roll_history_panel" to="roll_history" method="replay"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI/help_menu" method="open_help"]

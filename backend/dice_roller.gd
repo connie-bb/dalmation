@@ -95,6 +95,7 @@ func roll_dice( request: RollRequest ):
 	current_roll = Roll.new()
 	# Add locked dice from previous roll
 	for die: PhysicalDie in active_dice.get_children():
+		die.is_holdover = true
 		current_roll.die_list.append( die )
 	
 	var roll_string = request.as_string()

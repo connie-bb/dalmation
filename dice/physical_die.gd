@@ -18,6 +18,7 @@ var mesh_data_tool: MeshDataTool
 var die_type: Die.TYPES
 var disabled: bool = false
 var locked: bool = false
+var is_holdover: bool = false	# Was locked in the previous roll
 var score: int
 
 # Constant

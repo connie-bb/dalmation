@@ -9,4 +9,5 @@ const DIE_TYPE_TO_STRING: Dictionary[ Die.TYPES, String ] = {
 	Die.TYPES.D12: "d12",
 	Die.TYPES.D20: "d20",
 	Die.TYPES.D_PERCENTILE_10S: "d100",
+	Die.TYPES.D_PERCENTILE_1S: "d100 (d10)"
 }
