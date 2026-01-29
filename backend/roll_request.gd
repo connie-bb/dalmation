@@ -1,7 +1,15 @@
 extends Object
 class_name RollRequest
 
-var die_counts: Dictionary[ Die.TYPES, int ] = {}
+var die_counts: Dictionary[ Die.TYPES, int ] = {
+	Die.TYPES.D4: 0,
+	Die.TYPES.D6: 0,
+	Die.TYPES.D8: 0,
+	Die.TYPES.D10: 0,
+	Die.TYPES.D12: 0,
+	Die.TYPES.D20: 0,
+	Die.TYPES.D_PERCENTILE_10S: 0,
+}
 var modifier: int = 0
 
 static func from_roll_receipt( receipt: RollReceipt ) -> RollRequest:
@@ -21,15 +29,23 @@ func add_die( die_type: Die.TYPES ):
 	if !die_counts.has( die_type ):
 		die_counts[ die_type ] = 0
 	die_counts[ die_type ] += 1
+	die_counts[ die_type ] = min( die_counts[ die_type ], Settings.max_dice )
 
 func subtract_die( die_type: Die.TYPES ):
 	if !die_counts.has( die_type ): return
 	die_counts[ die_type ] -= 1
-	if die_counts[ die_type ] == 0:
-		die_counts.erase( die_type )
+	die_counts[ die_type ] = max( die_counts[ die_type ], 0 )
 		
 func remove_die( die_type: Die.TYPES ):
-	die_counts.erase( die_type )
+	die_counts[ die_type ] = 0
+
+func increment_modifier():
+	modifier += 1
+	modifier = min( modifier, Settings.max_modifier )
+
+func decrement_modifier():
+	modifier -= 1
+	modifier = max( modifier, -Settings.max_modifier )
 	
 func set_modifier( new_modifier: int ):
 	modifier = new_modifier
@@ -39,6 +55,7 @@ func as_string() -> String:
 	
 	for die_type: Die.TYPES in die_counts.keys():
 		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
+		if die_counts[ die_type ] == 0: continue
 		result += str( die_counts[ die_type ] )
 		result += Utils.DIE_TYPE_TO_STRING[ die_type ]
 		result += " + "

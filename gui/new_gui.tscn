@@ -1,0 +1,228 @@
+[gd_scene load_steps=14 format=3 uid="uid://mw4tamljoomf"]
+
+[ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="1_korrr"]
+[ext_resource type="Texture2D" uid="uid://d1owem5ltm4mo" path="res://gui/icons/trash.png" id="1_ulcsc"]
+[ext_resource type="Texture2D" uid="uid://bf4sqt1io0gxp" path="res://gui/icons/hamburger_menu.png" id="2_korrr"]
+[ext_resource type="PackedScene" uid="uid://bilaihhnfqonk" path="res://gui/die_button.tscn" id="3_ugfr4"]
+[ext_resource type="Texture2D" uid="uid://ccaquwst0suip" path="res://gui/icons/d6.png" id="4_bb1cu"]
+[ext_resource type="Texture2D" uid="uid://iheo1d5ii1xb" path="res://gui/icons/d8.png" id="5_h87iy"]
+[ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="6_lffac"]
+[ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="7_i7ui7"]
+[ext_resource type="Texture2D" uid="uid://5glox5rl3jh8" path="res://gui/icons/d20.png" id="8_h87iy"]
+[ext_resource type="Texture2D" uid="uid://bpd54mwos25ft" path="res://gui/icons/d100.png" id="9_lffac"]
+[ext_resource type="PackedScene" uid="uid://dawwr1mxams3w" path="res://gui/modifier_button.tscn" id="10_i7ui7"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="11_0uk48"]
+[ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="11_cwq44"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="history_menu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 26.0
+offset_right = -21.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="history_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="history_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Button2" type="Button" parent="history_menu/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("1_ulcsc")
+expand_icon = true
+
+[node name="Label" type="Label" parent="history_menu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 31
+text = "HISTORY"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="history_menu/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("11_0uk48")
+expand_icon = true
+
+[node name="HSeparator" type="HSeparator" parent="history_menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Tree" type="Tree" parent="history_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bottom_panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.452778
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="bottom_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="bottom_panel/MarginContainer"]
+layout_mode = 2
+
+[node name="top_row" type="Control" parent="bottom_panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+icon = ExtResource("1_korrr")
+
+[node name="Label" type="Label" parent="bottom_panel/MarginContainer/VBoxContainer/top_row"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -11.5
+offset_right = 14.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 63
+text = "100"
+
+[node name="history_menu_button" type="Button" parent="bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("2_korrr")
+
+[node name="HSeparator" type="HSeparator" parent="bottom_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="dice_row_1" type="HBoxContainer" parent="bottom_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DieButton" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="DieButton2" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton2" index="0"]
+texture = ExtResource("4_bb1cu")
+
+[node name="DieButton3" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton3" index="0"]
+texture = ExtResource("5_h87iy")
+
+[node name="DieButton4" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton4" index="0"]
+texture = ExtResource("6_lffac")
+
+[node name="dice_row_2" type="HBoxContainer" parent="bottom_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="DieButton" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton" index="0"]
+texture = ExtResource("7_i7ui7")
+
+[node name="DieButton2" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton2" index="0"]
+texture = ExtResource("8_h87iy")
+
+[node name="DieButton3" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2" instance=ExtResource("3_ugfr4")]
+layout_mode = 2
+
+[node name="TextureRect" parent="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton3" index="0"]
+texture = ExtResource("9_lffac")
+
+[node name="bottom_row" type="HBoxContainer" parent="bottom_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="delete_button" type="Button" parent="bottom_panel/MarginContainer/VBoxContainer/bottom_row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("1_ulcsc")
+icon_alignment = 1
+expand_icon = true
+
+[node name="seperator2" type="Control" parent="bottom_panel/MarginContainer/VBoxContainer/bottom_row"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="modifier_button" parent="bottom_panel/MarginContainer/VBoxContainer/bottom_row" instance=ExtResource("10_i7ui7")]
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="bottom_panel/MarginContainer/VBoxContainer/bottom_row"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="roll_button" type="Button" parent="bottom_panel/MarginContainer/VBoxContainer/bottom_row"]
+layout_mode = 2
+icon = ExtResource("11_cwq44")
+
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton2"]
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton3"]
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_1/DieButton4"]
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton"]
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton2"]
+[editable path="bottom_panel/MarginContainer/VBoxContainer/dice_row_2/DieButton3"]

@@ -2,9 +2,12 @@ extends Control
 class_name RollReceiptViewer
 
 # References
-@onready var tree: Tree = get_node( "Panel/VBoxContainer/Tree" )
+@onready var tree: Tree = $VBoxContainer/Tree
 @export var disabled_icon: Texture2D
 @export var locked_icon: Texture2D
+
+# Constant
+signal closed
 
 func _input( event: InputEvent ):
 	if !visible: return
@@ -48,3 +51,4 @@ func close_receipt():
 
 func _on_exit_button_pressed():
 	close_receipt()
+	closed.emit()

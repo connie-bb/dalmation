@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 class_name RollHistoryPanel
 
 # References
@@ -9,11 +9,22 @@ var row_resource: Resource = preload("res://gui/roll_history_panel_row.tscn")
 signal replay_pressed( receipt: RollReceipt )
 signal delete_pressed( receipt: RollReceipt )
 signal expand_pressed( receipt: RollReceipt )
+signal exit_pressed()
+signal clear_pressed()
 
 func _ready():
 	# Remove placeholder rows
 	for row in table.get_children():
 		row.queue_free()
+	hide_history()
+
+func show_history():
+	visible = true
+	mouse_filter = MOUSE_FILTER_STOP
+	
+func hide_history():
+	visible = false
+	mouse_filter = MOUSE_FILTER_IGNORE
 
 func add_row( receipt: RollReceipt ):
 	var row: RollHistoryPanelRow = row_resource.instantiate()
@@ -36,3 +47,7 @@ func _on_row_delete_pressed( receipt: RollReceipt ):
 
 func _on_row_expand_pressed( receipt ):
 	expand_pressed.emit( receipt )
+	hide_history()
+
+func _on_exit_button_pressed():
+	exit_pressed.emit()

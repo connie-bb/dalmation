@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bilaihhnfqonk"]
+
+[ext_resource type="Script" uid="uid://0td3uoyaqiy7" path="res://gui/die_button.gd" id="1_0k3yf"]
+[ext_resource type="Texture2D" uid="uid://da5ibbo4fxmyi" path="res://gui/icons/d4.png" id="2_fg5hk"]
+
+[node name="DieButton" type="VBoxContainer"]
+script = ExtResource("1_0k3yf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("2_fg5hk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 33
+text = "0"

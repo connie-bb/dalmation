@@ -1,47 +1,32 @@
-extends PanelContainer
+extends Control
 class_name RollEditorPanel
 
 # References
 @export var roll_editor: RollEditor
-@onready var table: Control = $VBoxContainer/ScrollContainer/table
-var row_resource: Resource = preload( "res://gui/roll_editor_panel/roll_editor_row.tscn" )
-@onready var modifier_spinbox: SpinBox = $VBoxContainer/HBoxContainer/modifier_spinbox
+@onready var modifier_button: ModifierButton = $bottom_row/modifier_button
+
+@export var die_buttons: Dictionary[ Die.TYPES, DieButton ]
 
 # Constant
-signal modifier_changed( modifier: int )
-signal modifier_post_roll( modifier: int )
-signal cleared
+signal clear_pressed
 
 func _ready():
 	if roll_editor == null:
 		push_warning( "RollEditorPanel has no assigned RollEditor." )
-	for row in table.get_children():
-		row.queue_free()	# Remove placeholders
-
-func add_row( die_type: Die.TYPES, count: int ):
-	var row: RollEditorRow = row_resource.instantiate()
-	table.add_child( row )
+	assert( die_buttons.size() == 7, "RollEditorPanel must have 7 DieButtons assigned." )
 	
-	row.die_type = die_type
-	row.type_label.text = Utils.DIE_TYPE_TO_STRING[ die_type ]
-	row.count_spinbox.value = count
-	
-	if roll_editor != null:
-		row.count_changed.connect( roll_editor.set_count )
-		row.delete_pressed.connect( roll_editor.remove_die )
+	if roll_editor == null: return
+	for die_type in Die.TYPES.values():
+		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
+		die_buttons[ die_type ].increment_pressed.connect( roll_editor.add_die )
+		die_buttons[ die_type ].decrement_pressed.connect( roll_editor.subtract_die )
+		die_buttons[ die_type ].clear_pressed.connect( roll_editor.remove_die )
 
 func update( request: RollRequest ):
-	for row: RollEditorRow in table.get_children():
-		row.queue_free()
 	for die_type: Die.TYPES in request.die_counts.keys():
-		add_row( die_type, request.die_counts[ die_type ] )
-	modifier_spinbox.value = request.modifier
-	
-func _on_clear_button_pressed():
-	cleared.emit()
-	
-func _on_modifier_spinbox_value_changed( value ):
-	modifier_changed.emit( value )
+		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
+		die_buttons[ die_type ].update( request.die_counts[ die_type ] )
+	modifier_button.update( request.modifier )		
 
-func _on_modifier_post_roll_button_pressed():
-	modifier_post_roll.emit( roll_editor.request.modifier )
+func _on_clear_button_pressed():
+	clear_pressed.emit()

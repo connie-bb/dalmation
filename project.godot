@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dalmation"
-run/main_scene="uid://crtr7u4d5fagv"
+run/main_scene="uid://kjwii3dmxeqk"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="dalmation"
 config/features=PackedStringArray("4.4", "Forward Plus")
@@ -32,9 +32,8 @@ file_logging/log_path="user://logs/dalmation.log"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=640
-window/size/resizable=false
+window/size/viewport_width=360
+window/size/viewport_height=720
 
 [editor_plugins]
 

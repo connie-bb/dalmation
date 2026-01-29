@@ -1,17 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://brhhb2juwnmcd"]
+[gd_scene load_steps=5 format=3 uid="uid://brhhb2juwnmcd"]
 
 [ext_resource type="Script" uid="uid://cewrxsgewmuou" path="res://gui/roll_history_panel.gd" id="1_83wuu"]
 [ext_resource type="PackedScene" uid="uid://k74d0w4efxnw" path="res://gui/roll_history_panel_row.tscn" id="1_tsd3m"]
+[ext_resource type="Texture2D" uid="uid://d1owem5ltm4mo" path="res://gui/icons/trash.png" id="2_w6q0p"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="3_8qxdy"]
 
-[node name="history" type="Panel"]
-custom_minimum_size = Vector2(235, 112.2)
+[node name="roll_history_panel" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = 13.0
-offset_right = -231.0
-offset_bottom = -516.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_83wuu")
@@ -24,11 +22,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="clear_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("2_w6q0p")
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 31
 text = "HISTORY"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="exit_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("3_8qxdy")
+expand_icon = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -44,3 +63,5 @@ size_flags_vertical = 3
 
 [node name="history_row" parent="VBoxContainer/ScrollContainer/table" instance=ExtResource("1_tsd3m")]
 layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_button_pressed"]

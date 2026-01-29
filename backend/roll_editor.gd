@@ -29,6 +29,14 @@ func remove_die( type: Die.TYPES ):
 	request.remove_die( type )
 	changed.emit( request )
 
+func increment_modifier():
+	request.increment_modifier()
+	changed.emit( request )
+
+func decrement_modifier():
+	request.decrement_modifier()
+	changed.emit( request )
+
 func set_modifier( modifier: int ):
 	request.set_modifier( modifier )
 	changed.emit( request )

@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="3_ryguw"]
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="6_w48qg"]
-[ext_resource type="Script" uid="uid://dxnh6enflejgm" path="res://gui/score_panel.gd" id="9_getpj"]
 [ext_resource type="Texture2D" uid="uid://clbsxfowrf5lw" path="res://gui/icons/exit.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="10_efxa6"]
 [ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/roll_history_panel.tscn" id="10_yaehf"]
@@ -107,6 +106,17 @@ pressed = true
 
 [sub_resource type="Shortcut" id="Shortcut_272bh"]
 events = [SubResource("InputEventAction_7mycd")]
+
+[sub_resource type="GDScript" id="GDScript_ryguw"]
+script/source = "extends Panel
+class_name ScorePanel
+
+# References
+@onready var score_label: Label = $VBoxContainer/score_label
+
+func display( score: int ):
+	score_label.text = str( score )
+"
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -279,7 +289,7 @@ anchor_right = 0.75625
 anchor_bottom = 0.196875
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("9_getpj")
+script = SubResource("GDScript_ryguw")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/score_panel"]
@@ -310,8 +320,6 @@ anchor_left = 0.0291667
 anchor_top = 0.015625
 anchor_right = 0.519167
 anchor_bottom = 0.19825
-offset_left = 0.0
-offset_top = 0.0
 offset_right = -0.200012
 offset_bottom = 0.119995
 grow_horizontal = 1
@@ -478,7 +486,4 @@ visible = false
 [connection signal="replay_pressed" from="GUI/roll_history_panel" to="roll_history" method="replay"]
 [connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
 [connection signal="pressed" from="GUI/help_button" to="GUI/help_menu" method="open_help"]
-[connection signal="cleared" from="GUI/roll_editor_panel" to="roll_editor" method="clear"]
-[connection signal="modifier_changed" from="GUI/roll_editor_panel" to="roll_editor" method="set_modifier"]
-[connection signal="modifier_post_roll" from="GUI/roll_editor_panel" to="dice_roller" method="update_modifier"]
 [connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
