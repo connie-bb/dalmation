@@ -28,9 +28,6 @@
 [ext_resource type="Script" uid="uid://cfsbgbrm1568s" path="res://gui/background_dimmer.gd" id="26_7pb30"]
 [ext_resource type="Script" uid="uid://b8gjjdii4rvf1" path="res://gui/alert.gd" id="26_hsq3r"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
-points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
-
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
 panorama = ExtResource("3_32ohb")
 
@@ -112,19 +109,14 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
+points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
+
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
 
 [node name="roll_editor" type="Node" parent="."]
 script = ExtResource("1_gw0eo")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.684419, 0.729089, 0, -0.729089, 0.684419, 0, 7.90969, 11.6302)
-
-[node name="camera_bounds" type="CollisionShape3D" parent="Camera3D"]
-transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_w48qg")
-debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
 
 [node name="roll_history" type="Node" parent="."]
 script = ExtResource("2_4jwux")
@@ -262,9 +254,11 @@ mouse_filter = 1
 [node name="bottom_panel" type="Panel" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.452778
+anchor_top = 0.493056
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.00139
+offset_top = 5.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -276,6 +270,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer"]
 layout_mode = 2
@@ -391,6 +386,9 @@ die_type = 5
 
 [node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d20_die_button" index="0"]
 texture = ExtResource("19_nwcut")
+
+[node name="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d20_die_button" index="1"]
+size_flags_stretch_ratio = 0.81
 
 [node name="d100_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
@@ -512,6 +510,29 @@ grow_vertical = 2
 [node name="alert_label" type="Label" parent="GUI/alert/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GUI/SubViewportContainer"]
+handle_input_locally = false
+physics_object_picking = true
+physics_object_picking_sort = true
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="GUI/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.731354, 0.681998, 0, -0.681998, 0.731354, 0, 8, 8)
+fov = 55.0
+
+[node name="camera_bounds" type="CollisionShape3D" parent="GUI/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_w48qg")
+debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
 
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
