@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=49 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -25,6 +25,8 @@
 [ext_resource type="Script" uid="uid://brf7o5rhn3fu3" path="res://gui/history_menu.gd" id="23_32ohb"]
 [ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/roll_history_panel.tscn" id="24_hsq3r"]
 [ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/roll_receipt_viewer.tscn" id="25_7pb30"]
+[ext_resource type="Script" uid="uid://cfsbgbrm1568s" path="res://gui/background_dimmer.gd" id="26_7pb30"]
+[ext_resource type="Script" uid="uid://b8gjjdii4rvf1" path="res://gui/alert.gd" id="26_hsq3r"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
@@ -102,6 +104,13 @@ roughness = 0.42
 [sub_resource type="BoxMesh" id="BoxMesh_074og"]
 material = SubResource("StandardMaterial3D_yaehf")
 size = Vector3(3, 3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32ohb"]
+bg_color = Color(0.632764, 0.603578, 0.463239, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -450,12 +459,67 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="background_dimmer" type="Control" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_7pb30")
+
+[node name="ColorRect" type="ColorRect" parent="GUI/background_dimmer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.745098)
+
+[node name="alert" type="Control" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 252.0
+offset_right = -44.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_hsq3r")
+
+[node name="Panel" type="Panel" parent="GUI/alert"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_32ohb")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/alert/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="alert_label" type="Label" parent="GUI/alert/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
 [connection signal="entry_added" from="roll_history" to="GUI/history_menu/Panel/roll_history_panel" method="add_row"]
 [connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
 [connection signal="die_locked" from="dice_roller" to="roll_editor" method="subtract_die"]
 [connection signal="die_unlocked" from="dice_roller" to="roll_editor" method="add_die"]
+[connection signal="error_with_roll" from="dice_roller" to="GUI/alert" method="show_alert"]
 [connection signal="old_roll_done" from="dice_roller" to="roll_history" method="add_entry"]
 [connection signal="scoring_requested" from="dice_roller" to="score_counter" method="count_score"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
@@ -475,6 +539,9 @@ layout_mode = 1
 [connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="replay"]
 [connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu" unbinds=1]
 [connection signal="closed" from="GUI/history_menu/Panel/roll_receipt_viewer" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
+[connection signal="clicked" from="GUI/background_dimmer" to="GUI/alert" method="hide_alert"]
+[connection signal="alert_hidden" from="GUI/alert" to="GUI/background_dimmer" method="hide_dimmer"]
+[connection signal="alert_shown" from="GUI/alert" to="GUI/background_dimmer" method="show_dimmer"]
 
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d6_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d8_die_button"]
