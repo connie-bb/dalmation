@@ -468,6 +468,7 @@ layout_mode = 1
 [connection signal="decrement_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="decrement_modifier"]
 [connection signal="increment_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="increment_modifier"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button" to="roll_editor" method="finalize"]
+[connection signal="clear_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="clear"]
 [connection signal="delete_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="remove_entry"]
 [connection signal="exit_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu"]
 [connection signal="expand_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu/Panel/roll_receipt_viewer" method="open_receipt"]

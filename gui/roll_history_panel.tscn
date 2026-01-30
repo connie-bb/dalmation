@@ -64,4 +64,5 @@ size_flags_vertical = 3
 [node name="history_row" parent="VBoxContainer/ScrollContainer/table" instance=ExtResource("1_tsd3m")]
 layout_mode = 2
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/clear_button" to="." method="_on_clear_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/exit_button" to="." method="_on_exit_button_pressed"]

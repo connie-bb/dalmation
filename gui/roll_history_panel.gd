@@ -51,3 +51,8 @@ func _on_row_expand_pressed( receipt ):
 
 func _on_exit_button_pressed():
 	exit_pressed.emit()
+
+func _on_clear_button_pressed():
+	for row in table.get_children():
+		row.queue_free()
+	clear_pressed.emit()

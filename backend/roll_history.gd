@@ -19,5 +19,8 @@ func remove_entry( receipt: RollReceipt ):
 	entry_removed.emit( receipt )
 	receipt.delete()
 
+func clear():
+	entries.clear()
+
 func replay( receipt: RollReceipt ):
 	replay_requested.emit( receipt )
