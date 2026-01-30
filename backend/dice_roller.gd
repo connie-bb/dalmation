@@ -86,7 +86,7 @@ func roll_dice( request: RollRequest ):
 	
 	# --------------- No early returns allowed past this point.
 	
-	if state == STATES.SETTLED:
+	if state == STATES.SETTLED and !current_roll.is_empty():
 		# A previous roll exists, and has finished.
 		old_roll_done.emit( current_roll )
 		

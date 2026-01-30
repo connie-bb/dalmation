@@ -11,3 +11,6 @@ func delete():
 	for die in die_list:
 		die.delete()
 	free.call_deferred()
+	
+func is_empty() -> bool:
+	return die_list.is_empty()
