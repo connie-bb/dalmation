@@ -74,7 +74,8 @@ func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
 	for die_type in request.die_counts.keys():
 		total_dice += request.die_counts[ die_type ]
-		if die_type == Die.TYPES.D_PERCENTILE_10S:
+		if die_type == Die.TYPES.D_PERCENTILE_10S \
+		and request.die_counts[ die_type ] > 0:
 			total_dice += 1 # We'll spawn a D_PERCENTILE_1s in addition.
 	if total_dice == 0: return
 	if total_dice > Settings.max_dice:
