@@ -49,7 +49,7 @@ size = Vector3(19, 2, 17)
 size = Vector3(11, 2, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2cqfq"]
-size = Vector3(19, 2, 23)
+size = Vector3(12.7275, 2, 15.3787)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
 size = Vector3(11, 7, 2)
@@ -57,11 +57,11 @@ size = Vector3(11, 7, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
 size = Vector3(19, 7, 2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
-size = Vector3(2, 7, 22)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
-size = Vector3(2, 7, 22)
+size = Vector3(2, 7, 16.4167)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7pb30"]
+size = Vector3(2, 7, 16.3911)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ycdy4"]
 size = Vector3(24.255, 1, 25.905)
@@ -102,15 +102,15 @@ roughness = 0.42
 material = SubResource("StandardMaterial3D_yaehf")
 size = Vector3(3, 3, 3)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
+points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32ohb"]
 bg_color = Color(0.632764, 0.603578, 0.463239, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
-points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -137,37 +137,37 @@ input_ray_pickable = false
 [node name="floor" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, -0.507976, -0.976288)
 shape = SubResource("BoxShape3D_0xm2m")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.540918, 0.580645, 1.15514e-06, 1)
 
 [node name="ramp" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.0251384, 0.811247, 5.99411)
 shape = SubResource("BoxShape3D_vivmo")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.685584, 0.753505, 0, 1)
 
 [node name="ceil" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 6.49202, 2.02371)
+transform = Transform3D(0.999983, 0, 0, 0, 0.999983, 0, 0, 0, 0.999983, 0.0251384, 6.49202, 2.02371)
 shape = SubResource("BoxShape3D_2cqfq")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.618431, 0.626491, 0, 1)
 
 [node name="near_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, 8.5237)
 shape = SubResource("BoxShape3D_074og")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.299099, 0.36011, 1, 1)
 
 [node name="back_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.77064)
 shape = SubResource("BoxShape3D_w48qg")
-debug_color = Color(0.839216, 0, 0.423529, 1)
-
-[node name="left_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -4.71424, 2.992, 2.04862)
-shape = SubResource("BoxShape3D_yaehf")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.331994, 0.411547, 1, 1)
 
 [node name="right_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 4.71424, 2.992, 2.04862)
+transform = Transform3D(0.999989, 0, 0, 0, 0.999989, 0, 0, 0, 0.999989, 4.48066, 2.992, 2.08325)
 shape = SubResource("BoxShape3D_ycdy4")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.243351, 0.375913, 1, 1)
+
+[node name="left_wall" type="CollisionShape3D" parent="env/collisions"]
+transform = Transform3D(0.999993, 0, 0, 0, 0.999993, 0, 0, 0, 0.999993, -4.50661, 2.992, 2.01354)
+shape = SubResource("BoxShape3D_7pb30")
+debug_color = Color(0.243351, 0.375913, 1, 1)
 
 [node name="toybox" parent="env" instance=ExtResource("4_hsq3r")]
 
@@ -207,7 +207,7 @@ transform = Transform3D(0.522286, 0, -0.351438, 0, 0.629517, 0, 0.351438, 0, 0.5
 mesh = SubResource("BoxMesh_074og")
 
 [node name="dice_roller" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294, 3.19605, 10.2044)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294, 4.16051, 8.92048)
 script = ExtResource("5_7pb30")
 
 [node name="spawnable_dice" parent="dice_roller" instance=ExtResource("6_hob12")]
@@ -250,6 +250,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="GUI/SubViewportContainer"]
+handle_input_locally = false
+physics_object_picking = true
+physics_object_picking_sort = true
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="GUI/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.6, 8)
+fov = 55.0
+
+[node name="camera_bounds" type="CollisionShape3D" parent="GUI/SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_w48qg")
+debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
 
 [node name="bottom_panel" type="Panel" parent="GUI"]
 layout_mode = 1
@@ -510,29 +533,6 @@ grow_vertical = 2
 [node name="alert_label" type="Label" parent="GUI/alert/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="GUI"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.5
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="GUI/SubViewportContainer"]
-handle_input_locally = false
-physics_object_picking = true
-physics_object_picking_sort = true
-size = Vector2i(360, 360)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="GUI/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.731354, 0.681998, 0, -0.681998, 0.731354, 0, 8, 8)
-fov = 55.0
-
-[node name="camera_bounds" type="CollisionShape3D" parent="GUI/SubViewportContainer/SubViewport/Camera3D"]
-transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_w48qg")
-debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
 
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
