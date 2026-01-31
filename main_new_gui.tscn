@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=50 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="8_w6b18"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="9_k6bty"]
 [ext_resource type="Texture2D" uid="uid://d1owem5ltm4mo" path="res://gui/icons/trash.png" id="10_hla7c"]
+[ext_resource type="Script" uid="uid://c52xqkn0hid8t" path="res://gui/resize_viewport.gd" id="10_hob12"]
 [ext_resource type="Script" uid="uid://3ue3bxcek8pg" path="res://gui/score_label.gd" id="13_4jwux"]
 [ext_resource type="Texture2D" uid="uid://bf4sqt1io0gxp" path="res://gui/icons/hamburger_menu.png" id="13_gw0eo"]
 [ext_resource type="PackedScene" uid="uid://bilaihhnfqonk" path="res://gui/die_button.tscn" id="14_4jwux"]
@@ -257,6 +258,7 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.5
 stretch = true
+script = ExtResource("10_hob12")
 
 [node name="SubViewport" type="SubViewport" parent="GUI/SubViewportContainer"]
 handle_input_locally = false
