@@ -90,11 +90,11 @@ func update_score():
 		mesh_data_tool.get_face_vertex( hit.face_index, 0 ) )
 	score = snapped( score_rgb.r, 0.05 ) * 20
 	
-	if die_type == Die.TYPES.D_PERCENTILE_10S:
-		if score == 10: score = 0	# It's a '00'
+	if die_type == Die.TYPES.D100:
 		score *= 10
-	elif die_type == Die.TYPES.D_PERCENTILE_1S:
-		if score == 10: score = 0	# it's a '0'
+	
+	if Settings.d10_count_0_as_10 and die_type == Die.TYPES.D10 and score == 0:
+		score = 10
 	
 func delete():
 	queue_free()

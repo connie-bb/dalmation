@@ -23,8 +23,5 @@ surface_material_override/0 = ExtResource("2_kmxy2")
 [node name="d20" parent="." index="5"]
 surface_material_override/0 = ExtResource("2_kmxy2")
 
-[node name="d_percentile_10s" parent="." index="6"]
-surface_material_override/0 = ExtResource("2_kmxy2")
-
-[node name="d_percentile_1s" parent="." index="7"]
+[node name="d100" parent="." index="6"]
 surface_material_override/0 = ExtResource("2_kmxy2")

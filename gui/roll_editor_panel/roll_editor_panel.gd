@@ -17,14 +17,12 @@ func _ready():
 	
 	if roll_editor == null: return
 	for die_type in Die.TYPES.values():
-		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
 		die_buttons[ die_type ].increment_pressed.connect( roll_editor.add_die )
 		die_buttons[ die_type ].decrement_pressed.connect( roll_editor.subtract_die )
 		die_buttons[ die_type ].clear_pressed.connect( roll_editor.remove_die )
 
 func update( request: RollRequest ):
 	for die_type: Die.TYPES in request.die_counts.keys():
-		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
 		die_buttons[ die_type ].update( request.die_counts[ die_type ] )
 	modifier_button.update( request.modifier )		
 

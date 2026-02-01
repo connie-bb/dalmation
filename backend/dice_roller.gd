@@ -74,9 +74,6 @@ func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
 	for die_type in request.die_counts.keys():
 		total_dice += request.die_counts[ die_type ]
-		if die_type == Die.TYPES.D_PERCENTILE_10S \
-		and request.die_counts[ die_type ] > 0:
-			total_dice += 1 # We'll spawn a D_PERCENTILE_1s in addition.
 	if total_dice == 0: return
 	if total_dice > Settings.max_dice:
 		var err_string = "Max of " + str( Settings.max_dice ) \
@@ -111,8 +108,6 @@ func roll_dice( request: RollRequest ):
 	for die_type in request.die_counts.keys():
 		for i in request.die_counts[ die_type ]:
 			spawnlist.append( die_type )
-			if die_type == Die.TYPES.D_PERCENTILE_10S:
-				spawnlist.append( Die.TYPES.D_PERCENTILE_1S )
 	# I miss C style brackets...
 	current_roll.modifier = request.modifier
 	roll_handful_of_dice()

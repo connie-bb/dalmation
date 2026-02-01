@@ -8,7 +8,7 @@ var die_counts: Dictionary[ Die.TYPES, int ] = {
 	Die.TYPES.D10: 0,
 	Die.TYPES.D12: 0,
 	Die.TYPES.D20: 0,
-	Die.TYPES.D_PERCENTILE_10S: 0,
+	Die.TYPES.D100: 0,
 }
 var modifier: int = 0
 
@@ -54,7 +54,6 @@ func as_string() -> String:
 	var result: String = ""
 	
 	for die_type: Die.TYPES in die_counts.keys():
-		if die_type == Die.TYPES.D_PERCENTILE_1S: continue
 		if die_counts[ die_type ] == 0: continue
 		result += str( die_counts[ die_type ] )
 		result += Utils.DIE_TYPE_TO_STRING[ die_type ]
