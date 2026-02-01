@@ -38,6 +38,13 @@ func open_receipt( receipt: RollReceipt ):
 		if die.disabled: row.set_icon( 2, disabled_icon )
 		if die.is_holdover: row.set_icon( 3, locked_icon )
 		
+	var modifier_row = tree.create_item()
+	modifier_row.set_text( 0, "Mod" )
+	var modifier_string = str( receipt.modifier )
+	if receipt.modifier > 0:
+		modifier_string = "+" + modifier_string
+	modifier_row.set_text( 1, modifier_string )
+	
 	var total_row = tree.create_item()
 	total_row.set_text( 0, "Total" )
 	total_row.set_text( 1, str( receipt.score ) )
