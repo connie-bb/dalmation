@@ -145,6 +145,22 @@ func settle():
 	roll_max_timer.stop()
 	request_scoring()
 	
+func clear_board():
+	if state == STATES.ROLLING:
+		roll_warmup_timer.stop()
+		roll_handful_timer.stop()
+		roll_max_timer.stop()
+	elif state == STATES.SETTLED:
+		old_roll_done.emit( current_roll )
+		
+	state = STATES.IDLE
+	current_roll.delete()
+	current_roll = Roll.new()
+		
+	for die: PhysicalDie in active_dice.get_children():
+		die.delete()
+		
+		
 func request_scoring():
 	scoring_requested.emit( current_roll )
 	
