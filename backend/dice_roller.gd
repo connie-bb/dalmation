@@ -74,6 +74,9 @@ func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
 	for die_type in request.die_counts.keys():
 		total_dice += request.die_counts[ die_type ]
+	for die: PhysicalDie in get_active_dice():
+		if die.locked:
+			total_dice += 1
 	if total_dice == 0: return
 	if total_dice > Settings.max_dice:
 		var err_string = "Max of " + str( Settings.max_dice ) \
