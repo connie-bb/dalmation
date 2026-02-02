@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://idjtsx48j57c"]
+[gd_scene load_steps=6 format=3 uid="uid://idjtsx48j57c"]
 
 [ext_resource type="Script" uid="uid://7qol1onovhvi" path="res://dice/physical_die.gd" id="1_3clpv"]
 [ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_ygxgw"]
 [ext_resource type="Texture2D" uid="uid://cu4qcobv18o0j" path="res://gui/icons/lock.png" id="3_ygxgw"]
+[ext_resource type="Texture2D" uid="uid://7cu684dnvp27" path="res://gui/icons/score_circle.png" id="4_782mw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.3
@@ -28,6 +29,21 @@ collision_mask = 0
 [node name="score_collision" type="CollisionShape3D" parent="score_area"]
 
 [node name="physics_collision" type="CollisionShape3D" parent="."]
+
+[node name="score_sprite" type="Sprite3D" parent="."]
+visible = false
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+texture = ExtResource("4_782mw")
+
+[node name="score_label" type="Label3D" parent="score_sprite"]
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+render_priority = 4
+text = "90"
+font_size = 67
 
 [node name="disabled_sprite" type="Sprite3D" parent="."]
 visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=54 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -14,10 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://dwgpv31ymdegs" path="res://gui/icons/blank_paper.png" id="12_nwcut"]
 [ext_resource type="Script" uid="uid://3ue3bxcek8pg" path="res://gui/score_label.gd" id="13_4jwux"]
 [ext_resource type="Texture2D" uid="uid://bf4sqt1io0gxp" path="res://gui/icons/hamburger_menu.png" id="13_gw0eo"]
+[ext_resource type="Texture2D" uid="uid://bsn7vbld0f6jn" path="res://gui/icons/eye.png" id="13_w6b18"]
 [ext_resource type="PackedScene" uid="uid://bilaihhnfqonk" path="res://gui/die_button.tscn" id="14_4jwux"]
 [ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="14_coh5o"]
+[ext_resource type="Script" uid="uid://dohvloya8v17v" path="res://gui/show_die_scores_button.gd" id="14_k6bty"]
 [ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/roll_editor_panel/roll_editor_panel.gd" id="14_p0y23"]
 [ext_resource type="Texture2D" uid="uid://ccaquwst0suip" path="res://gui/icons/d6.png" id="15_32ohb"]
+[ext_resource type="Texture2D" uid="uid://yuyqsp6p5u8o" path="res://gui/icons/eye_off.png" id="15_pmmu8"]
 [ext_resource type="Texture2D" uid="uid://iheo1d5ii1xb" path="res://gui/icons/d8.png" id="16_hsq3r"]
 [ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="17_7pb30"]
 [ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="18_hob12"]
@@ -330,6 +333,25 @@ offset_bottom = 20.0
 grow_vertical = 2
 icon = ExtResource("12_nwcut")
 
+[node name="show_die_scores_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -20.0
+offset_right = -61.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("15_pmmu8")
+script = ExtResource("14_k6bty")
+shown_icon = ExtResource("13_w6b18")
+hidden_icon = ExtResource("15_pmmu8")
+
 [node name="score_label" type="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
 layout_mode = 1
 anchors_preset = 8
@@ -564,6 +586,7 @@ size_flags_horizontal = 4
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/score_label" method="display"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="dice_roller" method="clear_board"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="dice_roller" method="toggle_die_score_visibility"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu" method="show_menu"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/delete_button" to="roll_editor" method="clear"]

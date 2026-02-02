@@ -12,6 +12,8 @@ class_name PhysicalDie
 @onready var physics_collision: CollisionShape3D = $physics_collision
 @onready var disabled_sprite: Sprite3D = $disabled_sprite
 @onready var locked_sprite: Sprite3D = $locked_sprite
+@onready var score_sprite: Sprite3D = $score_sprite
+@onready var score_label: Label3D = $score_sprite/score_label
 var mesh_data_tool: MeshDataTool
 
 # Variable
@@ -95,6 +97,13 @@ func update_score():
 	
 	if Settings.d10_count_0_as_10 and die_type == Die.TYPES.D10 and score == 0:
 		score = 10
+		
+func show_score():
+	score_sprite.visible = true
+	score_label.text = str( score )
+	
+func hide_score():
+	score_sprite.visible = false
 	
 func delete():
 	queue_free()

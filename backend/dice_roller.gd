@@ -5,6 +5,7 @@ class_name DiceRoller
 var state: STATES = STATES.IDLE
 var current_roll: Roll
 var spawnlist: Array[ Die.TYPES ]
+var die_scores_visible: bool = false
 
 # Configurable
 var min_velocity: float = 18.0
@@ -89,6 +90,7 @@ func roll_dice( request: RollRequest ):
 	
 	if state == STATES.SETTLED and !current_roll.is_empty():
 		# A previous roll exists, and has finished.
+		hide_die_scores()
 		old_roll_done.emit( current_roll )
 		
 	remove_active_dice()
@@ -147,6 +149,7 @@ func settle():
 	state = STATES.SETTLED
 	roll_max_timer.stop()
 	request_scoring()
+	if die_scores_visible: show_die_scores()
 	
 func clear_board():
 	if state == STATES.ROLLING:
@@ -154,6 +157,7 @@ func clear_board():
 		roll_handful_timer.stop()
 		roll_max_timer.stop()
 	elif state == STATES.SETTLED:
+		hide_die_scores()
 		old_roll_done.emit( current_roll )
 		
 	state = STATES.IDLE
@@ -162,7 +166,21 @@ func clear_board():
 		
 	for die: PhysicalDie in active_dice.get_children():
 		die.delete()
+
+func toggle_die_score_visibility():
+	die_scores_visible = !die_scores_visible
+	if die_scores_visible and state == STATES.SETTLED:
+		show_die_scores()
+	if !die_scores_visible and state == STATES.SETTLED:
+		hide_die_scores()
+
+func show_die_scores():
+	for die: PhysicalDie in get_active_dice():
+		die.show_score()
 		
+func hide_die_scores():
+	for die: PhysicalDie in get_active_dice():
+		die.hide_score()
 		
 func request_scoring():
 	scoring_requested.emit( current_roll )
