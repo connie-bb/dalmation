@@ -318,6 +318,7 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
+disabled = true
 icon = ExtResource("14_coh5o")
 
 [node name="clear_board_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
