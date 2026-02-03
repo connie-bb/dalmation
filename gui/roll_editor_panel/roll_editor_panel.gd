@@ -19,7 +19,6 @@ func _ready():
 	for die_type in Die.TYPES.values():
 		die_buttons[ die_type ].increment_pressed.connect( roll_editor.add_die )
 		die_buttons[ die_type ].decrement_pressed.connect( roll_editor.subtract_die )
-		die_buttons[ die_type ].clear_pressed.connect( roll_editor.remove_die )
 
 func update( request: RollRequest ):
 	for die_type: Die.TYPES in request.die_counts.keys():

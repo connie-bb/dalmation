@@ -474,14 +474,15 @@ expand_icon = true
 [node name="seperator2" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
 
 [node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row" instance=ExtResource("21_k6bty")]
 layout_mode = 2
-mouse_filter = 0
 
 [node name="seperator" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
 
 [node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
 layout_mode = 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bilaihhnfqonk"]
+[gd_scene load_steps=4 format=3 uid="uid://bilaihhnfqonk"]
 
 [ext_resource type="Script" uid="uid://0td3uoyaqiy7" path="res://gui/die_button.gd" id="1_0k3yf"]
 [ext_resource type="Texture2D" uid="uid://da5ibbo4fxmyi" path="res://gui/icons/d4.png" id="2_fg5hk"]
+[ext_resource type="Script" uid="uid://dbjvjk081lfgj" path="res://gui/long_press_button.gd" id="3_fg5hk"]
 
 [node name="DieButton" type="Control"]
 custom_minimum_size = Vector2(70, 100)
@@ -27,3 +28,18 @@ offset_bottom = 102.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 33
 text = "0"
+
+[node name="LongPressButton" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_fg5hk")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[connection signal="long_pressed" from="LongPressButton" to="." method="_on_long_press"]
+[connection signal="scrolled_down" from="LongPressButton" to="." method="_on_scrolled_down"]
+[connection signal="scrolled_up" from="LongPressButton" to="." method="_on_scrolled_up"]
+[connection signal="short_pressed" from="LongPressButton" to="." method="_on_short_press"]

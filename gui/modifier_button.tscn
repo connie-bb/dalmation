@@ -1,34 +1,119 @@
-[gd_scene load_steps=2 format=3 uid="uid://dawwr1mxams3w"]
+[gd_scene load_steps=3 format=3 uid="uid://dawwr1mxams3w"]
 
 [ext_resource type="Script" uid="uid://bdro3acgkkblm" path="res://gui/modifier_button.gd" id="1_aj6vy"]
+[ext_resource type="Script" uid="uid://dbjvjk081lfgj" path="res://gui/long_press_button.gd" id="2_c6yvr"]
 
-[node name="modifier_button" type="HBoxContainer"]
+[node name="modifier_button" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 110.0
+offset_bottom = 73.0
+size_flags_horizontal = 3
 script = ExtResource("1_aj6vy")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 2
-mouse_filter = 1
-text = "MOD"
-
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(66.985, 53.49)
-layout_mode = 2
-mouse_filter = 1
-
-[node name="Label" type="Label" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.5
-offset_top = -11.5
-offset_right = 9.5
-offset_bottom = 11.5
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.74
+offset_bottom = -0.0200005
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="minus_button" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/minus_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 53
+text = "-"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme_override_font_sizes/font_size = 28
 text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="plus_button" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="HBoxContainer/plus_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 53
+text = "+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LongPressButtonMinus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[node name="LongPressButtonPlus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -23.0
+offset_right = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+text = "MOD"
+horizontal_alignment = 1
+
+[connection signal="long_pressed" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_long_press_minus"]
+[connection signal="scrolled_down" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_scrolled_down"]
+[connection signal="scrolled_up" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_scrolled_up"]
+[connection signal="short_pressed" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_short_press_minus"]
+[connection signal="long_pressed" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_long_press_plus"]
+[connection signal="scrolled_down" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_scrolled_down"]
+[connection signal="scrolled_up" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_scrolled_up"]
+[connection signal="short_pressed" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_short_press_plus"]
