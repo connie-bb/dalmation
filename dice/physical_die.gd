@@ -15,6 +15,8 @@ class_name PhysicalDie
 @onready var score_sprite: Sprite3D = $score_sprite
 @onready var score_label: Label3D = $score_sprite/score_label
 var mesh_data_tool: MeshDataTool
+var long_press_timer: Timer
+var long_press_duration: float = 1.0
 
 # Variable
 var die_type: Die.TYPES
@@ -40,7 +42,12 @@ func _ready():
 	
 	mesh_data_tool = MeshDataTool.new()
 	mesh_data_tool.create_from_surface( mesh, 0 )
-
+	
+	long_press_timer = Timer.new()
+	long_press_timer.one_shot = true
+	add_child( long_press_timer )
+	long_press_timer.timeout.connect( _on_long_press_timeout )
+	long_press_duration = Settings.long_press_duration
 
 func toggle_disabled():
 	if disabled: enable()
@@ -113,10 +120,21 @@ func _on_score_area_input_event( _a, event: InputEvent, _b, _c, _d ):
 	var mouse_event: InputEventMouseButton = event
 	
 	if mouse_event.button_index == MOUSE_BUTTON_LEFT \
-	and mouse_event.pressed:
+	and mouse_event.is_pressed():
+		long_press_timer.start( long_press_duration )
+	
+	elif mouse_event.button_index == MOUSE_BUTTON_LEFT \
+	and mouse_event.is_released() \
+	and !long_press_timer.is_stopped():
+		long_press_timer.stop()
 		toggle_disabled()
 		disable_toggled.emit( self )
+	
 	elif mouse_event.button_index == MOUSE_BUTTON_RIGHT \
 	and mouse_event.pressed:
 		toggle_locked()
 		lock_toggled.emit( self )
+		
+func _on_long_press_timeout():
+	toggle_locked()
+	lock_toggled.emit( self )
