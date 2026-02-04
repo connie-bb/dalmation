@@ -40,6 +40,7 @@ func _gui_input( event: InputEvent ):
 		elif mouse_event.button_index == MOUSE_BUTTON_LEFT \
 		and mouse_event.is_released() \
 		and !long_press:
+			long_press_timer.stop()
 			short_pressed.emit()
 			
 		elif mouse_event.is_released() \
