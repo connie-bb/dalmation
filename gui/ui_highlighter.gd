@@ -1,7 +1,9 @@
 extends ColorRect
 class_name UIHighlighter
 
+# Configurable
 @export var target: Control
+const border_width: int = 2
 
 # References
 var window: Window
@@ -33,3 +35,7 @@ func set_rect( rect: Rect2i ):
 	var shader_material = material as ShaderMaterial
 	shader_material.set_shader_parameter( "top_left", rect.position )
 	shader_material.set_shader_parameter( "bottom_right", rect.position + rect.size )
+	shader_material.set_shader_parameter( "top_left_border", 
+		rect.position - Vector2i( border_width, border_width ) )
+	shader_material.set_shader_parameter( "bottom_right_border",
+		rect.position + rect.size + Vector2i( border_width, border_width ) )

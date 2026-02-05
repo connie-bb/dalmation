@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=66 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://di0q54cft8ydq" path="res://gui/icons/mouse_right_click.png" id="40_fh31r"]
 [ext_resource type="Texture2D" uid="uid://cql2j3r2dybpi" path="res://gui/icons/mouse_scroll_down.png" id="41_rqf6u"]
 [ext_resource type="Texture2D" uid="uid://8l1jjksu6ukp" path="res://gui/icons/mouse_scroll.png" id="42_rqf6u"]
+[ext_resource type="Texture2D" uid="uid://cqwbvip77m213" path="res://gui/icons/demo_dice.png" id="43_swk1u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
 panorama = ExtResource("3_32ohb")
@@ -130,8 +131,10 @@ corner_radius_bottom_left = 12
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0aik"]
 shader = ExtResource("33_io8dt")
 shader_parameter/dark_color = Color(0, 0, 0, 0.8)
-shader_parameter/top_left = Vector2i(10, 10)
-shader_parameter/bottom_right = Vector2i(100, 100)
+shader_parameter/top_left = Vector2(10, 10)
+shader_parameter/bottom_right = Vector2(100, 10)
+shader_parameter/top_left_border = Vector2(5, 5)
+shader_parameter/bottom_right_border = Vector2(105, 105)
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -595,7 +598,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="tutorial" type="Control" parent="GUI" node_paths=PackedStringArray("steps")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -876,13 +878,30 @@ script = ExtResource("36_roqoo")
 highlight_target = NodePath("highlight_the_top_part")
 
 [node name="highlight_the_top_part" type="Control" parent="GUI/tutorial/step_4"]
+custom_minimum_size = Vector2(260, 260)
 layout_mode = 1
-anchor_left = 0.111111
-anchor_top = 0.0555556
-anchor_right = 0.888889
-anchor_bottom = 0.444444
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.25
+offset_top = 16.56
 grow_horizontal = 2
-metadata/_edit_use_anchors_ = true
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/highlight_the_top_part"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -112.0
+offset_right = 111.5
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_swk1u")
 
 [node name="actual_content" type="Control" parent="GUI/tutorial/step_4"]
 layout_mode = 1
