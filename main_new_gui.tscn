@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=65 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -32,6 +32,16 @@
 [ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/roll_receipt_viewer.tscn" id="25_7pb30"]
 [ext_resource type="Script" uid="uid://cfsbgbrm1568s" path="res://gui/background_dimmer.gd" id="26_7pb30"]
 [ext_resource type="Script" uid="uid://b8gjjdii4rvf1" path="res://gui/alert.gd" id="26_hsq3r"]
+[ext_resource type="Script" uid="uid://dj5sgdsipwlnl" path="res://tutorial.gd" id="33_ho1c3"]
+[ext_resource type="Shader" uid="uid://dj8fu754vn70r" path="res://shaders/ui_highlighter.gdshader" id="33_io8dt"]
+[ext_resource type="Script" uid="uid://c2xanaa6obcp" path="res://gui/ui_highlighter.gd" id="34_h0aik"]
+[ext_resource type="Texture2D" uid="uid://ko8b5wu7h580" path="res://gui/icons/mouse_left_click.png" id="35_coh5o"]
+[ext_resource type="Texture2D" uid="uid://ct4jbhiid1m3y" path="res://gui/icons/mouse_scroll_up.png" id="36_eshcj"]
+[ext_resource type="Texture2D" uid="uid://b4d7taiekti6u" path="res://gui/icons/forward slash.png" id="36_ho1c3"]
+[ext_resource type="Script" uid="uid://bniuccu326tka" path="res://gui/tutorial_step.gd" id="36_roqoo"]
+[ext_resource type="Texture2D" uid="uid://di0q54cft8ydq" path="res://gui/icons/mouse_right_click.png" id="40_fh31r"]
+[ext_resource type="Texture2D" uid="uid://cql2j3r2dybpi" path="res://gui/icons/mouse_scroll_down.png" id="41_rqf6u"]
+[ext_resource type="Texture2D" uid="uid://8l1jjksu6ukp" path="res://gui/icons/mouse_scroll.png" id="42_rqf6u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
 panorama = ExtResource("3_32ohb")
@@ -116,6 +126,12 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0aik"]
+shader = ExtResource("33_io8dt")
+shader_parameter/dark_color = Color(0, 0, 0, 0.8)
+shader_parameter/top_left = Vector2i(10, 10)
+shader_parameter/bottom_right = Vector2i(100, 100)
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -394,69 +410,73 @@ size_flags_vertical = 3
 script = ExtResource("14_p0y23")
 roll_editor = NodePath("../../../../../roll_editor")
 die_buttons = {
-0: NodePath("dice_row_1/d4_die_button"),
-1: NodePath("dice_row_1/d6_die_button"),
-2: NodePath("dice_row_1/d8_die_button"),
-3: NodePath("dice_row_1/d10_die_button"),
-4: NodePath("dice_row_2/d12_die_button"),
-5: NodePath("dice_row_2/d20_die_button"),
-6: NodePath("dice_row_2/d100_die_button")
+0: NodePath("dice_rows/dice_row_1/d4_die_button"),
+1: NodePath("dice_rows/dice_row_1/d6_die_button"),
+2: NodePath("dice_rows/dice_row_1/d8_die_button"),
+3: NodePath("dice_rows/dice_row_1/d10_die_button"),
+4: NodePath("dice_rows/dice_row_2/d12_die_button"),
+5: NodePath("dice_rows/dice_row_2/d20_die_button"),
+6: NodePath("dice_rows/dice_row_2/d100_die_button")
 }
 
-[node name="dice_row_1" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+[node name="dice_rows" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="dice_row_1" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
 layout_mode = 2
 alignment = 1
 
-[node name="d4_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1" instance=ExtResource("14_4jwux")]
+[node name="d4_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 
-[node name="d6_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1" instance=ExtResource("14_4jwux")]
+[node name="d6_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 1
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d6_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button" index="0"]
 texture = ExtResource("15_32ohb")
 
-[node name="d8_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1" instance=ExtResource("14_4jwux")]
+[node name="d8_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 2
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d8_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button" index="0"]
 texture = ExtResource("16_hsq3r")
 
-[node name="d10_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1" instance=ExtResource("14_4jwux")]
+[node name="d10_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 3
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d10_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button" index="0"]
 texture = ExtResource("17_7pb30")
 
-[node name="dice_row_2" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+[node name="dice_row_2" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
 layout_mode = 2
 alignment = 1
 
-[node name="d12_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2" instance=ExtResource("14_4jwux")]
+[node name="d12_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 4
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d12_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button" index="0"]
 texture = ExtResource("18_hob12")
 
-[node name="d20_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2" instance=ExtResource("14_4jwux")]
+[node name="d20_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 5
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d20_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button" index="0"]
 texture = ExtResource("19_nwcut")
 
-[node name="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d20_die_button" index="1"]
+[node name="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button" index="1"]
 size_flags_stretch_ratio = 0.81
 
-[node name="d100_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2" instance=ExtResource("14_4jwux")]
+[node name="d100_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 6
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d100_die_button" index="0"]
+[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button" index="0"]
 texture = ExtResource("20_w6b18")
 
 [node name="bottom_row" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
@@ -574,6 +594,379 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="tutorial" type="Control" parent="GUI" node_paths=PackedStringArray("steps")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_ho1c3")
+steps = [NodePath("step_1"), NodePath("step_2"), NodePath("step_3"), NodePath("step_4")]
+
+[node name="ui_highlighter" type="ColorRect" parent="GUI/tutorial" node_paths=PackedStringArray("target")]
+material = SubResource("ShaderMaterial_h0aik")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_h0aik")
+target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/top_row")
+
+[node name="step_1" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("36_roqoo")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("35_coh5o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("36_eshcj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Add dice"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_1/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16.985)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/line_spacing = -10
+theme_override_font_sizes/font_size = 21
+text = "Press 
+and hold"
+horizontal_alignment = 1
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("40_fh31r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("41_rqf6u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Remove dice"
+horizontal_alignment = 1
+
+[node name="step_2" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("36_roqoo")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("35_coh5o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("42_rqf6u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Change modifier"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16.985)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press and hold to
+change faster"
+horizontal_alignment = 1
+
+[node name="step_3" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("36_roqoo")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("35_coh5o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Roll the dice !!"
+horizontal_alignment = 1
+
+[node name="step_4" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("36_roqoo")
+highlight_target = NodePath("highlight_the_top_part")
+
+[node name="highlight_the_top_part" type="Control" parent="GUI/tutorial/step_4"]
+layout_mode = 1
+anchor_left = 0.111111
+anchor_top = 0.0555556
+anchor_right = 0.888889
+anchor_bottom = 0.444444
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="actual_content" type="Control" parent="GUI/tutorial/step_4"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_4/actual_content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("35_coh5o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Disable dice"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32.765)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/line_spacing = -10
+theme_override_font_sizes/font_size = 23
+text = "Press
+and hold"
+horizontal_alignment = 1
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("36_ho1c3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("40_fh31r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Keep dice on the board"
+horizontal_alignment = 1
+
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
 [connection signal="entry_added" from="roll_history" to="GUI/history_menu/Panel/roll_history_panel" method="add_row"]
@@ -606,9 +999,9 @@ size_flags_horizontal = 4
 [connection signal="alert_hidden" from="GUI/alert" to="GUI/background_dimmer" method="hide_dimmer"]
 [connection signal="alert_shown" from="GUI/alert" to="GUI/background_dimmer" method="show_dimmer"]
 
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d6_die_button"]
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d8_die_button"]
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_1/d10_die_button"]
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d12_die_button"]
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d20_die_button"]
-[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_row_2/d100_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button"]
