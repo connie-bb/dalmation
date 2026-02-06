@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=67 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gw0eo"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_4jwux"]
@@ -43,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://cql2j3r2dybpi" path="res://gui/icons/mouse_scroll_down.png" id="41_rqf6u"]
 [ext_resource type="Texture2D" uid="uid://8l1jjksu6ukp" path="res://gui/icons/mouse_scroll.png" id="42_rqf6u"]
 [ext_resource type="Texture2D" uid="uid://cqwbvip77m213" path="res://gui/icons/demo_dice.png" id="43_swk1u"]
+[ext_resource type="PackedScene" uid="uid://blgmdm1c2cc2w" path="res://gui/settings_menu.tscn" id="44_hydhl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
 panorama = ExtResource("3_32ohb")
@@ -337,7 +338,6 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
-disabled = true
 icon = ExtResource("14_coh5o")
 
 [node name="clear_board_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
@@ -598,6 +598,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="tutorial" type="Control" parent="GUI" node_paths=PackedStringArray("steps")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -986,6 +987,10 @@ theme_override_font_sizes/font_size = 26
 text = "Keep dice on the board"
 horizontal_alignment = 1
 
+[node name="settings_menu" parent="GUI" instance=ExtResource("44_hydhl")]
+visible = false
+layout_mode = 1
+
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
 [connection signal="entry_added" from="roll_history" to="GUI/history_menu/Panel/roll_history_panel" method="add_row"]
@@ -999,6 +1004,7 @@ horizontal_alignment = 1
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
 [connection signal="score_counted" from="score_counter" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/score_label" method="display"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" to="GUI/settings_menu" method="open_settings"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="dice_roller" method="clear_board"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="dice_roller" method="toggle_die_score_visibility"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu" method="show_menu"]
@@ -1017,6 +1023,7 @@ horizontal_alignment = 1
 [connection signal="clicked" from="GUI/background_dimmer" to="GUI/alert" method="hide_alert"]
 [connection signal="alert_hidden" from="GUI/alert" to="GUI/background_dimmer" method="hide_dimmer"]
 [connection signal="alert_shown" from="GUI/alert" to="GUI/background_dimmer" method="show_dimmer"]
+[connection signal="show_tutorial_pressed" from="GUI/settings_menu" to="GUI/tutorial" method="start"]
 
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button"]

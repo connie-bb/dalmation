@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://blgmdm1c2cc2w"]
+
+[ext_resource type="Script" uid="uid://dytbi5cf3lhfg" path="res://gui/settings_menu.gd" id="1_oq6lf"]
+[ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_4xlro"]
+
+[node name="settings_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oq6lf")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="settings_main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settings_main"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -161.0
+offset_right = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="settings_main/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="spacer" type="Control" parent="settings_main/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="settings_main/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="settings_main/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("2_4xlro")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HSeparator" type="HSeparator" parent="settings_main/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="settings_main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settings_main/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="show_tutorial_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Show Tutorial"
+
+[connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/show_tutorial_button" to="." method="_on_show_tutorial_pressed"]
