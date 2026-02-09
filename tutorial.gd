@@ -10,7 +10,13 @@ var current_step_index = -1		# -1 means no current step yet.
 @onready var ui_highlighter: UIHighlighter = $ui_highlighter
 
 func _ready():
-	start()
+	Settings.settings_loaded.connect( first_time_check )
+	
+func first_time_check():
+	if !Settings.tutorial_played:
+		start()
+		Settings.tutorial_played = true
+		Settings.save_settings()
 
 func start():
 	show()

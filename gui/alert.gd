@@ -7,6 +7,9 @@ extends Control
 signal alert_shown
 signal alert_hidden
 
+func _ready():
+	Settings.save_load_error.connect( show_alert )
+
 func show_alert( text: String ):
 	visible = true
 	label.text = text

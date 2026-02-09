@@ -122,13 +122,6 @@ size = Vector3(3, 3, 3)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
 points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32ohb"]
-bg_color = Color(0.632764, 0.603578, 0.463239, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0aik"]
 shader = ExtResource("33_io8dt")
 shader_parameter/dark_color = Color(0, 0, 0, 0.8)
@@ -136,6 +129,13 @@ shader_parameter/top_left = Vector2(10, 10)
 shader_parameter/bottom_right = Vector2(100, 10)
 shader_parameter/top_left_border = Vector2(5, 5)
 shader_parameter/bottom_right_border = Vector2(105, 105)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32ohb"]
+bg_color = Color(0.632764, 0.603578, 0.463239, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
@@ -543,60 +543,6 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="background_dimmer" type="Control" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("26_7pb30")
-
-[node name="ColorRect" type="ColorRect" parent="GUI/background_dimmer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.745098)
-
-[node name="alert" type="Control" parent="GUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 44.0
-offset_top = 252.0
-offset_right = -44.0
-offset_bottom = -252.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("26_hsq3r")
-
-[node name="Panel" type="Panel" parent="GUI/alert"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_32ohb")
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/alert/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="alert_label" type="Label" parent="GUI/alert/Panel/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
 [node name="tutorial" type="Control" parent="GUI" node_paths=PackedStringArray("steps")]
 visible = false
 layout_mode = 1
@@ -987,9 +933,63 @@ theme_override_font_sizes/font_size = 26
 text = "Keep dice on the board"
 horizontal_alignment = 1
 
+[node name="background_dimmer" type="Control" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_7pb30")
+
+[node name="ColorRect" type="ColorRect" parent="GUI/background_dimmer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.745098)
+
 [node name="settings_menu" parent="GUI" instance=ExtResource("44_hydhl")]
 visible = false
 layout_mode = 1
+
+[node name="alert" type="Control" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 252.0
+offset_right = -44.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_hsq3r")
+
+[node name="Panel" type="Panel" parent="GUI/alert"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_32ohb")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/alert/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="alert_label" type="Label" parent="GUI/alert/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
@@ -1021,9 +1021,9 @@ layout_mode = 1
 [connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu" unbinds=1]
 [connection signal="closed" from="GUI/history_menu/Panel/roll_receipt_viewer" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
 [connection signal="clicked" from="GUI/background_dimmer" to="GUI/alert" method="hide_alert"]
+[connection signal="show_tutorial_pressed" from="GUI/settings_menu" to="GUI/tutorial" method="start"]
 [connection signal="alert_hidden" from="GUI/alert" to="GUI/background_dimmer" method="hide_dimmer"]
 [connection signal="alert_shown" from="GUI/alert" to="GUI/background_dimmer" method="show_dimmer"]
-[connection signal="show_tutorial_pressed" from="GUI/settings_menu" to="GUI/tutorial" method="start"]
 
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button"]
