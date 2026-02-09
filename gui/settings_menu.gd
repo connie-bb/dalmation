@@ -11,6 +11,7 @@ func open_settings():
 	settings_main.show()
 	
 func close_settings():
+	Settings.save_settings()
 	hide()
 	settings_main.hide()
 
