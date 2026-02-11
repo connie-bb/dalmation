@@ -5,8 +5,9 @@ class_name DieButton
 @export var die_type: Die.TYPES
 
 # References
-@onready var label = get_node("Label")
+@onready var label = $Label
 @onready var long_press_button: LongPressButton = $LongPressButton
+@onready var mechanical_counter: MechanicalCounter = $mechanical_counter
 
 # Constant
 signal increment_pressed( die_type: Die.TYPES )
@@ -21,7 +22,7 @@ func _ready():
 		Settings.long_press_repeat_interval
 
 func update( count: int ):
-	label.text = str( count )
+	mechanical_counter.set_number( count )
 
 func _on_long_press():
 	decrement_pressed.emit( die_type )
