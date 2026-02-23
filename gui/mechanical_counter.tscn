@@ -184,6 +184,7 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("1_dv0ke")
 
 [node name="animation_player_left" type="AnimationPlayer" parent="."]
@@ -211,6 +212,7 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("1_4q2wk")
 expand_mode = 1
 
@@ -226,6 +228,7 @@ offset_right = -2.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="label_left" type="Label" parent="TextureRect2/Control"]
 layout_mode = 1

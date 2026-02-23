@@ -16,6 +16,8 @@ signal short_pressed
 signal long_pressed
 signal scrolled_up
 signal scrolled_down
+signal press_started
+signal press_ended
 
 func _ready():
 	long_press_timer = Timer.new()
@@ -30,18 +32,21 @@ func _gui_input( event: InputEvent ):
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT \
 		and mouse_event.is_pressed():
 			long_press_timer.start( long_press_duration )
+			press_started.emit()
 			
 		elif mouse_event.button_index == MOUSE_BUTTON_LEFT \
 		and mouse_event.is_released() \
 		and long_press:
 			long_press_timer.stop()
 			long_press = false
+			press_ended.emit()
 		
 		elif mouse_event.button_index == MOUSE_BUTTON_LEFT \
 		and mouse_event.is_released() \
 		and !long_press:
 			long_press_timer.stop()
 			short_pressed.emit()
+			press_ended.emit()
 			
 		elif mouse_event.is_released() \
 		and mouse_event.button_index == MOUSE_BUTTON_RIGHT:

@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsdlf018wcl8"]
+
+[ext_resource type="Script" uid="uid://c81xoou0011m2" path="res://gui/typewriter_button.gd" id="1_stowr"]
+[ext_resource type="Texture2D" uid="uid://cg55ud248qvo2" path="res://gui/textures/typewriter_button.png" id="1_x2006"]
+[ext_resource type="Texture2D" uid="uid://dyaaliafef4eh" path="res://gui/textures/typewriter_button_pressed.png" id="3_0ced0"]
+
+[sub_resource type="Animation" id="Animation_stowr"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gsd2h"]
+resource_name = "press"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.406126, 1.56917, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_0ced0"]
+resource_name = "release"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.210224, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gsd2h"]
+_data = {
+&"RESET": SubResource("Animation_stowr"),
+&"press": SubResource("Animation_gsd2h"),
+&"release": SubResource("Animation_0ced0")
+}
+
+[node name="TypewriterButton" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_stowr")
+normal_texture = ExtResource("1_x2006")
+pressed_texture = ExtResource("3_0ced0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gsd2h")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("1_x2006")
+expand_mode = 1

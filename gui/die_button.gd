@@ -5,7 +5,6 @@ class_name DieButton
 @export var die_type: Die.TYPES
 
 # References
-@onready var label = $Label
 @onready var long_press_button: LongPressButton = $LongPressButton
 @onready var mechanical_counter: MechanicalCounter = $mechanical_counter
 

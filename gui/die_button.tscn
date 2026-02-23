@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bilaihhnfqonk"]
+[gd_scene load_steps=6 format=3 uid="uid://bilaihhnfqonk"]
 
 [ext_resource type="Script" uid="uid://0td3uoyaqiy7" path="res://gui/die_button.gd" id="1_0k3yf"]
-[ext_resource type="Texture2D" uid="uid://da5ibbo4fxmyi" path="res://gui/icons/d4.png" id="2_fg5hk"]
 [ext_resource type="Script" uid="uid://dbjvjk081lfgj" path="res://gui/long_press_button.gd" id="3_fg5hk"]
+[ext_resource type="PackedScene" uid="uid://dsdlf018wcl8" path="res://gui/typewriter_button.tscn" id="4_2p2gw"]
 [ext_resource type="PackedScene" uid="uid://bofa62b7bi5st" path="res://gui/mechanical_counter.tscn" id="4_c71gr"]
+[ext_resource type="Texture2D" uid="uid://5glox5rl3jh8" path="res://gui/icons/d20.png" id="5_2p2gw"]
 
 [node name="DieButton" type="Control"]
 custom_minimum_size = Vector2(70, 100)
@@ -12,23 +13,6 @@ anchors_preset = 0
 offset_right = 70.0
 offset_bottom = 100.0
 script = ExtResource("1_0k3yf")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(70, 70)
-layout_mode = 2
-offset_right = 70.0
-offset_bottom = 70.0
-texture = ExtResource("2_fg5hk")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 2
-offset_left = 25.0
-offset_top = 56.0
-offset_right = 44.0
-offset_bottom = 102.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 33
-text = "0"
 
 [node name="LongPressButton" type="Control" parent="."]
 layout_mode = 1
@@ -43,7 +27,33 @@ metadata/_custom_type_script = "uid://dbjvjk081lfgj"
 [node name="mechanical_counter" parent="." instance=ExtResource("4_c71gr")]
 layout_mode = 1
 
+[node name="TypewriterButton" parent="." instance=ExtResource("4_2p2gw")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="TextureRect2" type="TextureRect" parent="TypewriterButton"]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_2p2gw")
+expand_mode = 1
+
 [connection signal="long_pressed" from="LongPressButton" to="." method="_on_long_press"]
+[connection signal="press_ended" from="LongPressButton" to="TypewriterButton" method="release"]
+[connection signal="press_started" from="LongPressButton" to="TypewriterButton" method="press"]
 [connection signal="scrolled_down" from="LongPressButton" to="." method="_on_scrolled_down"]
 [connection signal="scrolled_up" from="LongPressButton" to="." method="_on_scrolled_up"]
 [connection signal="short_pressed" from="LongPressButton" to="." method="_on_short_press"]

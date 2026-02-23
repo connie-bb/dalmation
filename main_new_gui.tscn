@@ -19,16 +19,16 @@
 [ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="14_coh5o"]
 [ext_resource type="Script" uid="uid://dohvloya8v17v" path="res://gui/show_die_scores_button.gd" id="14_k6bty"]
 [ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/roll_editor_panel/roll_editor_panel.gd" id="14_p0y23"]
-[ext_resource type="Texture2D" uid="uid://ccaquwst0suip" path="res://gui/icons/d6.png" id="15_32ohb"]
 [ext_resource type="Texture2D" uid="uid://yuyqsp6p5u8o" path="res://gui/icons/eye_off.png" id="15_pmmu8"]
-[ext_resource type="Texture2D" uid="uid://iheo1d5ii1xb" path="res://gui/icons/d8.png" id="16_hsq3r"]
-[ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="17_7pb30"]
-[ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="18_hob12"]
-[ext_resource type="Texture2D" uid="uid://5glox5rl3jh8" path="res://gui/icons/d20.png" id="19_nwcut"]
-[ext_resource type="Texture2D" uid="uid://bpd54mwos25ft" path="res://gui/icons/d100.png" id="20_w6b18"]
+[ext_resource type="Texture2D" uid="uid://da5ibbo4fxmyi" path="res://gui/icons/d4.png" id="20_roqoo"]
+[ext_resource type="Texture2D" uid="uid://ccaquwst0suip" path="res://gui/icons/d6.png" id="21_hydhl"]
 [ext_resource type="PackedScene" uid="uid://dawwr1mxams3w" path="res://gui/modifier_button.tscn" id="21_k6bty"]
+[ext_resource type="Texture2D" uid="uid://iheo1d5ii1xb" path="res://gui/icons/d8.png" id="22_sdj6x"]
 [ext_resource type="Script" uid="uid://brf7o5rhn3fu3" path="res://gui/history_menu.gd" id="23_32ohb"]
+[ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="23_yaved"]
+[ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="24_23dxb"]
 [ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/roll_history_panel.tscn" id="24_hsq3r"]
+[ext_resource type="Texture2D" uid="uid://bpd54mwos25ft" path="res://gui/icons/d100.png" id="25_0y4a0"]
 [ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/roll_receipt_viewer.tscn" id="25_7pb30"]
 [ext_resource type="Script" uid="uid://cfsbgbrm1568s" path="res://gui/background_dimmer.gd" id="26_7pb30"]
 [ext_resource type="Script" uid="uid://b8gjjdii4rvf1" path="res://gui/alert.gd" id="26_hsq3r"]
@@ -433,26 +433,29 @@ alignment = 1
 [node name="d4_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d4_die_button/TypewriterButton" index="2"]
+texture = ExtResource("20_roqoo")
+
 [node name="d6_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 1
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button" index="0"]
-texture = ExtResource("15_32ohb")
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button/TypewriterButton" index="2"]
+texture = ExtResource("21_hydhl")
 
 [node name="d8_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 2
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button" index="0"]
-texture = ExtResource("16_hsq3r")
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button/TypewriterButton" index="2"]
+texture = ExtResource("22_sdj6x")
 
 [node name="d10_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 3
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button" index="0"]
-texture = ExtResource("17_7pb30")
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button/TypewriterButton" index="2"]
+texture = ExtResource("23_yaved")
 
 [node name="dice_row_2" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
 layout_mode = 2
@@ -462,25 +465,23 @@ alignment = 1
 layout_mode = 2
 die_type = 4
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button" index="0"]
-texture = ExtResource("18_hob12")
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button/TypewriterButton" index="2"]
+texture = ExtResource("24_23dxb")
 
 [node name="d20_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 5
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button" index="0"]
-texture = ExtResource("19_nwcut")
-
-[node name="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button" index="1"]
-size_flags_stretch_ratio = 0.81
-
 [node name="d100_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("14_4jwux")]
 layout_mode = 2
 die_type = 6
 
-[node name="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button" index="0"]
-texture = ExtResource("20_w6b18")
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button/TypewriterButton" index="2"]
+texture = ExtResource("25_0y4a0")
+
+[node name="Control" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="bottom_row" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
 layout_mode = 2
@@ -495,18 +496,8 @@ icon = ExtResource("10_hla7c")
 icon_alignment = 1
 expand_icon = true
 
-[node name="seperator2" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
 [node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row" instance=ExtResource("21_k6bty")]
 layout_mode = 2
-
-[node name="seperator" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
 
 [node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
 layout_mode = 2
@@ -1025,6 +1016,7 @@ size_flags_horizontal = 4
 [connection signal="alert_hidden" from="GUI/alert" to="GUI/background_dimmer" method="hide_dimmer"]
 [connection signal="alert_shown" from="GUI/alert" to="GUI/background_dimmer" method="show_dimmer"]
 
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d4_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button"]
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button"]
