@@ -500,8 +500,11 @@ expand_icon = true
 layout_mode = 2
 
 [node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 icon = ExtResource("7_nwcut")
+icon_alignment = 1
+expand_icon = true
 
 [node name="history_menu" type="Control" parent="GUI"]
 visible = false
