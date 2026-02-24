@@ -1,0 +1,255 @@
+[gd_scene load_steps=14 format=3 uid="uid://dawwr1mxams3w"]
+
+[ext_resource type="Script" uid="uid://bdro3acgkkblm" path="res://gui/elements/modifier_button.gd" id="1_aj6vy"]
+[ext_resource type="Script" uid="uid://dbjvjk081lfgj" path="res://gui/elements/long_press_button.gd" id="2_c6yvr"]
+[ext_resource type="Texture2D" uid="uid://bmwswvsligtoq" path="res://gui/textures/mod_spinwheel_moving.png" id="3_k6263"]
+[ext_resource type="Script" uid="uid://bok5x23nib4pt" path="res://gui/elements/mod_spinwheel.gd" id="3_ulh66"]
+[ext_resource type="Texture2D" uid="uid://b223ccvmiy76t" path="res://gui/textures/mod_spinwheel.png" id="3_xbhpl"]
+[ext_resource type="Theme" uid="uid://bmjyho5kycyl8" path="res://gui/fonts/libertine_bold_dark.tres" id="4_o4url"]
+[ext_resource type="PackedScene" uid="uid://dsdlf018wcl8" path="res://gui/elements/typewriter_button.tscn" id="7_o4uko"]
+[ext_resource type="Texture2D" uid="uid://bxq52786kbba5" path="res://gui/icons/minus.png" id="8_cxcx6"]
+[ext_resource type="Texture2D" uid="uid://be5ch75jedvt6" path="res://gui/icons/plus.png" id="9_8m238"]
+
+[sub_resource type="Animation" id="Animation_ulh66"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spinwheel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.00174533]
+}
+
+[sub_resource type="Animation" id="Animation_o4uko"]
+resource_name = "spin_ccw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spinwheel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [0.523599, 0.00174533]
+}
+
+[sub_resource type="Animation" id="Animation_k6263"]
+resource_name = "spin_cw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spinwheel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [0.00174533, 0.523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k6263"]
+_data = {
+&"RESET": SubResource("Animation_ulh66"),
+&"spin_ccw": SubResource("Animation_o4uko"),
+&"spin_cw": SubResource("Animation_k6263")
+}
+
+[node name="modifier_button" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 197.0
+offset_bottom = 84.0
+size_flags_horizontal = 3
+script = ExtResource("1_aj6vy")
+
+[node name="mod_spinwheel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 0.794998
+offset_right = 0.794998
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("3_ulh66")
+
+[node name="spinwheel" type="TextureRect" parent="mod_spinwheel"]
+custom_minimum_size = Vector2(156, 156)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -85.0
+offset_right = 78.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00174533
+pivot_offset = Vector2(78, 78)
+texture = ExtResource("3_k6263")
+expand_mode = 1
+
+[node name="spinwheel_static" type="TextureRect" parent="mod_spinwheel"]
+custom_minimum_size = Vector2(156, 156)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -85.0
+offset_right = 78.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00174533
+pivot_offset = Vector2(78, 78)
+texture = ExtResource("3_xbhpl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="mod_spinwheel"]
+custom_minimum_size = Vector2(16, 38)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -69.0
+offset_right = 8.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("4_o4url")
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="mod_spinwheel"]
+libraries = {
+&"": SubResource("AnimationLibrary_k6263")
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LongPressButtonMinus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[node name="LongPressButtonPlus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[node name="TypewriterButtonMinus" parent="." instance=ExtResource("7_o4uko")]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -32.0
+offset_right = -34.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" parent="TypewriterButtonMinus" index="1"]
+custom_minimum_size = Vector2(72, 72)
+offset_right = 72.0
+offset_bottom = 72.0
+
+[node name="TextureRect2" type="TextureRect" parent="TypewriterButtonMinus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_cxcx6")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TypewriterButtonPlus" parent="." instance=ExtResource("7_o4uko")]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 31.5
+offset_top = -36.0
+offset_right = 103.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" parent="TypewriterButtonPlus" index="1"]
+custom_minimum_size = Vector2(72, 72)
+offset_right = 72.0
+offset_bottom = 72.0
+
+[node name="TextureRect3" type="TextureRect" parent="TypewriterButtonPlus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_8m238")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="long_pressed" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_long_press_minus"]
+[connection signal="press_ended" from="HBoxContainer2/LongPressButtonMinus" to="TypewriterButtonMinus" method="release"]
+[connection signal="press_started" from="HBoxContainer2/LongPressButtonMinus" to="TypewriterButtonMinus" method="press"]
+[connection signal="scrolled_down" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_scrolled_down"]
+[connection signal="scrolled_up" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_scrolled_up"]
+[connection signal="short_pressed" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_short_press_minus"]
+[connection signal="long_pressed" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_long_press_plus"]
+[connection signal="press_ended" from="HBoxContainer2/LongPressButtonPlus" to="TypewriterButtonPlus" method="release"]
+[connection signal="press_started" from="HBoxContainer2/LongPressButtonPlus" to="TypewriterButtonPlus" method="press"]
+[connection signal="scrolled_down" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_scrolled_down"]
+[connection signal="scrolled_up" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_scrolled_up"]
+[connection signal="short_pressed" from="HBoxContainer2/LongPressButtonPlus" to="." method="_on_short_press_plus"]
+
+[editable path="TypewriterButtonMinus"]
+[editable path="TypewriterButtonPlus"]

@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Debug="*res://singletons/debug.gd"
-TooltipManager="*res://singletons/tooltip_manager.gd"
 Settings="*res://singletons/settings.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 VFXManager="*res://singletons/vfx_manager.gd"
@@ -42,6 +41,25 @@ window/handheld/orientation=1
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "yellow",
+"res://backend/": "red",
+"res://backgrounds/": "green",
+"res://dice/": "red",
+"res://dice_sets/": "green",
+"res://gui/": "red",
+"res://gui/elements/": "blue",
+"res://gui/fonts/": "blue",
+"res://gui/icons/": "green",
+"res://gui/textures/": "green",
+"res://shaders/": "blue",
+"res://singletons/": "red",
+"res://tools/": "yellow",
+"res://utils/": "yellow"
+}
 
 [gui]
 

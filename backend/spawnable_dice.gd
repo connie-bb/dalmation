@@ -16,7 +16,7 @@ func load_dice_set():
 	collisions.position = Vector3.ZERO
 	
 	# Load cosmetic meshes
-	var dice_set_resource = preload( "res://dice/faithful/faithful.tscn" )
+	var dice_set_resource = preload( "res://dice_sets/faithful/faithful.tscn" )
 	var dice_set = dice_set_resource.instantiate()
 	dice_set.visible = false
 	add_child( dice_set )
@@ -41,6 +41,8 @@ func load_dice_set():
 		assert( model != null, "Couldn't find model with name " + die_name )
 		model.reparent( die )
 		model.position = Vector3.ZERO
+		
+		die.freeze = true
 		
 		add_child( die )
 		die_type_to_die[ die_type ] = die

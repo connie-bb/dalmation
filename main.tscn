@@ -1,33 +1,52 @@
-[gd_scene load_steps=46 format=3 uid="uid://crtr7u4d5fagv"]
+[gd_scene load_steps=57 format=3 uid="uid://kjwii3dmxeqk"]
 
-[ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://jfc0d8f2uivv" path="res://backend/spawnable_dice.tscn" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="2_yaehf"]
-[ext_resource type="Texture2D" uid="uid://be1cnfjg505tx" path="res://backgrounds/toybox_hdri.exr" id="3_d13ii"]
-[ext_resource type="PackedScene" uid="uid://d3gmy8l2rgcb3" path="res://backgrounds/toybox.tscn" id="3_getpj"]
-[ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="3_h2yge"]
-[ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="3_ryguw"]
-[ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="6_w48qg"]
-[ext_resource type="Texture2D" uid="uid://clbsxfowrf5lw" path="res://gui/icons/exit.png" id="9_kek77"]
-[ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="10_efxa6"]
-[ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/roll_history_panel.tscn" id="10_yaehf"]
-[ext_resource type="Script" uid="uid://gqyj36rge4px" path="res://gui/exit_button.gd" id="10_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://cd13kg2snxduq" path="res://gui/icons/help.png" id="11_dg77c"]
-[ext_resource type="Texture2D" uid="uid://dtxhnjdtjehtu" path="res://gui/icons/volume.png" id="12_dg77c"]
-[ext_resource type="Script" uid="uid://dhdun5noywp67" path="res://gui/die_selector.gd" id="15_d13ii"]
-[ext_resource type="Script" uid="uid://cuvl0yxsnu3ea" path="res://gui/error_panel.gd" id="15_vivmo"]
-[ext_resource type="PackedScene" uid="uid://n1f8wur3117u" path="res://gui/help_menu.tscn" id="16_2cqfq"]
-[ext_resource type="PackedScene" uid="uid://c6ba6x5w0xqnj" path="res://gui/roll_editor_panel/roll_editor_panel.tscn" id="17_82xsv"]
-[ext_resource type="PackedScene" uid="uid://5451dmdabyq1" path="res://gui/die_selector/die_selector_button.tscn" id="18_074og"]
-[ext_resource type="PackedScene" uid="uid://b4csxnw7da742" path="res://gui/tooltip.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/roll_receipt_viewer.tscn" id="21_d13ii"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
-points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
+[ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gngh3"]
+[ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_0n3wm"]
+[ext_resource type="Texture2D" uid="uid://be1cnfjg505tx" path="res://backgrounds/toybox/toybox_hdri.exr" id="3_qnost"]
+[ext_resource type="PackedScene" uid="uid://d3gmy8l2rgcb3" path="res://backgrounds/toybox/toybox.tscn" id="4_wnkbs"]
+[ext_resource type="Script" uid="uid://cfhcd087u5cur" path="res://backend/dice_roller.gd" id="5_f6a44"]
+[ext_resource type="Script" uid="uid://dfsdmi1aykny3" path="res://backend/spawnable_dice.gd" id="6_0cbny"]
+[ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="7_hrvbo"]
+[ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="8_uypp3"]
+[ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="9_blkrb"]
+[ext_resource type="Script" uid="uid://c52xqkn0hid8t" path="res://gui/elements/resize_viewport.gd" id="10_abqjc"]
+[ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="11_6iyjs"]
+[ext_resource type="Texture2D" uid="uid://dwgpv31ymdegs" path="res://gui/icons/blank_paper.png" id="12_4w656"]
+[ext_resource type="Texture2D" uid="uid://yuyqsp6p5u8o" path="res://gui/icons/eye_off.png" id="13_e71vb"]
+[ext_resource type="Script" uid="uid://dohvloya8v17v" path="res://gui/elements/show_die_scores_button.gd" id="14_rnkwl"]
+[ext_resource type="Texture2D" uid="uid://bsn7vbld0f6jn" path="res://gui/icons/eye.png" id="15_vke2r"]
+[ext_resource type="Script" uid="uid://3ue3bxcek8pg" path="res://gui/elements/score_label.gd" id="16_uit24"]
+[ext_resource type="Texture2D" uid="uid://bf4sqt1io0gxp" path="res://gui/icons/hamburger_menu.png" id="17_ruth0"]
+[ext_resource type="Script" uid="uid://msxojpd5tm2p" path="res://gui/elements/roll_editor_panel.gd" id="18_rm4vd"]
+[ext_resource type="PackedScene" uid="uid://bilaihhnfqonk" path="res://gui/elements/die_button.tscn" id="19_pjyto"]
+[ext_resource type="Texture2D" uid="uid://da5ibbo4fxmyi" path="res://gui/icons/d4.png" id="20_sm6fg"]
+[ext_resource type="Texture2D" uid="uid://ccaquwst0suip" path="res://gui/icons/d6.png" id="21_b17eg"]
+[ext_resource type="Texture2D" uid="uid://iheo1d5ii1xb" path="res://gui/icons/d8.png" id="22_ntx8l"]
+[ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="23_uatky"]
+[ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="24_rqtf5"]
+[ext_resource type="Texture2D" uid="uid://bpd54mwos25ft" path="res://gui/icons/d100.png" id="25_1vm84"]
+[ext_resource type="Texture2D" uid="uid://d1owem5ltm4mo" path="res://gui/icons/trash.png" id="26_wu3dr"]
+[ext_resource type="PackedScene" uid="uid://dawwr1mxams3w" path="res://gui/elements/modifier_button.tscn" id="27_cyx1q"]
+[ext_resource type="Script" uid="uid://brf7o5rhn3fu3" path="res://gui/elements/history_menu.gd" id="28_0dhbp"]
+[ext_resource type="PackedScene" uid="uid://brhhb2juwnmcd" path="res://gui/elements/roll_history_panel.tscn" id="29_jx0wj"]
+[ext_resource type="PackedScene" uid="uid://b52784m3nw14y" path="res://gui/elements/roll_receipt_viewer.tscn" id="30_kkkcx"]
+[ext_resource type="Script" uid="uid://dj5sgdsipwlnl" path="res://gui/elements/tutorial.gd" id="31_34ol3"]
+[ext_resource type="Shader" uid="uid://dj8fu754vn70r" path="res://shaders/ui_highlighter.gdshader" id="32_c2n8d"]
+[ext_resource type="Script" uid="uid://c2xanaa6obcp" path="res://gui/elements/ui_highlighter.gd" id="33_wy5fy"]
+[ext_resource type="Script" uid="uid://bniuccu326tka" path="res://gui/elements/tutorial_step.gd" id="34_gx4rg"]
+[ext_resource type="Texture2D" uid="uid://b4d7taiekti6u" path="res://gui/icons/forward slash.png" id="35_5dllo"]
+[ext_resource type="Texture2D" uid="uid://ko8b5wu7h580" path="res://gui/icons/mouse_left_click.png" id="36_phcyf"]
+[ext_resource type="Texture2D" uid="uid://ct4jbhiid1m3y" path="res://gui/icons/mouse_scroll_up.png" id="37_birbe"]
+[ext_resource type="Texture2D" uid="uid://di0q54cft8ydq" path="res://gui/icons/mouse_right_click.png" id="38_f1p13"]
+[ext_resource type="Texture2D" uid="uid://cql2j3r2dybpi" path="res://gui/icons/mouse_scroll_down.png" id="39_4obbf"]
+[ext_resource type="Texture2D" uid="uid://8l1jjksu6ukp" path="res://gui/icons/mouse_scroll.png" id="40_ovcoh"]
+[ext_resource type="Texture2D" uid="uid://cqwbvip77m213" path="res://gui/icons/demo_dice.png" id="41_ppx11"]
+[ext_resource type="PackedScene" uid="uid://bpxfayp7pqwh6" path="res://gui/elements/background_dimmer.tscn" id="42_1yv1y"]
+[ext_resource type="PackedScene" uid="uid://blgmdm1c2cc2w" path="res://gui/elements/settings_menu.tscn" id="43_5yh34"]
+[ext_resource type="PackedScene" uid="uid://dobxx1ey2th5x" path="res://gui/elements/alert.tscn" id="44_pjuso"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1u8w0"]
-panorama = ExtResource("3_d13ii")
+panorama = ExtResource("3_qnost")
 
 [sub_resource type="Sky" id="Sky_h2yge"]
 sky_material = SubResource("PanoramaSkyMaterial_1u8w0")
@@ -47,7 +66,7 @@ size = Vector3(19, 2, 17)
 size = Vector3(11, 2, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2cqfq"]
-size = Vector3(19, 2, 23)
+size = Vector3(12.7275, 2, 15.3787)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
 size = Vector3(11, 7, 2)
@@ -55,85 +74,25 @@ size = Vector3(11, 7, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
 size = Vector3(19, 7, 2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yaehf"]
-size = Vector3(2, 7, 22)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycdy4"]
-size = Vector3(2, 7, 22)
+size = Vector3(2, 7, 16.4167)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ycdy4"]
-size = Vector3(24.255, 1, 25.905)
+[sub_resource type="BoxShape3D" id="BoxShape3D_7pb30"]
+size = Vector3(2, 7, 16.3911)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48qg"]
-albedo_color = Color(1, 0.09, 0.09, 1)
-roughness = 0.28
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w48qg"]
+points = PackedVector3Array(0.749539, -1.30048, 1, -0.749539, -1.30048, 1, 0.749539, -1.30048, -1, -0.000146687, 0, -0.000195742, -0.749539, -1.30048, -1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_w48qg"]
-material = SubResource("StandardMaterial3D_w48qg")
-top_radius = 2.613
-bottom_radius = 2.0
-height = 5.575
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
-albedo_color = Color(0.0438, 0.73, 0.123857, 1)
-roughness = 0.44
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_vivmo"]
-material = SubResource("StandardMaterial3D_vivmo")
-top_radius = 1.264
-bottom_radius = 1.278
-height = 3.617
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_color = Color(0.00999999, 0.307, 1, 1)
-roughness = 0.42
-
-[sub_resource type="BoxMesh" id="BoxMesh_w48qg"]
-material = SubResource("StandardMaterial3D_2cqfq")
-size = Vector3(3, 3, 3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
-albedo_color = Color(1, 0.770667, 0.14, 1)
-roughness = 0.42
-
-[sub_resource type="BoxMesh" id="BoxMesh_074og"]
-material = SubResource("StandardMaterial3D_yaehf")
-size = Vector3(3, 3, 3)
-
-[sub_resource type="InputEventAction" id="InputEventAction_7mycd"]
-action = &"roll"
-pressed = true
-
-[sub_resource type="Shortcut" id="Shortcut_272bh"]
-events = [SubResource("InputEventAction_7mycd")]
-
-[sub_resource type="GDScript" id="GDScript_ryguw"]
-script/source = "extends Panel
-class_name ScorePanel
-
-# References
-@onready var score_label: Label = $VBoxContainer/score_label
-
-func display( score: int ):
-	score_label.text = str( score )
-"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0aik"]
+shader = ExtResource("32_c2n8d")
+shader_parameter/dark_color = Color(0, 0, 0, 0.8)
+shader_parameter/top_left = Vector2(10, 10)
+shader_parameter/bottom_right = Vector2(100, 10)
+shader_parameter/top_left_border = Vector2(5, 5)
+shader_parameter/bottom_right_border = Vector2(105, 105)
 
 [node name="Node3D" type="Node3D"]
 physics_interpolation_mode = 1
-
-[node name="roll_editor" type="Node" parent="."]
-script = ExtResource("2_yaehf")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.684419, 0.729089, 0, -0.729089, 0.684419, 0, 10.069, 9.33)
-
-[node name="camera_bounds" type="CollisionShape3D" parent="Camera3D"]
-transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_w48qg")
-debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
-
-[node name="roll_history" type="Node" parent="."]
-script = ExtResource("3_ryguw")
 
 [node name="env" type="Node3D" parent="."]
 
@@ -151,82 +110,58 @@ input_ray_pickable = false
 [node name="floor" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, -0.507976, -0.976288)
 shape = SubResource("BoxShape3D_0xm2m")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.540918, 0.580645, 1.15514e-06, 1)
 
 [node name="ramp" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.0251384, 0.811247, 5.99411)
 shape = SubResource("BoxShape3D_vivmo")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.685584, 0.753505, 0, 1)
 
 [node name="ceil" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 6.49202, 2.02371)
+transform = Transform3D(0.999983, 0, 0, 0, 0.999983, 0, 0, 0, 0.999983, 0.0251384, 6.49202, 2.02371)
 shape = SubResource("BoxShape3D_2cqfq")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.618431, 0.626491, 0, 1)
 
 [node name="near_wall" type="CollisionShape3D" parent="env/collisions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0251384, 2.99202, 8.5237)
 shape = SubResource("BoxShape3D_074og")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.299099, 0.36011, 1, 1)
 
 [node name="back_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -4.77064)
 shape = SubResource("BoxShape3D_w48qg")
-debug_color = Color(0.839216, 0, 0.423529, 1)
-
-[node name="left_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -4.71424, 2.992, 2.04862)
-shape = SubResource("BoxShape3D_yaehf")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.331994, 0.411547, 1, 1)
 
 [node name="right_wall" type="CollisionShape3D" parent="env/collisions"]
-transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 4.71424, 2.992, 2.04862)
+transform = Transform3D(0.999989, 0, 0, 0, 0.999989, 0, 0, 0, 0.999989, 4.48066, 2.992, 2.08325)
 shape = SubResource("BoxShape3D_ycdy4")
-debug_color = Color(0.839216, 0, 0.423529, 1)
+debug_color = Color(0.243351, 0.375913, 1, 1)
 
-[node name="toybox" parent="env" instance=ExtResource("3_getpj")]
+[node name="left_wall" type="CollisionShape3D" parent="env/collisions"]
+transform = Transform3D(0.999993, 0, 0, 0, 0.999993, 0, 0, 0, 0.999993, -4.50661, 2.992, 2.01354)
+shape = SubResource("BoxShape3D_7pb30")
+debug_color = Color(0.243351, 0.375913, 1, 1)
 
-[node name="world" type="Node3D" parent="."]
-transform = Transform3D(1.40477, 0, 0, 0, 1.40477, 0, 0, 0, 1.40477, 0, 0.614297, 0.569212)
-visible = false
+[node name="toybox" parent="env" instance=ExtResource("4_wnkbs")]
 
-[node name="table" type="MeshInstance3D" parent="world"]
-mesh = SubResource("BoxMesh_ycdy4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="world"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.26118, -5.88599)
-mesh = SubResource("CylinderMesh_w48qg")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="world"]
-transform = Transform3D(0.707107, -0.707107, 0, -3.09086e-08, -3.09086e-08, -1, 0.707107, 0.707107, -4.37114e-08, 1.90304, 1.83638, -6.2261)
-mesh = SubResource("CylinderMesh_vivmo")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="world"]
-transform = Transform3D(0.865991, -0.50006, 0, -2.18583e-08, -3.78536e-08, -1, 0.50006, 0.865991, -4.37114e-08, 4.71215, 1.74882, -5.61063)
-mesh = SubResource("CylinderMesh_vivmo")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="world"]
-transform = Transform3D(0.758839, -0.646985, 0.0746528, -2.6077e-08, -0.114625, -0.993409, 0.651278, 0.753838, -0.0869821, 3.58133, 3.97965, -6.13184)
-mesh = SubResource("CylinderMesh_vivmo")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="world"]
-transform = Transform3D(-0.29989, 0, -0.953974, 0, 1, 0, 0.953974, 0, -0.29989, -6.62242, 2, -5.82331)
-mesh = SubResource("BoxMesh_w48qg")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="world"]
-transform = Transform3D(0.185003, 0, -0.354646, 0, 0.4, 0, 0.354646, 0, 0.185003, -0.442011, 1.2, -4.3137)
-mesh = SubResource("BoxMesh_w48qg")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="world"]
-transform = Transform3D(0.522286, 0, -0.351438, 0, 0.629517, 0, 0.351438, 0, 0.522286, 6.77689, 1.43129, -4.56219)
-mesh = SubResource("BoxMesh_074og")
+[node name="roll_editor" type="Node" parent="."]
+script = ExtResource("1_gngh3")
 
 [node name="dice_roller" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294, 5.907, 9.28)
-script = ExtResource("1_h2yge")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.294, 4.16051, 8.92048)
+script = ExtResource("5_f6a44")
 
-[node name="spawnable_dice" parent="dice_roller" instance=ExtResource("2_0xm2m")]
-process_mode = 4
+[node name="spawnable_dice" type="Node3D" parent="dice_roller"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 9)
 visible = false
+script = ExtResource("6_0cbny")
+
+[node name="spawnpoint_indicator" type="Sprite3D" parent="dice_roller"]
+transform = Transform3D(4.1, 0, 0, 0, 4.1, 0, 0, 0, 4.1, 0, 0, 0)
+billboard = 1
+texture = ExtResource("7_hrvbo")
+script = ExtResource("8_uypp3")
+show_in_game = true
 
 [node name="active_dice" type="Node3D" parent="dice_roller"]
 
@@ -246,15 +181,11 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[node name="spawnpoint_indicator" type="Sprite3D" parent="dice_roller"]
-transform = Transform3D(4.1, 0, 0, 0, 4.1, 0, 0, 0, 4.1, 0, 0, 0)
-billboard = 1
-texture = ExtResource("6_7mycd")
-script = ExtResource("6_w48qg")
-show_in_game = true
-
 [node name="score_counter" type="Node" parent="."]
-script = ExtResource("3_h2yge")
+script = ExtResource("9_blkrb")
+
+[node name="roll_history" type="Node" parent="."]
+script = ExtResource("2_0n3wm")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -263,227 +194,703 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-mouse_filter = 2
+mouse_filter = 1
 
-[node name="roll_button" type="Button" parent="GUI"]
-layout_mode = 2
-offset_left = 388.0
-offset_top = 558.0
-offset_right = 460.0
-offset_bottom = 630.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-focus_mode = 0
-action_mode = 0
-shortcut = SubResource("Shortcut_272bh")
-icon = ExtResource("6_7mycd")
-
-[node name="score_panel" type="Panel" parent="GUI"]
+[node name="3D_viewport" type="SubViewportContainer" parent="GUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.545833
-anchor_top = 0.01875
-anchor_right = 0.75625
-anchor_bottom = 0.196875
+anchor_right = 1.0
+anchor_bottom = 0.5
+stretch = true
+script = ExtResource("10_abqjc")
+
+[node name="SubViewport" type="SubViewport" parent="GUI/3D_viewport"]
+handle_input_locally = false
+physics_object_picking = true
+physics_object_picking_sort = true
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="GUI/3D_viewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8.6, 8)
+fov = 55.0
+
+[node name="camera_bounds" type="CollisionShape3D" parent="GUI/3D_viewport/SubViewport/Camera3D"]
+transform = Transform3D(10.9798, 0, 0, 0, -2.38419e-07, -10.9798, 0, 10.9798, -2.38419e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_w48qg")
+debug_color = Color(0.585062, 0.585062, 0.585062, 0.352941)
+
+[node name="bottom_panel" type="Panel" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.493056
+anchor_right = 1.0
+anchor_bottom = 1.00139
+offset_top = 5.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_ryguw")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/score_panel"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI/bottom_panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="GUI/score_panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 1
-text = "SCORE"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="score_label" type="Label" parent="GUI/score_panel/VBoxContainer"]
+[node name="top_row" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="settings_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+icon = ExtResource("11_6iyjs")
+
+[node name="clear_board_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = -20.0
+offset_right = 99.0
+offset_bottom = 20.0
+grow_vertical = 2
+icon = ExtResource("12_4w656")
+
+[node name="show_die_scores_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -20.0
+offset_right = -61.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("13_e71vb")
+script = ExtResource("14_rnkwl")
+shown_icon = ExtResource("15_vke2r")
+hidden_icon = ExtResource("13_e71vb")
+
+[node name="score_label" type="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -11.5
+offset_right = 14.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 63
+text = "0"
+script = ExtResource("16_uit24")
+
+[node name="history_menu_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("17_ruth0")
+
+[node name="HSeparator" type="HSeparator" parent="GUI/bottom_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="roll_editor_panel" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("roll_editor", "die_buttons")]
 layout_mode = 2
 size_flags_vertical = 3
-horizontal_alignment = 1
-vertical_alignment = 1
+script = ExtResource("18_rm4vd")
+roll_editor = NodePath("../../../../../roll_editor")
+die_buttons = {
+0: NodePath("dice_rows/dice_row_1/d4_die_button"),
+1: NodePath("dice_rows/dice_row_1/d6_die_button"),
+2: NodePath("dice_rows/dice_row_1/d8_die_button"),
+3: NodePath("dice_rows/dice_row_1/d10_die_button"),
+4: NodePath("dice_rows/dice_row_2/d12_die_button"),
+5: NodePath("dice_rows/dice_row_2/d20_die_button"),
+6: NodePath("dice_rows/dice_row_2/d100_die_button")
+}
 
-[node name="roll_history_panel" parent="GUI" instance=ExtResource("10_yaehf")]
+[node name="dice_rows" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="dice_row_1" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
+layout_mode = 2
+alignment = 1
+
+[node name="d4_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d4_die_button/TypewriterButton" index="2"]
+texture = ExtResource("20_sm6fg")
+
+[node name="d6_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 1
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button/TypewriterButton" index="2"]
+texture = ExtResource("21_b17eg")
+
+[node name="d8_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 2
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button/TypewriterButton" index="2"]
+texture = ExtResource("22_ntx8l")
+
+[node name="d10_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 3
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button/TypewriterButton" index="2"]
+texture = ExtResource("23_uatky")
+
+[node name="dice_row_2" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
+layout_mode = 2
+alignment = 1
+
+[node name="d12_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 4
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button/TypewriterButton" index="2"]
+texture = ExtResource("24_rqtf5")
+
+[node name="d20_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 5
+
+[node name="d100_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("19_pjyto")]
+layout_mode = 2
+die_type = 6
+
+[node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button/TypewriterButton" index="2"]
+texture = ExtResource("25_1vm84")
+
+[node name="Control" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bottom_row" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="delete_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("26_wu3dr")
+icon_alignment = 1
+expand_icon = true
+
+[node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row" instance=ExtResource("27_cyx1q")]
+layout_mode = 2
+
+[node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+icon = ExtResource("7_hrvbo")
+icon_alignment = 1
+expand_icon = true
+
+[node name="background_dimmer" parent="GUI" instance=ExtResource("42_1yv1y")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0291667
-anchor_top = 0.015625
-anchor_right = 0.519167
-anchor_bottom = 0.19825
-offset_right = -0.200012
-offset_bottom = 0.119995
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="exit_button" type="Button" parent="GUI"]
-layout_mode = 0
-offset_left = 379.0
-offset_top = 11.0
-offset_right = 419.0
-offset_bottom = 51.0
-icon = ExtResource("9_kek77")
-script = ExtResource("10_ycdy4")
-
-[node name="settings_button" type="Button" parent="GUI"]
-layout_mode = 0
-offset_left = 429.0
-offset_top = 11.0
-offset_right = 469.0
-offset_bottom = 51.0
-disabled = true
-icon = ExtResource("10_efxa6")
-
-[node name="help_button" type="Button" parent="GUI"]
-layout_mode = 0
-offset_left = 379.0
-offset_top = 59.0
-offset_right = 419.0
-offset_bottom = 99.0
-icon = ExtResource("11_dg77c")
-
-[node name="volume_button" type="Button" parent="GUI"]
-layout_mode = 0
-offset_left = 429.0
-offset_top = 59.0
-offset_right = 469.0
-offset_bottom = 99.0
-disabled = true
-icon = ExtResource("12_dg77c")
-
-[node name="die_selector" type="PanelContainer" parent="GUI" node_paths=PackedStringArray("roll_editor")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0181667
-anchor_top = 0.77
-anchor_right = 0.286167
-anchor_bottom = 0.975
-offset_left = 0.279999
-offset_top = -0.800049
-offset_right = 0.639999
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_d13ii")
-roll_editor = NodePath("../../roll_editor")
-metadata/_edit_use_anchors_ = true
-
-[node name="GridContainer" type="GridContainer" parent="GUI/die_selector"]
-layout_mode = 2
-columns = 3
-
-[node name="die_selector_button" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d4"
-
-[node name="die_selector_button2" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d6"
-type = 1
-
-[node name="die_selector_button3" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d8"
-type = 2
-
-[node name="die_selector_button4" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d10"
-type = 3
-
-[node name="die_selector_button5" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d12"
-type = 4
-
-[node name="die_selector_button6" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d20"
-type = 5
-
-[node name="die_selector_button7" parent="GUI/die_selector/GridContainer" instance=ExtResource("18_074og")]
-layout_mode = 2
-text = "d100"
-type = 6
-
-[node name="roll_editor_panel" parent="GUI" node_paths=PackedStringArray("roll_editor") instance=ExtResource("17_82xsv")]
-layout_mode = 1
-anchor_left = 0.322917
-anchor_top = 0.6875
-anchor_right = 0.752083
-anchor_bottom = 0.959813
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 9.71973
-roll_editor = NodePath("../../roll_editor")
-
-[node name="error_panel" type="Panel" parent="GUI"]
+[node name="history_menu" type="Control" parent="GUI"]
 visible = false
-custom_minimum_size = Vector2(0.34, 0.86)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.139583
-anchor_top = 0.59375
-anchor_right = 0.8125
-anchor_bottom = 0.735937
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_vivmo")
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="GUI/error_panel"]
-layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="display_timer" type="Timer" parent="GUI/error_panel"]
-wait_time = 5.0
-one_shot = true
-
-[node name="roll_receipt_viewer" parent="GUI" instance=ExtResource("21_d13ii")]
-layout_mode = 1
-
-[node name="help_menu" parent="GUI" instance=ExtResource("16_2cqfq")]
-visible = false
-layout_mode = 1
 mouse_filter = 2
+script = ExtResource("28_0dhbp")
 
-[node name="tooltip" parent="GUI" instance=ExtResource("20_82xsv")]
+[node name="Panel" type="Panel" parent="GUI/history_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 26.0
+offset_right = -19.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="roll_history_panel" parent="GUI/history_menu/Panel" instance=ExtResource("29_jx0wj")]
 visible = false
+layout_mode = 1
 
-[connection signal="changed" from="roll_editor" to="GUI/roll_editor_panel" method="update"]
+[node name="roll_receipt_viewer" parent="GUI/history_menu/Panel" instance=ExtResource("30_kkkcx")]
+visible = false
+layout_mode = 1
+
+[node name="tutorial" type="Control" parent="GUI" node_paths=PackedStringArray("steps")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("31_34ol3")
+steps = [NodePath("step_1"), NodePath("step_2"), NodePath("step_3"), NodePath("step_4")]
+
+[node name="ui_highlighter" type="ColorRect" parent="GUI/tutorial" node_paths=PackedStringArray("target")]
+material = SubResource("ShaderMaterial_h0aik")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_wy5fy")
+target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/top_row")
+
+[node name="step_1" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_gx4rg")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("36_phcyf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("37_birbe")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Add dice"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_1/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16.985)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/line_spacing = -10
+theme_override_font_sizes/font_size = 21
+text = "Press 
+and hold"
+horizontal_alignment = 1
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("38_f1p13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_1/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("39_4obbf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_1/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Remove dice"
+horizontal_alignment = 1
+
+[node name="step_2" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_gx4rg")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("36_phcyf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="slash" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/tutorial/step_2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("40_ovcoh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Change modifier"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16.985)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press and hold to
+change faster"
+horizontal_alignment = 1
+
+[node name="step_3" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.499
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_gx4rg")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -32.0
+offset_right = 67.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("36_phcyf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Roll the dice !!"
+horizontal_alignment = 1
+
+[node name="step_4" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("34_gx4rg")
+highlight_target = NodePath("highlight_the_top_part")
+
+[node name="highlight_the_top_part" type="Control" parent="GUI/tutorial/step_4"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.25
+offset_top = 16.56
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/highlight_the_top_part"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -112.0
+offset_right = 111.5
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("41_ppx11")
+
+[node name="actual_content" type="Control" parent="GUI/tutorial/step_4"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_4/actual_content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Press"
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("36_phcyf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Disable dice"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32.765)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Press" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/line_spacing = -10
+theme_override_font_sizes/font_size = 23
+text = "Press
+and hold"
+horizontal_alignment = 1
+
+[node name="slash2" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 48)
+layout_mode = 2
+texture = ExtResource("35_5dllo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GUI/tutorial/step_4/actual_content/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("38_f1p13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="GUI/tutorial/step_4/actual_content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Keep dice on the board"
+horizontal_alignment = 1
+
+[node name="settings_menu" parent="GUI" instance=ExtResource("43_5yh34")]
+visible = false
+layout_mode = 1
+
+[node name="alert" parent="GUI" instance=ExtResource("44_pjuso")]
+layout_mode = 1
+
+[connection signal="changed" from="roll_editor" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" method="update"]
 [connection signal="finalized" from="roll_editor" to="dice_roller" method="roll_dice"]
-[connection signal="entry_added" from="roll_history" to="GUI/roll_history_panel" method="add_row"]
-[connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
 [connection signal="die_locked" from="dice_roller" to="roll_editor" method="subtract_die"]
 [connection signal="die_unlocked" from="dice_roller" to="roll_editor" method="add_die"]
-[connection signal="error_with_roll" from="dice_roller" to="GUI/error_panel" method="display_error"]
 [connection signal="old_roll_done" from="dice_roller" to="roll_history" method="add_entry"]
-[connection signal="rolled" from="dice_roller" to="GUI/error_panel" method="stop_displaying_error"]
 [connection signal="scoring_requested" from="dice_roller" to="score_counter" method="count_score"]
 [connection signal="timeout" from="dice_roller/roll_handful_timer" to="dice_roller" method="_on_roll_handful_timeout"]
 [connection signal="timeout" from="dice_roller/roll_dice_group_timer" to="dice_roller" method="_on_roll_dice_group_timeout"]
 [connection signal="timeout" from="dice_roller/roll_max_timer" to="dice_roller" method="_on_roll_max_timeout"]
-[connection signal="score_counted" from="score_counter" to="GUI/score_panel" method="display"]
-[connection signal="pressed" from="GUI/roll_button" to="roll_editor" method="finalize"]
-[connection signal="delete_pressed" from="GUI/roll_history_panel" to="roll_history" method="remove_entry"]
-[connection signal="expand_pressed" from="GUI/roll_history_panel" to="GUI/roll_receipt_viewer" method="open_receipt"]
-[connection signal="replay_pressed" from="GUI/roll_history_panel" to="roll_history" method="replay"]
-[connection signal="pressed" from="GUI/exit_button" to="GUI/exit_button" method="_on_pressed"]
-[connection signal="pressed" from="GUI/help_button" to="GUI/help_menu" method="open_help"]
-[connection signal="timeout" from="GUI/error_panel/display_timer" to="GUI/error_panel" method="_on_display_timeout"]
+[connection signal="score_counted" from="score_counter" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/score_label" method="display"]
+[connection signal="entry_added" from="roll_history" to="GUI/history_menu/Panel/roll_history_panel" method="add_row"]
+[connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" to="GUI/settings_menu" method="open_settings"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="dice_roller" method="clear_board"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="dice_roller" method="toggle_die_score_visibility"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu" method="show_menu"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/delete_button" to="roll_editor" method="clear"]
+[connection signal="decrement_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="decrement_modifier"]
+[connection signal="increment_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="increment_modifier"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button" to="roll_editor" method="finalize"]
+[connection signal="clear_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="clear"]
+[connection signal="delete_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="remove_entry"]
+[connection signal="exit_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu"]
+[connection signal="expand_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu/Panel/roll_receipt_viewer" method="open_receipt"]
+[connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="replay"]
+[connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu" unbinds=1]
+[connection signal="closed" from="GUI/history_menu/Panel/roll_receipt_viewer" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
+[connection signal="show_tutorial_pressed" from="GUI/settings_menu" to="GUI/tutorial" method="start"]
+
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d4_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d6_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d8_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d10_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d12_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d20_die_button"]
+[editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button"]

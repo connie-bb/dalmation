@@ -8,8 +8,8 @@ var spawnlist: Array[ Die.TYPES ]
 var die_scores_visible: bool = false
 
 # Configurable
-var min_velocity: float = 18.0
-var max_velocity: float = 25.0
+var min_velocity: float = 8.0
+var max_velocity: float = 12.0
 var min_angular_velocity: float = 1.0 # rotations/s
 var max_angular_velocity: float = 5.0
 
@@ -53,6 +53,8 @@ func roll_die( die_type: Die.TYPES ):
 		spawnable_dice.die_type_to_die[ die_type ].duplicate()
 	die.die_type = die_type
 	
+	die.freeze = false
+	
 	var velocity = randf_range( min_velocity, max_velocity )
 	var angular_velocity := Vector3( randf(), randf(), randf() )
 	angular_velocity *= randf_range( min_angular_velocity, \
@@ -70,6 +72,8 @@ func roll_die( die_type: Die.TYPES ):
 	active_dice.add_child( die )
 	die.position = Vector3.ZERO
 	current_roll.die_list.append( die )
+	
+	
 
 func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
