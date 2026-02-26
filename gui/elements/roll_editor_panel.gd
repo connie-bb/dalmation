@@ -3,7 +3,7 @@ class_name RollEditorPanel
 
 # References
 @export var roll_editor: RollEditor
-@onready var modifier_button: ModifierButton = $bottom_row/modifier_button
+@onready var modifier_button: ModifierButton = $modifier_button
 
 @export var die_buttons: Dictionary[ Die.TYPES, DieButton ]
 

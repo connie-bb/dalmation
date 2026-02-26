@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://kjwii3dmxeqk"]
+[gd_scene load_steps=58 format=3 uid="uid://kjwii3dmxeqk"]
 
 [ext_resource type="Script" uid="uid://die758t1kg2s7" path="res://backend/roll_editor.gd" id="1_gngh3"]
 [ext_resource type="Script" uid="uid://ehmufl88hplj" path="res://backend/roll_history.gd" id="2_0n3wm"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b0mattwx4nh0w" path="res://gui/icons/d10.png" id="23_uatky"]
 [ext_resource type="Texture2D" uid="uid://clflqvkmxp20u" path="res://gui/icons/d12.png" id="24_rqtf5"]
 [ext_resource type="Texture2D" uid="uid://bpd54mwos25ft" path="res://gui/icons/d100.png" id="25_1vm84"]
+[ext_resource type="PackedScene" uid="uid://dsdlf018wcl8" path="res://gui/elements/typewriter_button.tscn" id="26_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://d1owem5ltm4mo" path="res://gui/icons/trash.png" id="26_wu3dr"]
 [ext_resource type="PackedScene" uid="uid://dawwr1mxams3w" path="res://gui/elements/modifier_button.tscn" id="27_cyx1q"]
 [ext_resource type="Script" uid="uid://brf7o5rhn3fu3" path="res://gui/elements/history_menu.gd" id="28_0dhbp"]
@@ -327,7 +328,7 @@ icon = ExtResource("17_ruth0")
 [node name="HSeparator" type="HSeparator" parent="GUI/bottom_panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="roll_editor_panel" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("roll_editor", "die_buttons")]
+[node name="roll_editor_panel" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("roll_editor", "die_buttons")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("18_rm4vd")
@@ -343,8 +344,11 @@ die_buttons = {
 }
 
 [node name="dice_rows" type="VBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
-layout_mode = 2
-size_flags_horizontal = 4
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 216.0
+grow_horizontal = 2
 
 [node name="dice_row_1" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
 layout_mode = 2
@@ -379,6 +383,8 @@ texture = ExtResource("23_uatky")
 
 [node name="dice_row_2" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 alignment = 1
 
 [node name="d12_die_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2" instance=ExtResource("19_pjyto")]
@@ -399,32 +405,99 @@ die_type = 6
 [node name="TextureRect2" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_2/d100_die_button/TypewriterButton" index="2"]
 texture = ExtResource("25_1vm84")
 
-[node name="Control" type="Control" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="delete_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_right = 68.0
+grow_vertical = 0
+size_flags_horizontal = 3
+focus_mode = 0
+flat = true
 
-[node name="bottom_row" type="HBoxContainer" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
-layout_mode = 2
-alignment = 1
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button" instance=ExtResource("26_0n3wm")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="delete_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-icon = ExtResource("26_wu3dr")
-icon_alignment = 1
-expand_icon = true
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_wu3dr")
 
-[node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row" instance=ExtResource("27_cyx1q")]
-layout_mode = 2
+[node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" instance=ExtResource("27_cyx1q")]
+layout_mode = 1
+offset_left = -175.0
+offset_top = -21.675
+offset_right = 175.0
+size_flags_horizontal = 3
 
-[node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-icon = ExtResource("7_hrvbo")
-icon_alignment = 1
-expand_icon = true
+[node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -70.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+focus_mode = 0
+flat = true
+
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button" instance=ExtResource("26_0n3wm")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_hrvbo")
 
 [node name="background_dimmer" parent="GUI" instance=ExtResource("42_1yv1y")]
 layout_mode = 1
@@ -482,7 +555,7 @@ grow_vertical = 2
 script = ExtResource("33_wy5fy")
 target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/top_row")
 
-[node name="step_1" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
+[node name="step_1" type="Control" parent="GUI/tutorial"]
 visible = false
 layout_mode = 1
 anchor_right = 1.0
@@ -491,7 +564,6 @@ offset_bottom = -0.279999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("34_gx4rg")
-highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_1"]
 layout_mode = 1
@@ -607,7 +679,7 @@ offset_bottom = -0.279999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("34_gx4rg")
-highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/modifier_button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_2"]
 layout_mode = 1
@@ -685,7 +757,7 @@ offset_bottom = -0.279999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("34_gx4rg")
-highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_3"]
 layout_mode = 1
@@ -874,10 +946,14 @@ layout_mode = 1
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="dice_roller" method="toggle_die_score_visibility"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu" method="show_menu"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
-[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/delete_button" to="roll_editor" method="clear"]
-[connection signal="decrement_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="decrement_modifier"]
-[connection signal="increment_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/modifier_button" to="roll_editor" method="increment_modifier"]
-[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/bottom_row/roll_button" to="roll_editor" method="finalize"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button/TypewriterButton" method="release"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button" to="roll_editor" method="clear"]
+[connection signal="decrement_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/modifier_button" to="roll_editor" method="decrement_modifier"]
+[connection signal="increment_pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/modifier_button" to="roll_editor" method="increment_modifier"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button/TypewriterButton" method="release"]
+[connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/roll_button" to="roll_editor" method="finalize"]
 [connection signal="clear_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="clear"]
 [connection signal="delete_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="remove_entry"]
 [connection signal="exit_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu"]

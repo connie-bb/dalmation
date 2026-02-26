@@ -63,11 +63,19 @@ _data = {
 }
 
 [node name="modifier_button" type="Control"]
+custom_minimum_size = Vector2(197, 21.675)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 197.0
-offset_bottom = 84.0
-size_flags_horizontal = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.5
+offset_top = -84.0
+offset_right = 98.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
 script = ExtResource("1_aj6vy")
 
 [node name="mod_spinwheel" type="Control" parent="."]
@@ -173,17 +181,17 @@ metadata/_custom_type_script = "uid://dbjvjk081lfgj"
 [node name="TypewriterButtonMinus" parent="." instance=ExtResource("7_o4uko")]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -98.5
-offset_top = -32.0
-offset_right = -34.5
-offset_bottom = 32.0
+anchor_bottom = 1.0
+offset_left = -102.5
+offset_top = -78.0
+offset_right = -30.5
+offset_bottom = -6.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="TextureRect" parent="TypewriterButtonMinus" index="1"]
 custom_minimum_size = Vector2(72, 72)
@@ -207,22 +215,24 @@ metadata/_edit_use_anchors_ = true
 [node name="TypewriterButtonPlus" parent="." instance=ExtResource("7_o4uko")]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 31.5
-offset_top = -36.0
-offset_right = 103.5
-offset_bottom = 36.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -78.0
+offset_right = 103.0
+offset_bottom = -6.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="TextureRect" parent="TypewriterButtonPlus" index="1"]
 custom_minimum_size = Vector2(72, 72)
 offset_right = 72.0
 offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="TextureRect3" type="TextureRect" parent="TypewriterButtonPlus"]
 layout_mode = 1
