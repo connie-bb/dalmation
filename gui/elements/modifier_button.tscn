@@ -63,16 +63,16 @@ _data = {
 }
 
 [node name="modifier_button" type="Control"]
-custom_minimum_size = Vector2(197, 21.675)
+custom_minimum_size = Vector2(197, 84)
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -98.5
+offset_left = -98.0
 offset_top = -84.0
-offset_right = 98.5
+offset_right = 99.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 6
@@ -156,28 +156,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_k6263")
 }
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 0
-
-[node name="LongPressButtonMinus" type="Control" parent="HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_c6yvr")
-metadata/_custom_type_script = "uid://dbjvjk081lfgj"
-
-[node name="LongPressButtonPlus" type="Control" parent="HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_c6yvr")
-metadata/_custom_type_script = "uid://dbjvjk081lfgj"
-
 [node name="TypewriterButtonMinus" parent="." instance=ExtResource("7_o4uko")]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 1
@@ -192,11 +170,6 @@ offset_right = -30.5
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="TextureRect" parent="TypewriterButtonMinus" index="1"]
-custom_minimum_size = Vector2(72, 72)
-offset_right = 72.0
-offset_bottom = 72.0
 
 [node name="TextureRect2" type="TextureRect" parent="TypewriterButtonMinus"]
 layout_mode = 1
@@ -227,13 +200,6 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureRect" parent="TypewriterButtonPlus" index="1"]
-custom_minimum_size = Vector2(72, 72)
-offset_right = 72.0
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 0
-
 [node name="TextureRect3" type="TextureRect" parent="TypewriterButtonPlus"]
 layout_mode = 1
 anchors_preset = -1
@@ -247,6 +213,28 @@ mouse_filter = 2
 texture = ExtResource("9_8m238")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="LongPressButtonMinus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
+
+[node name="LongPressButtonPlus" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_c6yvr")
+metadata/_custom_type_script = "uid://dbjvjk081lfgj"
 
 [connection signal="long_pressed" from="HBoxContainer2/LongPressButtonMinus" to="." method="_on_long_press_minus"]
 [connection signal="press_ended" from="HBoxContainer2/LongPressButtonMinus" to="TypewriterButtonMinus" method="release"]

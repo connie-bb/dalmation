@@ -250,7 +250,7 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
 [node name="settings_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -259,39 +259,66 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
-icon = ExtResource("11_6iyjs")
+focus_mode = 0
+flat = true
+
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" instance=ExtResource("26_0n3wm")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_6iyjs")
 
 [node name="clear_board_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 59.0
-offset_top = -20.0
-offset_right = 99.0
-offset_bottom = 20.0
+offset_left = 64.0
+offset_top = -32.0003
+offset_right = 128.0
+offset_bottom = 31.9997
 grow_vertical = 2
-icon = ExtResource("12_4w656")
+focus_mode = 0
+flat = true
 
-[node name="show_die_scores_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
-custom_minimum_size = Vector2(32, 32)
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" instance=ExtResource("26_0n3wm")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -101.0
-offset_top = -20.0
-offset_right = -61.0
-offset_bottom = 20.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("13_e71vb")
-script = ExtResource("14_rnkwl")
-shown_icon = ExtResource("15_vke2r")
-hidden_icon = ExtResource("13_e71vb")
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_4w656")
 
 [node name="score_label" type="Label" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
 layout_mode = 1
@@ -300,30 +327,95 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -11.5
-offset_right = 14.0
-offset_bottom = 11.5
+offset_left = -18.0
+offset_top = -43.5
+offset_right = 18.0
+offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 63
 text = "0"
 script = ExtResource("16_uit24")
 
-[node name="history_menu_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
-custom_minimum_size = Vector2(32, 32)
+[node name="show_die_scores_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -20.0
-offset_bottom = 20.0
+offset_left = -128.0
+offset_top = -32.0003
+offset_right = -64.0
+offset_bottom = 31.9997
 grow_horizontal = 0
 grow_vertical = 2
-icon = ExtResource("17_ruth0")
+focus_mode = 0
+flat = true
+script = ExtResource("14_rnkwl")
+shown_icon = ExtResource("15_vke2r")
+hidden_icon = ExtResource("13_e71vb")
+
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" instance=ExtResource("26_0n3wm")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_e71vb")
+
+[node name="history_menu_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="TypewriterButton" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" instance=ExtResource("26_0n3wm")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button/TypewriterButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_ruth0")
 
 [node name="HSeparator" type="HSeparator" parent="GUI/bottom_panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -449,9 +541,6 @@ texture = ExtResource("26_wu3dr")
 
 [node name="modifier_button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel" instance=ExtResource("27_cyx1q")]
 layout_mode = 1
-offset_left = -175.0
-offset_top = -21.675
-offset_right = 175.0
 size_flags_horizontal = 3
 
 [node name="roll_button" type="Button" parent="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel"]
@@ -941,9 +1030,17 @@ layout_mode = 1
 [connection signal="score_counted" from="score_counter" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/score_label" method="display"]
 [connection signal="entry_added" from="roll_history" to="GUI/history_menu/Panel/roll_history_panel" method="add_row"]
 [connection signal="replay_requested" from="roll_history" to="roll_editor" method="replay_roll"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button/TypewriterButton" method="release"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/settings_button" to="GUI/settings_menu" method="open_settings"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button/TypewriterButton" method="release"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/clear_board_button" to="dice_roller" method="clear_board"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button/TypewriterButton" method="release"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/show_die_scores_button" to="dice_roller" method="toggle_die_score_visibility"]
+[connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button/TypewriterButton" method="press"]
+[connection signal="button_up" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button/TypewriterButton" method="release"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu" method="show_menu"]
 [connection signal="pressed" from="GUI/bottom_panel/MarginContainer/VBoxContainer/top_row/history_menu_button" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
 [connection signal="button_down" from="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button" to="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/delete_button/TypewriterButton" method="press"]
