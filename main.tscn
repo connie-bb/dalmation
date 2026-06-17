@@ -634,7 +634,7 @@ grow_vertical = 2
 script = ExtResource("31_34ol3")
 steps = [NodePath("step_1"), NodePath("step_2"), NodePath("step_3"), NodePath("step_4")]
 
-[node name="ui_highlighter" type="ColorRect" parent="GUI/tutorial" node_paths=PackedStringArray("target")]
+[node name="ui_highlighter" type="ColorRect" parent="GUI/tutorial"]
 material = SubResource("ShaderMaterial_h0aik")
 layout_mode = 1
 anchors_preset = 15
@@ -643,9 +643,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("33_wy5fy")
-target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/top_row")
 
-[node name="step_1" type="Control" parent="GUI/tutorial"]
+[node name="step_1" type="Control" parent="GUI/tutorial" node_paths=PackedStringArray("highlight_target")]
 visible = false
 layout_mode = 1
 anchor_right = 1.0
@@ -654,6 +653,7 @@ offset_bottom = -0.279999
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("34_gx4rg")
+highlight_target = NodePath("../../bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/tutorial/step_1"]
 layout_mode = 1
