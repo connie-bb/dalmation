@@ -4,6 +4,7 @@ var tutorial_played: bool = false
 var sfx_volume: float = 0.5:
 	set( value ):
 		sfx_volume_changed.emit( value )
+		sfx_volume = value
 var max_dice: int = 30 
 var max_modifier: int = 99
 var d10_count_0_as_10: bool = true

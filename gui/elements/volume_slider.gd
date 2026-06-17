@@ -31,7 +31,9 @@ func _ready():
 	Settings.settings_loaded.connect( _on_settings_loaded )
 	
 func _on_settings_loaded():
-	set_value( Settings.get( setting_name ) )
+	var new_value = Settings.get( setting_name )
+	value = new_value
+	update_label()
 
 func _on_left_button_pressed():
 	clicked.emit()
