@@ -14,6 +14,12 @@ var roll_sound_delay: float = 0.35
 @onready var roll_couple_delay: Timer = $roll_couple_delay
 @onready var roll_several_delay: Timer = $roll_several_delay
 
+func _ready():
+	Settings.sfx_volume_changed.connect( _on_sfx_volume_changed )
+
+func _on_sfx_volume_changed( value: float ):
+	AudioServer.set_bus_volume_linear( 1, value )
+	
 # For decoupling purposes.
 func play( sound: StringName ):
 	var player = sounds[ sound ]

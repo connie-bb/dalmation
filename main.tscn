@@ -1064,6 +1064,7 @@ layout_mode = 1
 [connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="roll_history" method="replay"]
 [connection signal="replay_pressed" from="GUI/history_menu/Panel/roll_history_panel" to="GUI/history_menu" method="hide_menu" unbinds=1]
 [connection signal="closed" from="GUI/history_menu/Panel/roll_receipt_viewer" to="GUI/history_menu/Panel/roll_history_panel" method="show_history"]
+[connection signal="sfx_volume_slider_clicked" from="GUI/settings_menu" to="SFX" method="play" binds= [&"ROLL_PLASTIC_SEVERAL"]]
 [connection signal="show_tutorial_pressed" from="GUI/settings_menu" to="GUI/tutorial" method="start"]
 
 [editable path="GUI/bottom_panel/MarginContainer/VBoxContainer/roll_editor_panel/dice_rows/dice_row_1/d4_die_button"]

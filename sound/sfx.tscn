@@ -42,12 +42,15 @@ one_shot = true
 
 [node name="ROLL_PLASTIC_SINGLE" type="AudioStreamPlayer" parent="players"]
 stream = SubResource("AudioStreamRandomizer_blkrb")
+bus = &"SFX"
 
 [node name="ROLL_PLASTIC_COUPLE" type="AudioStreamPlayer" parent="players"]
 stream = SubResource("AudioStreamRandomizer_hrvbo")
+bus = &"SFX"
 
 [node name="ROLL_PLASTIC_SEVERAL" type="AudioStreamPlayer" parent="players"]
 stream = SubResource("AudioStreamRandomizer_uypp3")
+bus = &"SFX"
 
 [connection signal="timeout" from="roll_single_delay" to="." method="_on_roll_single_delay_timeout"]
 [connection signal="timeout" from="roll_couple_delay" to="." method="_on_roll_couple_delay_timeout"]

@@ -6,6 +6,7 @@ extends Control
 
 # Constant
 signal show_tutorial_pressed
+signal sfx_volume_slider_clicked
 
 func open_settings():
 	show()
@@ -24,3 +25,7 @@ func _input( event: InputEvent ):
 func _on_show_tutorial_pressed():
 	close_settings()
 	show_tutorial_pressed.emit()
+
+func _on_sfx_volume_slider_clicked():
+	# Pass it up the chain.
+	sfx_volume_slider_clicked.emit()

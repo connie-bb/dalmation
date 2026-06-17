@@ -87,3 +87,4 @@ setting_name = &"sfx_volume"
 
 [connection signal="pressed" from="settings_main/VBoxContainer/HBoxContainer/exit_button" to="." method="close_settings"]
 [connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/show_tutorial_button" to="." method="_on_show_tutorial_pressed"]
+[connection signal="clicked" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/sfx_volume_slider" to="." method="_on_sfx_volume_slider_clicked"]
