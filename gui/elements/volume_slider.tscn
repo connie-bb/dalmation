@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfrvxv1d8j0vo"]
+
+[ext_resource type="Script" uid="uid://b7vknty0bjg7r" path="res://gui/elements/volume_slider.gd" id="1_s41ah"]
+[ext_resource type="Texture2D" uid="uid://de8jogjd1j332" path="res://gui/icons/play_flipped.png" id="2_4wy2u"]
+[ext_resource type="Texture2D" uid="uid://dqitu07tqlcf0" path="res://gui/icons/play.png" id="2_s41ah"]
+
+[node name="volume_slider" type="VBoxContainer"]
+script = ExtResource("1_s41ah")
+
+[node name="title_label" type="Label" parent="."]
+layout_mode = 2
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="left_button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_4wy2u")
+
+[node name="value_label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "50%"
+
+[node name="right_button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_s41ah")
+
+[connection signal="pressed" from="HBoxContainer/left_button" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/right_button" to="." method="_on_right_button_pressed"]

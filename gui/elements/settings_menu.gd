@@ -2,6 +2,7 @@ extends Control
 
 # References
 @onready var settings_main: Control = $settings_main
+@export var sfx_volume_slider: VolumeSlider
 
 # Constant
 signal show_tutorial_pressed

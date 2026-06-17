@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://blgmdm1c2cc2w"]
+[gd_scene load_steps=4 format=3 uid="uid://blgmdm1c2cc2w"]
 
 [ext_resource type="Script" uid="uid://dytbi5cf3lhfg" path="res://gui/elements/settings_menu.gd" id="1_oq6lf"]
 [ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_4xlro"]
+[ext_resource type="PackedScene" uid="uid://cfrvxv1d8j0vo" path="res://gui/elements/volume_slider.tscn" id="3_as1df"]
 
-[node name="settings_menu" type="Control"]
+[node name="settings_menu" type="Control" node_paths=PackedStringArray("sfx_volume_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oq6lf")
+sfx_volume_slider = NodePath("settings_main/VBoxContainer/ScrollContainer/VBoxContainer/sfx_volume_slider")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -72,11 +74,16 @@ horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="settings_main/VBoxContainer/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 
 [node name="show_tutorial_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Show Tutorial"
+
+[node name="sfx_volume_slider" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_as1df")]
+layout_mode = 2
+setting_name = &"sfx_volume"
 
 [connection signal="pressed" from="settings_main/VBoxContainer/HBoxContainer/exit_button" to="." method="close_settings"]
 [connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/show_tutorial_button" to="." method="_on_show_tutorial_pressed"]

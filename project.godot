@@ -57,6 +57,7 @@ folder_colors={
 "res://gui/textures/": "green",
 "res://shaders/": "blue",
 "res://singletons/": "red",
+"res://sound/": "blue",
 "res://tools/": "yellow",
 "res://utils/": "yellow"
 }

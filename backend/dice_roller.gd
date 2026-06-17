@@ -12,16 +12,19 @@ var min_velocity: float = 8.0
 var max_velocity: float = 12.0
 var min_angular_velocity: float = 1.0 # rotations/s
 var max_angular_velocity: float = 5.0
+const roll_sound_delay: float = 0.5
 
 # Constant
 enum STATES { IDLE, ROLLING, SETTLED }
-const MAX_SIMULTANEOUS_ROLLS: int = 5
-signal rolled()
+const HANDFUL_SIZE: int = 5
 signal scoring_requested( roll: Roll )
 signal old_roll_done( roll: Roll )
 signal error_with_roll( error: String )
 signal die_locked( die_type: Die.TYPES )
 signal die_unlocked( die_type: Die.TYPES )
+signal rolled_several()
+signal rolled_couple()
+signal rolled_single()
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -72,8 +75,6 @@ func roll_die( die_type: Die.TYPES ):
 	active_dice.add_child( die )
 	die.position = Vector3.ZERO
 	current_roll.die_list.append( die )
-	
-	
 
 func roll_dice( request: RollRequest ):
 	var total_dice: int = 0
@@ -120,19 +121,21 @@ func roll_dice( request: RollRequest ):
 	# I miss C style brackets...
 	current_roll.modifier = request.modifier
 	roll_handful_of_dice()
-	rolled.emit()
 	
 func roll_handful_of_dice():
-	for i in range( 0, spawnlist.size() ):
-		if i < MAX_SIMULTANEOUS_ROLLS:
+	if spawnlist.size() > 3: 	rolled_several.emit()
+	elif spawnlist.size() > 1: 	rolled_couple.emit()
+	else: 						rolled_single.emit()
+	
+	if spawnlist.size() > HANDFUL_SIZE:
+		for i in range( 0, HANDFUL_SIZE ):
 			roll_die( spawnlist.pop_back() )
-		else: # if i >= MAX_SIMULTANEOUS_ROLLS:
 			roll_handful_timer.start()
-			return
-
-	assert( spawnlist.is_empty(), "Following code assumes spawnlist is empty.
-		If this triggers clearly I was wrong. >_>;" )
-	all_dice_spawned()
+	else:
+		for i in range( 0, spawnlist.size() ):
+			roll_die( spawnlist.pop_back() )
+		all_dice_spawned()
+	
 
 func _on_roll_handful_timeout():
 	roll_handful_of_dice()
