@@ -117,6 +117,7 @@ func roll_dice( request: RollRequest ):
 	
 	state = STATES.ROLLING
 	
+	spawnlist.clear()
 	for die_type in request.die_counts.keys():
 		for i in request.die_counts[ die_type ]:
 			spawnlist.append( die_type )
