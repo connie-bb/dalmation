@@ -22,6 +22,7 @@ signal old_roll_done( roll: Roll )
 signal error_with_roll( error: String )
 signal die_locked( die_type: Die.TYPES )
 signal die_unlocked( die_type: Die.TYPES )
+signal die_rolled( die: PhysicalDie )
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -56,14 +57,14 @@ func roll_die( die_type: Die.TYPES ):
 	die.freeze = false
 	
 	var velocity = randf_range( min_velocity, max_velocity )
-	var angular_velocity := Vector3( randf(), randf(), randf() )
+	var angular_velocity := Vector3(
+		randf() - 0.5, randf() - 0.5, randf() - 0.5 )
 	angular_velocity *= randf_range( min_angular_velocity, \
 		max_angular_velocity )
-	var rotation_axis = Vector3( randf(), randf(), randf() ).normalized()
-	var rotation_angle = randf_range( 0, TAU )
 	
-	die.rotate( rotation_axis, rotation_angle )
-	die.angular_velocity = angular_velocity * TAU
+	die.quaternion = Utils.random_quaternion()
+	die.angular_velocity = angular_velocity * 2 * TAU
+	
 	die.apply_impulse( Vector3.FORWARD * velocity )
 	
 	die.disable_toggled.connect( _on_die_disable_toggled )
@@ -72,7 +73,7 @@ func roll_die( die_type: Die.TYPES ):
 	active_dice.add_child( die )
 	die.position = Vector3.ZERO
 	current_roll.die_list.append( die )
-	
+	die_rolled.emit( die )
 	
 
 func roll_dice( request: RollRequest ):

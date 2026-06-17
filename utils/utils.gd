@@ -16,3 +16,20 @@ static func plus_me( number: int ):
 		return "+" + str( number )
 	else:
 		return str( number )
+		
+static func random_quaternion() -> Quaternion:
+	# Go wayback on http://planning.cs.uiuc.edu/node198.html
+	# Formula described by Steven M. LaValle, 2012, Cambridge Uni Press
+	# I don't even know what to say. Quats are black magic.
+	var u1 = randf()
+	var TAUu2 = randf() * TAU
+	var TAUu3 = randf() * TAU
+	
+	var sqrt_inv_u1 = sqrt( 1.0 - u1 )
+	var sqrt_u1 = sqrt( u1 )
+	var X = sqrt_inv_u1 * sin( TAUu2 )
+	var Y = sqrt_inv_u1 * cos( TAUu2 )
+	var Z = sqrt_u1 * sin( TAUu3 )
+	var W = sqrt_u1 * cos( TAUu3 )
+	
+	return Quaternion( X, Y, Z, W )
