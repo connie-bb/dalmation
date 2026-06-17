@@ -1,6 +1,10 @@
 extends Node
 
-var tutorial_played: bool = false;
+var tutorial_played: bool = false
+var sfx_volume: float = 0.5:
+	set( value ):
+		sfx_volume_changed.emit( value )
+		sfx_volume = value
 var max_dice: int = 30 
 var max_modifier: int = 99
 var d10_count_0_as_10: bool = true
@@ -11,6 +15,7 @@ var modifier_long_press_repeat_interval: float = 0.1
 signal save_load_error( error: String )
 signal settings_loaded
 
+signal sfx_volume_changed( value: float )
 
 var save_path: String = "user://settings.save"
 
@@ -22,6 +27,7 @@ func _ready():
 func serialize():
 	var save_dictionary = {
 		"tutorial_played": tutorial_played,
+		"sfx_volume": sfx_volume,
 		"max_dice": max_dice,
 		"max_modifier": max_modifier,
 		"d10_count_0_as_10": d10_count_0_as_10,

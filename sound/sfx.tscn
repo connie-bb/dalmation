@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://5xlnej6ohihv"]
+
+[ext_resource type="Script" uid="uid://dpk78ece7xhif" path="res://sound/sfx.gd" id="1_c2mct"]
+[ext_resource type="AudioStream" uid="uid://crxd3mpiyv61r" path="res://sound/plastic/Die drop with extra Spin 1.wav" id="2_nxrc2"]
+[ext_resource type="AudioStream" uid="uid://bpjsvdolncsvx" path="res://sound/plastic/Single Die Falling on Table.wav" id="3_uhfuh"]
+[ext_resource type="AudioStream" uid="uid://ckd6pktwnkmer" path="res://sound/plastic/Dice Roll on Wooden Surface 1.wav" id="4_jrjmn"]
+[ext_resource type="AudioStream" uid="uid://bmwifs212w4ha" path="res://sound/plastic/Dice Roll on Wooden Surface 2.wav" id="5_gystx"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_blkrb"]
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("2_nxrc2")
+stream_1/stream = ExtResource("3_uhfuh")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hrvbo"]
+playback_mode = 1
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("4_jrjmn")
+stream_1/stream = ExtResource("5_gystx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uypp3"]
+playback_mode = 1
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("4_jrjmn")
+stream_1/stream = ExtResource("5_gystx")
+
+[node name="SFX" type="Node"]
+script = ExtResource("1_c2mct")
+
+[node name="roll_single_delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="roll_couple_delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="roll_several_delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="players" type="Node" parent="."]
+
+[node name="ROLL_PLASTIC_SINGLE" type="AudioStreamPlayer" parent="players"]
+stream = SubResource("AudioStreamRandomizer_blkrb")
+bus = &"SFX"
+
+[node name="ROLL_PLASTIC_COUPLE" type="AudioStreamPlayer" parent="players"]
+stream = SubResource("AudioStreamRandomizer_hrvbo")
+bus = &"SFX"
+
+[node name="ROLL_PLASTIC_SEVERAL" type="AudioStreamPlayer" parent="players"]
+stream = SubResource("AudioStreamRandomizer_uypp3")
+bus = &"SFX"
+
+[connection signal="timeout" from="roll_single_delay" to="." method="_on_roll_single_delay_timeout"]
+[connection signal="timeout" from="roll_couple_delay" to="." method="_on_roll_couple_delay_timeout"]
+[connection signal="timeout" from="roll_several_delay" to="." method="_on_roll_several_delay_timeout"]
