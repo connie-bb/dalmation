@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_4xlro"]
 [ext_resource type="PackedScene" uid="uid://cfrvxv1d8j0vo" path="res://gui/elements/volume_slider.tscn" id="3_as1df"]
 
-[node name="settings_menu" type="Control" node_paths=PackedStringArray("sfx_volume_slider")]
+[node name="settings_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oq6lf")
-sfx_volume_slider = NodePath("settings_main/VBoxContainer/ScrollContainer/VBoxContainer/sfx_volume_slider")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -87,4 +86,3 @@ setting_name = &"sfx_volume"
 
 [connection signal="pressed" from="settings_main/VBoxContainer/HBoxContainer/exit_button" to="." method="close_settings"]
 [connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/show_tutorial_button" to="." method="_on_show_tutorial_pressed"]
-[connection signal="clicked" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/sfx_volume_slider" to="." method="_on_sfx_volume_slider_clicked"]

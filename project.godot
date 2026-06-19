@@ -23,6 +23,7 @@ Debug="*res://singletons/debug.gd"
 Settings="*res://singletons/settings.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 VFXManager="*res://singletons/vfx_manager.gd"
+SFX="*res://sound/sfx.tscn"
 
 [debug]
 

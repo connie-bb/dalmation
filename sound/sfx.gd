@@ -1,5 +1,4 @@
 extends Node
-class_name SFX
 
 # Configurable
 var roll_sound_delay: float = 0.35

@@ -23,9 +23,6 @@ signal error_with_roll( error: String )
 signal die_locked( die_type: Die.TYPES )
 signal die_unlocked( die_type: Die.TYPES )
 signal die_rolled( die: PhysicalDie )
-signal rolled_several()
-signal rolled_couple()
-signal rolled_single()
 
 # References
 @onready var spawnable_dice: SpawnableDice = $spawnable_dice
@@ -126,9 +123,9 @@ func roll_dice( request: RollRequest ):
 	roll_handful_of_dice()
 	
 func roll_handful_of_dice():
-	if spawnlist.size() > 3: 	rolled_several.emit()
-	elif spawnlist.size() > 1: 	rolled_couple.emit()
-	else: 						rolled_single.emit()
+	if spawnlist.size() > 3: 	SFX.play_roll_several()
+	elif spawnlist.size() > 1: 	SFX.play_roll_couple()
+	else: 						SFX.play_roll_single()
 	
 	if spawnlist.size() > HANDFUL_SIZE:
 		for i in range( 0, HANDFUL_SIZE ):

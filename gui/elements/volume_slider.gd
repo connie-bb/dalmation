@@ -14,9 +14,6 @@ const max_value: float = 1.0
 # References
 @onready var value_label: Label = $HBoxContainer/value_label
 
-# Constant
-signal clicked # So we can play a noise as volume changes.
-
 func update_label():
 	value_label.text = str( String.num( value * 100.0, 0 ) ) + "%"
 
@@ -36,11 +33,11 @@ func _on_settings_loaded():
 	update_label()
 
 func _on_left_button_pressed():
-	clicked.emit()
 	if value == min_value: return
 	set_value( max( value - step, min_value ) )
+	SFX.play( "ROLL_PLASTIC_SEVERAL" )
 
 func _on_right_button_pressed():
-	clicked.emit()
 	if value == max_value: return
 	set_value( min( value + step, max_value ) )
+	SFX.play( "ROLL_PLASTIC_SEVERAL" )
