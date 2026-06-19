@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://rhrxk0gwu4n" path="res://gui/icons/roll.png" id="7_hrvbo"]
 [ext_resource type="Script" uid="uid://c1p3i2vn7f2mt" path="res://tools/only_visible_in_editor.gd" id="8_uypp3"]
 [ext_resource type="Script" uid="uid://cpqeh2yb2ambq" path="res://backend/score_counter.gd" id="9_blkrb"]
-[ext_resource type="Script" uid="uid://c52xqkn0hid8t" path="res://gui/elements/resize_viewport.gd" id="10_abqjc"]
+[ext_resource type="Script" uid="uid://icvogoearev1" path="res://utils/SubViewportContainerFix.gd" id="10_0n3wm"]
 [ext_resource type="Texture2D" uid="uid://o4hrbomhvjtr" path="res://gui/icons/settings.png" id="11_6iyjs"]
 [ext_resource type="Texture2D" uid="uid://dwgpv31ymdegs" path="res://gui/icons/blank_paper.png" id="12_4w656"]
 [ext_resource type="Texture2D" uid="uid://yuyqsp6p5u8o" path="res://gui/icons/eye_off.png" id="13_e71vb"]
@@ -202,11 +202,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.5
-stretch = true
-script = ExtResource("10_abqjc")
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_0n3wm")
 
 [node name="SubViewport" type="SubViewport" parent="GUI/3D_viewport"]
 handle_input_locally = false
+msaa_3d = 1
 physics_object_picking = true
 physics_object_picking_sort = true
 size = Vector2i(360, 360)
