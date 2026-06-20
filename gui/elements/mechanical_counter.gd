@@ -22,8 +22,10 @@ func set_number( new_number: int ):
 	if new_number == old_number: return
 	var increment: bool = new_number > old_number
 	
+	@warning_ignore_start( "integer_division" ) # Oh, stop whining...
 	var old_number_left = min( abs( old_number / 10 ), 9 )
 	var new_number_left = min( abs( new_number / 10 ), 9 )
+	@warning_ignore_restore( "integer_division" )
 	var old_number_right = abs( old_number ) % 10
 	var new_number_right = abs( new_number ) % 10
 	
