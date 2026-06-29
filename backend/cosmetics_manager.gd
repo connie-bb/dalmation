@@ -6,7 +6,6 @@ var dice_sets: Array[ Cosmetic ]
 var backgrounds: Array[ Cosmetic ]
 
 # Constant
-signal search_error( err_string: String )
 signal loading
 signal finished
 signal status_changed( status: String )
@@ -40,8 +39,8 @@ func load_user_packs():
 	if !dir:
 		var err_string = "Error opening user://cosmetics: " \
 			+ error_string( DirAccess.get_open_error() )
-		search_error.emit( err_string )
 		Debug.log( err_string, Debug.TAG.ERROR )
+		get_tree().quit( 1 )
 	
 	for file: String in dir.get_files():
 		if !( file.ends_with( ".pck" ) or file.ends_with( ".zip" ) ): 
@@ -53,8 +52,8 @@ func load_pack( path: String ):
 	if !success:
 		var err_string = "Failed to load resource pack '" \
 			+ path + "'."
-		search_error.emit( err_string )
 		Debug.log( err_string, Debug.TAG.ERROR )
+		get_tree().quit( 1 )
 	else:
 		Debug.log( "Loaded resource pack '" + path + "'." )
 			
@@ -107,7 +106,6 @@ func parse_metadata( path: String ) -> Cosmetic:
 	if file_access == null:
 		var err_string = "Error opening '" + path + "': " \
 			+ error_string( FileAccess.get_open_error() )
-		search_error.emit( err_string )
 		Debug.log( err_string, Debug.TAG.ERROR )
 		return null
 
@@ -117,7 +115,6 @@ func parse_metadata( path: String ) -> Cosmetic:
 	if json_err != Error.OK:
 		var err_string = "Error parsing '" + path + "': " \
 			+ error_string( json_err )
-		search_error.emit( err_string )
 		Debug.log( err_string, Debug.TAG.ERROR )
 		return null
 	
