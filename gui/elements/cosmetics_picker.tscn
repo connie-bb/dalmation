@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwp8v8jxljmsq"]
+
+[ext_resource type="Script" uid="uid://di4kjkdjoo1xp" path="res://gui/elements/cosmetics_picker.gd" id="1_v0pkj"]
+[ext_resource type="PackedScene" uid="uid://3tdt2j73hlbl" path="res://gui/elements/cosmetic_button.tscn" id="2_t4fal"]
+
+[node name="cosmetics_picker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v0pkj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dice Sets"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="cosmetics_list" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="cosmetic_button" parent="VBoxContainer/ScrollContainer/MarginContainer/cosmetics_list" instance=ExtResource("2_t4fal")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="seperator2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Import"
+
+[node name="seperator" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="close_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Done"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/close_button" to="." method="_on_close_button_pressed"]

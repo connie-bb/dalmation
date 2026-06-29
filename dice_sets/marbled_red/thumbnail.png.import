@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://c5eyattd7uv1m"
+path="res://.godot/imported/thumbnail.png-93e5458eed6da5f46b054acb8502ccba.image"
+
+[deps]
+
+source_file="res://dice_sets/marbled_red/thumbnail.png"
+dest_files=["res://.godot/imported/thumbnail.png-93e5458eed6da5f46b054acb8502ccba.image"]
+
+[params]
+

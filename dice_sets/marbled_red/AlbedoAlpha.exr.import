@@ -2,21 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://derlind6pow6j"
-path.s3tc="res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.s3tc.ctex"
-path.etc2="res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.etc2.ctex"
+uid="uid://c2ge1lfb22lh3"
+path.bptc="res://.godot/imported/AlbedoAlpha.exr-4d694ed71efc296c6d68350d81fbdd7b.bptc.ctex"
+path.astc="res://.godot/imported/AlbedoAlpha.exr-4d694ed71efc296c6d68350d81fbdd7b.astc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "486eb4eccc0fbae6e39187134f700534"
-}
 
 [deps]
 
-source_file="res://dice/placeholder/dice_d12_placeholder.png"
-dest_files=["res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.s3tc.ctex", "res://.godot/imported/dice_d12_placeholder.png-72c1cfb88e8a3f1ac3062a4772daeb33.etc2.ctex"]
+source_file="res://dice_sets/marbled_red/AlbedoAlpha.exr"
+dest_files=["res://.godot/imported/AlbedoAlpha.exr-4d694ed71efc296c6d68350d81fbdd7b.bptc.ctex", "res://.godot/imported/AlbedoAlpha.exr-4d694ed71efc296c6d68350d81fbdd7b.astc.ctex"]
 
 [params]
 

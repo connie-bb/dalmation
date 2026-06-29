@@ -1,5 +1,10 @@
 extends Node
 
+# Configurable
+const default_dice_set: String = "Faithful"
+const save_path: String = "user://settings.save"
+
+# Variable
 var tutorial_played: bool = false
 var sfx_volume: float = 0.5:
 	set( value ):
@@ -11,18 +16,17 @@ var d10_count_0_as_10: bool = true
 var long_press_duration: float = 0.25
 var long_press_repeat_interval: float = 0.15
 var modifier_long_press_repeat_interval: float = 0.1
+var selected_dice_set: String = default_dice_set
 
+# Constant
 signal save_load_error( error: String )
 signal settings_loaded
-
 signal sfx_volume_changed( value: float )
 
-var save_path: String = "user://settings.save"
-
 func _ready():
-	# Just give everything a second to warm up.
-	await get_tree().create_timer( 0.01 ).timeout
-	load_settings()
+	# Give scene tree a chance to load, so it can
+	# receive the 'settings_loaded' signal.
+	load_settings.call_deferred()
 
 func serialize():
 	var save_dictionary = {
@@ -34,6 +38,7 @@ func serialize():
 		"long_press_duration": long_press_duration,
 		"long_press_repeat_interval": long_press_repeat_interval,
 		"modifier_long_press_repeat_interval": modifier_long_press_repeat_interval,
+		"selected_dice_set": selected_dice_set,
 	}
 	return save_dictionary
 	

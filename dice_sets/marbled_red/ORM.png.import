@@ -2,21 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwtydvs5j5rjk"
-path.s3tc="res://.godot/imported/dice_d100_placeholder.png-7bf72b72e5866f6efc22a91808a1951e.s3tc.ctex"
-path.etc2="res://.godot/imported/dice_d100_placeholder.png-7bf72b72e5866f6efc22a91808a1951e.etc2.ctex"
+uid="uid://2fr0vqwfs0ei"
+path.s3tc="res://.godot/imported/ORM.png-007d03e5025ef1f2b3b8e50511700ab7.s3tc.ctex"
+path.etc2="res://.godot/imported/ORM.png-007d03e5025ef1f2b3b8e50511700ab7.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "4e455375ab89171b06ef4790d468b734"
-}
 
 [deps]
 
-source_file="res://dice/placeholder/dice_d100_placeholder.png"
-dest_files=["res://.godot/imported/dice_d100_placeholder.png-7bf72b72e5866f6efc22a91808a1951e.s3tc.ctex", "res://.godot/imported/dice_d100_placeholder.png-7bf72b72e5866f6efc22a91808a1951e.etc2.ctex"]
+source_file="res://dice_sets/marbled_red/ORM.png"
+dest_files=["res://.godot/imported/ORM.png-007d03e5025ef1f2b3b8e50511700ab7.s3tc.ctex", "res://.godot/imported/ORM.png-007d03e5025ef1f2b3b8e50511700ab7.etc2.ctex"]
 
 [params]
 

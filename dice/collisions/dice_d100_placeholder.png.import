@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p71kwoy0uw2i"
-path.s3tc="res://.godot/imported/dice_d20_placeholder.png-eebacc9f10a9d8cedbd6a16cbeaa7291.s3tc.ctex"
-path.etc2="res://.godot/imported/dice_d20_placeholder.png-eebacc9f10a9d8cedbd6a16cbeaa7291.etc2.ctex"
+uid="uid://bwtydvs5j5rjk"
+path.s3tc="res://.godot/imported/dice_d100_placeholder.png-0d3bdfa36bcee016ac7c9f4af97e9bf1.s3tc.ctex"
+path.etc2="res://.godot/imported/dice_d100_placeholder.png-0d3bdfa36bcee016ac7c9f4af97e9bf1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "0682ef08d2613357f056b697371da554"
+"md5": "4e455375ab89171b06ef4790d468b734"
 }
 
 [deps]
 
-source_file="res://dice/placeholder/dice_d20_placeholder.png"
-dest_files=["res://.godot/imported/dice_d20_placeholder.png-eebacc9f10a9d8cedbd6a16cbeaa7291.s3tc.ctex", "res://.godot/imported/dice_d20_placeholder.png-eebacc9f10a9d8cedbd6a16cbeaa7291.etc2.ctex"]
+source_file="res://dice/collisions/dice_d100_placeholder.png"
+dest_files=["res://.godot/imported/dice_d100_placeholder.png-0d3bdfa36bcee016ac7c9f4af97e9bf1.s3tc.ctex", "res://.godot/imported/dice_d100_placeholder.png-0d3bdfa36bcee016ac7c9f4af97e9bf1.etc2.ctex"]
 
 [params]
 

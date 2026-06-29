@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://mmja6ujb2byj"
+path="res://.godot/imported/thumbnail.png-acb17e6385acde4b36157e3d6b953971.image"
+
+[deps]
+
+source_file="res://dice_sets/faithful/thumbnail.png"
+dest_files=["res://.godot/imported/thumbnail.png-acb17e6385acde4b36157e3d6b953971.image"]
+
+[params]
+

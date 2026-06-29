@@ -1,22 +1,37 @@
 extends Node3D
 class_name SpawnableDice
 
+# Variable
 var die_scene: Resource = preload( "res://dice/physical_die.tscn" )
 var die_type_to_die: Dictionary[ Die.TYPES, PhysicalDie ]
 
-func _ready():
-	load_dice_set()
+# Constant
+signal loading
+signal finished
+signal status_changed( status: String )
 
-func load_dice_set():
+# References
+@export var cosmetics_manager: CosmeticsManager 
+
+func load_selected_dice_set():
+	# If something goes wrong in here, we just crash via assertions.
+	loading.emit()
+	
 	# Load collision / score meshes
-	var collisions_resource = preload( "res://dice/placeholder/dice.tscn" )
+	var collisions_resource = preload( "res://dice/collisions/dice.tscn" )
 	var collisions = collisions_resource.instantiate()
 	collisions.visible = false
 	add_child( collisions )
 	collisions.position = Vector3.ZERO
 	
+	status_changed.emit( "Loading dice set meshes" )
 	# Load cosmetic meshes
-	var dice_set_resource = preload( "res://dice_sets/faithful/faithful.tscn" )
+	var cosmetic: Cosmetic = cosmetics_manager.get_cosmetic(
+		cosmetics_manager.dice_sets, Settings.selected_dice_set )
+	assert( cosmetic != null )
+	var dice_set_resource = ResourceLoader.load(
+		cosmetic.scene_filepath, "", ResourceLoader.CACHE_MODE_IGNORE )
+	
 	var dice_set = dice_set_resource.instantiate()
 	dice_set.visible = false
 	add_child( dice_set )
@@ -38,7 +53,8 @@ func load_dice_set():
 		
 		# Add cosmetic model
 		var model: MeshInstance3D = dice_set.get_node( die_name )
-		assert( model != null, "Couldn't find model with name " + die_name )
+		assert( model != null, "Couldn't find cosmetic model with name " \
+			+ die_name )
 		model.reparent( die )
 		model.position = Vector3.ZERO
 		
@@ -46,3 +62,5 @@ func load_dice_set():
 		
 		add_child( die )
 		die_type_to_die[ die_type ] = die
+	
+	finished.emit()
