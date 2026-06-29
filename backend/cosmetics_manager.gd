@@ -1,6 +1,17 @@
 extends Node
 class_name CosmeticsManager
 
+# Welcome to the CosmeticsManager. 
+# Here we do the following:
+# 	1. load resource packs from user://cosmetics
+# 	2. search res://dice_sets and res://backgrounds for folders
+#	   which may be imported as a Cosmetic (the class)
+# 	3. Parse the folders to turn them into Cosmetics
+#	4. Put Cosmetics into the 'dice_sets' and 'backgrounds' arrays
+#
+# SpawnableDice handles the actual instantiation of dice sets.
+# See the Cosmetic class for what info is required and cached.
+
 # Variable
 var dice_sets: Array[ Cosmetic ]
 var backgrounds: Array[ Cosmetic ]
