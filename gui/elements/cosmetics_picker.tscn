@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwp8v8jxljmsq"]
+[gd_scene format=3 uid="uid://cwp8v8jxljmsq"]
 
 [ext_resource type="Script" uid="uid://di4kjkdjoo1xp" path="res://gui/elements/cosmetics_picker.gd" id="1_v0pkj"]
 [ext_resource type="PackedScene" uid="uid://3tdt2j73hlbl" path="res://gui/elements/cosmetic_button.tscn" id="2_t4fal"]
 
-[node name="cosmetics_picker" type="Control"]
+[node name="cosmetics_picker" type="Control" unique_id=1814397427]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v0pkj")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=950188503]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,57 +20,56 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1578824060]
 layout_mode = 2
 text = "Dice Sets"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=453388167]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=920153113]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer" unique_id=602113459]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="cosmetics_list" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="cosmetics_list" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer" unique_id=576289670]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="cosmetic_button" parent="VBoxContainer/ScrollContainer/MarginContainer/cosmetics_list" instance=ExtResource("2_t4fal")]
+[node name="cosmetic_button" parent="VBoxContainer/ScrollContainer/MarginContainer/cosmetics_list" unique_id=1601498290 instance=ExtResource("2_t4fal")]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=485673169]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1874483085]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=955898007]
 layout_mode = 2
 text = "Refresh"
 
-[node name="seperator2" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="seperator2" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=865096882]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=208461989]
 layout_mode = 2
-disabled = true
 text = "Import"
 
-[node name="seperator" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="seperator" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=557961914]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="close_button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="close_button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=704873213]
 layout_mode = 2
 text = "Done"
 

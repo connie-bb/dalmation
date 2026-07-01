@@ -23,7 +23,9 @@ func _on_resized() -> void:
 	var viewport_scale := viewport_size / reference_size
 	var size_scale := minf(viewport_scale.x, viewport_scale.y)
 
+	@warning_ignore_start( "integer_division" )
 	var scaled_size := Vector2i((size * scale * size_scale).round()) / stretch_shrink
+	@warning_ignore_restore( "integer_division" )
 	if Vector2i(size.round()) == scaled_size:
 		return
 
