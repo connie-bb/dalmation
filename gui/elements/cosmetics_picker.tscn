@@ -50,22 +50,23 @@ layout_mode = 2
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=485673169]
 layout_mode = 2
 
+[node name="import_button" type="Button" parent="VBoxContainer" unique_id=208461989]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+text = "Import cosmetic files"
+
+[node name="folder_button" type="Button" parent="VBoxContainer" unique_id=869255487]
+layout_mode = 2
+text = "Open cosmetics folder"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1874483085]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=955898007]
+[node name="refresh_button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=955898007]
 layout_mode = 2
 text = "Refresh"
 
-[node name="seperator2" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=865096882]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=208461989]
-layout_mode = 2
-text = "Import"
-
-[node name="seperator" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=557961914]
+[node name="seperator" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=609373163]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -73,4 +74,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Done"
 
+[connection signal="pressed" from="VBoxContainer/import_button" to="." method="_on_import_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/folder_button" to="." method="_on_folder_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/refresh_button" to="." method="_on_refresh_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/close_button" to="." method="_on_close_button_pressed"]

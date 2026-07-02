@@ -8,6 +8,8 @@ class_name SettingsMenu
 # Constant
 signal show_tutorial_pressed
 signal select_dice_set( cosmetic: Cosmetic )
+signal import_cosmetics
+signal refresh_cosmetics
 
 func open_settings():
 	show()
@@ -42,8 +44,16 @@ func _on_dice_set_picker_select( cosmetic_name: String ):
 func _on_dice_set_selected():
 	# A dice set has been selected and loaded successfully.
 	var cosmetic_name: String = Settings.selected_dice_set
-	dice_set_picker._on_cosmetic_selected( cosmetic_name )
+	dice_set_picker.show_selected_cosmetic( cosmetic_name )
 
 func _on_new_dice_sets( dice_sets: Array[ Cosmetic ] ):
 	# CosmeticsManager has a new list of dice_sets for us.
 	dice_set_picker.new_list( dice_sets )
+
+func _on_import_cosmetics():
+	# Pass it up the chain.
+	import_cosmetics.emit()
+
+func _on_refresh_cosmetics():
+	# Pass it up the chain.
+	refresh_cosmetics.emit()

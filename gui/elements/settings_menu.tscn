@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://blgmdm1c2cc2w"]
+[gd_scene format=3 uid="uid://blgmdm1c2cc2w"]
 
 [ext_resource type="Script" uid="uid://dytbi5cf3lhfg" path="res://gui/elements/settings_menu.gd" id="1_oq6lf"]
 [ext_resource type="Texture2D" uid="uid://bxq3rhkyuusyw" path="res://gui/icons/x.png" id="2_4xlro"]
@@ -30,7 +30,7 @@ gradient = SubResource("Gradient_m5bwc")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[node name="settings_menu" type="Control"]
+[node name="settings_menu" type="Control" unique_id=1899140462]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oq6lf")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2138040350]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="settings_main" type="Control" parent="."]
+[node name="settings_main" type="Control" parent="." unique_id=2036103414]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="settings_main"]
+[node name="VBoxContainer" type="VBoxContainer" parent="settings_main" unique_id=918870732]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -66,15 +66,15 @@ offset_right = 161.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="settings_main/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="settings_main/VBoxContainer" unique_id=1776285305]
 layout_mode = 2
 alignment = 1
 
-[node name="spacer" type="Control" parent="settings_main/VBoxContainer/HBoxContainer"]
+[node name="spacer" type="Control" parent="settings_main/VBoxContainer/HBoxContainer" unique_id=763461141]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="settings_main/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="settings_main/VBoxContainer/HBoxContainer" unique_id=610999508]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -82,31 +82,31 @@ text = "SETTINGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="exit_button" type="Button" parent="settings_main/VBoxContainer/HBoxContainer"]
+[node name="exit_button" type="Button" parent="settings_main/VBoxContainer/HBoxContainer" unique_id=523755415]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 icon = ExtResource("2_4xlro")
 icon_alignment = 1
 expand_icon = true
 
-[node name="HSeparator" type="HSeparator" parent="settings_main/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="settings_main/VBoxContainer" unique_id=1892182074]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="settings_main/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="settings_main/VBoxContainer" unique_id=1440409166]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="settings_main/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="settings_main/VBoxContainer/ScrollContainer" unique_id=855129714]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="dice_sets_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer"]
-clip_contents = true
+[node name="dice_sets_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=515948496]
 custom_minimum_size = Vector2(320, 160)
+clip_contents = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button"]
+[node name="TextureRect" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button" unique_id=1944725985]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +117,7 @@ texture = SubResource("ImageTexture_q5gkq")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="gradient" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button/TextureRect"]
+[node name="gradient" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button/TextureRect" unique_id=409671445]
 material = SubResource("CanvasItemMaterial_s7f8t")
 layout_mode = 1
 anchors_preset = 15
@@ -127,7 +127,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_twqwx")
 
-[node name="name_label" type="Label" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button/TextureRect"]
+[node name="name_label" type="Label" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button/TextureRect" unique_id=1570335701]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -138,12 +138,12 @@ grow_vertical = 0
 mouse_filter = 1
 text = "Dice Sets"
 
-[node name="backgrounds_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer"]
-clip_contents = true
+[node name="backgrounds_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1250768389]
 custom_minimum_size = Vector2(320, 160)
+clip_contents = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button"]
+[node name="TextureRect" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button" unique_id=907145229]
 modulate = Color(1, 1, 1, 0.45098)
 layout_mode = 1
 anchors_preset = 15
@@ -155,7 +155,7 @@ texture = SubResource("ImageTexture_q5gkq")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="gradient" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button/TextureRect"]
+[node name="gradient" type="TextureRect" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button/TextureRect" unique_id=777430611]
 material = SubResource("CanvasItemMaterial_s7f8t")
 layout_mode = 1
 anchors_preset = 15
@@ -165,7 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_twqwx")
 
-[node name="name_label" type="Label" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button/TextureRect"]
+[node name="name_label" type="Label" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/backgrounds_button/TextureRect" unique_id=1138361247]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -176,16 +176,16 @@ grow_vertical = 0
 mouse_filter = 1
 text = "Backgrounds (TBD)"
 
-[node name="show_tutorial_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="show_tutorial_button" type="Button" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=853912794]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Show Tutorial"
 
-[node name="sfx_volume_slider" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_as1df")]
+[node name="sfx_volume_slider" parent="settings_main/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=629027285 instance=ExtResource("3_as1df")]
 layout_mode = 2
 setting_name = &"sfx_volume"
 
-[node name="dice_set_picker" parent="." instance=ExtResource("4_m5bwc")]
+[node name="dice_set_picker" parent="." unique_id=409972088 instance=ExtResource("4_m5bwc")]
 visible = false
 layout_mode = 1
 
@@ -193,4 +193,6 @@ layout_mode = 1
 [connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/dice_sets_button" to="." method="open_dice_set_picker"]
 [connection signal="pressed" from="settings_main/VBoxContainer/ScrollContainer/VBoxContainer/show_tutorial_button" to="." method="_on_show_tutorial_pressed"]
 [connection signal="close" from="dice_set_picker" to="." method="close_dice_set_picker"]
+[connection signal="import_cosmetics" from="dice_set_picker" to="." method="_on_import_cosmetics"]
+[connection signal="refresh_cosmetics" from="dice_set_picker" to="." method="_on_refresh_cosmetics"]
 [connection signal="select_cosmetic" from="dice_set_picker" to="." method="_on_dice_set_picker_select"]

@@ -10,7 +10,7 @@ class_name CosmeticsManager
 #	4. Put Cosmetics into the 'dice_sets' and 'backgrounds' arrays
 #
 # SpawnableDice handles the actual instantiation of dice sets.
-# See the Cosmetic class for what info is required and cached.
+# See the Cosmetic class for further info.
 
 # Variable
 var dice_sets: Array[ Cosmetic ]
@@ -27,6 +27,15 @@ signal dice_set_selected()
 @export var alert: Alert
 
 func _ready():
+	# Make cosmetics directory if it doesn't exist.
+	var path = ProjectSettings.globalize_path( "user://cosmetics" )
+	var err: Error = Error.OK
+	if !DirAccess.dir_exists_absolute( path ):
+		err = DirAccess.make_dir_absolute( path )
+	if err != Error.OK:
+		Debug.log( "Failed to create user://cosmetics: " \
+		+ error_string( err ) )
+	
 	# Give settings + scene tree a chance to load.
 	refresh_cosmetics.call_deferred()
 	
@@ -43,9 +52,11 @@ func refresh_cosmetics():
 	backgrounds = search_for_cosmetics( "res://backgrounds/" )
 	
 	await check_missing()
+	dice_set_selected.emit()
 	finished.emit()
 
 func load_user_packs():
+	Debug.log( "Loading user resource packs", Debug.TAG.INFO )
 	var dir = DirAccess.open( "user://cosmetics" )
 	if !dir:
 		var err_string = "Error opening user://cosmetics: " \
@@ -191,10 +202,34 @@ func check_missing():
 func select_dice_set( cosmetic_name: String ):
 	assert( has_cosmetic( dice_sets, cosmetic_name ),
 		"Attempted to load non-extant dice set '" + cosmetic_name + "'."
-	)		
+	)
 	Settings.selected_dice_set = cosmetic_name
 	dice_set_selected.emit()
 	# Here we kind of assume SpawnableDice won't have any trouble
 	# actually loading / parsing the scene. So if something goes wrong
 	# let's crash out before saving the settings.
 	Settings.save_settings.call_deferred()
+
+func open_file_dialog():
+	var downloads: String = OS.get_system_dir( OS.SYSTEM_DIR_DOWNLOADS )
+	DisplayServer.file_dialog_show(
+		"Import Cosmetic Files",
+		downloads,
+		"",
+		false,
+		DisplayServer.FILE_DIALOG_MODE_OPEN_FILES,
+		["*.pck,*.zip;Cosmetic files (*.pck, *.zip);application/octet-stream,application/zip"],
+		_on_files_chosen
+	)
+
+func _on_files_chosen( status: bool, selected_paths: PackedStringArray, _idx ):
+	if !status: return
+	for path in selected_paths:
+		Debug.log( "Copying '" + path + "'", Debug.TAG.INFO )
+		var destination = "user://cosmetics/" + path.get_file()
+		var err = DirAccess.copy_absolute( path, destination )
+		if err != Error.OK:
+			var err_string = error_string( err )
+			Debug.log( "Failed to copy '" + path + "': " \
+				+ err_string, Debug.TAG.ERROR )
+	refresh_cosmetics()
